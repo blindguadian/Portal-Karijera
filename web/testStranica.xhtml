@@ -1,0 +1,1568 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Homepage</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+        <link rel="stylesheet" type="text/css" href="resources/css/noviSvet.css"></link>
+
+
+        <h:outputScript library="bsf" name="js/carousel.js" />
+        <f:metadata>
+            <f:viewAction action="#{ucitajVestiZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
+            <f:viewAction action="#{ucitajStatistikeZaKorisnika.ucitajStatistikeNaGlavnojStrani()}"></f:viewAction>
+            <f:viewAction action="#{ucitajObavestenjaZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
+            <f:viewAction action="#{ucitajDiskusijeZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
+            <f:viewAction action="#{ucitajOglaseZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
+            <f:viewAction action="#{ucitajAnketeZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
+            <f:viewAction action="#{ucitajPreporukeZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
+        </f:metadata>
+
+        <style>
+
+        </style>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div id="top" style="background-image: linear-gradient(to left top, #00b16a, #009564, #00795a, #005e4d, #04443c);">
+                <div id="header" class="row">
+                    <div id="logo" class="col-md-2">
+                        <img class="image-fluid rounded logoImg" src="resources\images\logo4.png" />
+                    </div>
+
+                    <div class="col-md-7" id="menuItems">
+                        <div id="ikonicaDiv" class="col-sm-1">
+                            <b:icon name="menuIcon">
+                                <svg version="1.1" height="30" width="120" id="svgMenu" class="svgMenu" style="overflow-x: visible; overflow-y: visible;">
+                                    <path class="upper-line" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" d="M5 5 60 5" />
+                                    <path class="middle-line-first" stroke-linecap="round" fill="none" stroke="white" stroke-width="5" d="M5 15 40 15" /> <path class="middle-line-second" style="overflow-x: visible;" stroke-linecap="round" stroke="white" stroke-width="5" d="M53 15 103 15" /> <circle id="middle-dot-upper" class="middle-dot-upper" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" /> <circle id="middle-dot-lower" class="middle-dot-lower" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" />
+                                    <path class="lower-line" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" d="M5 25 60 25" />
+                                </svg>
+                            </b:icon>
+                        </div>
+                        <div id="gornja-menu-linija" class="col-sm-11">
+                            <svg version="1.1" height="5" width="700" id="svgMenuBorderUpper">
+                                <path class="gornja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
+                            </svg>
+                        </div>
+                        <div id="mainmenuDiv" class="col-sm-11">
+                            <nav id="mainMenu" class="navbar navbar-expand-sm">
+                                <ul class="navbar-nav mainmenu-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihVesti.xhtml">Vesti</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihDiskusija.xhtml">Diskusije</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihObavestenja.xhtml">Obavestenja</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihGrupa.xhtml">Grupe</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihAnketa">Ankete</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihOglasa.xhtml">Oglasi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihPreporuka.xhtml">Preporuke</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/kontakt.xhtml">Kontakt</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div id="logoHolder" class="col-sm-1"></div>
+                        <div id="donja-menu-linija" class="col-sm-11">
+                            <svg version="1.1" height="5" width="700" id="svgMenuBorderLower">
+                                <path class="donja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2" id="headerPrijavaDugmici">
+                        <div class="row">
+                            <div id="logindugme" class="col-sm-6">
+                                <h:form id="forma" prependId="false" >
+                                    <b:commandButton class="btn btn-info btn-lg prijava-dugme" id="dugmePrijava" ajax="true" oncomplete="PF('dlg1').show();" value="Prijava">
+                                        
+                                    </b:commandButton>
+
+                                    <p:dialog id="dlg1" header="Prijava" widgetVar="dlg1" resizable="false" styleClass="loginforma">
+                                        <p:panelGrid columns="2">
+                                            <h:outputLabel for="username" value="Korisnicko ime:" />
+                                            <p:inputText id="username" value="#{login.korisnickoIme}" required="true" label="username"/>
+                                            <h:outputLabel for="password" value="Lozinka:" />
+                                            <p:password id="password" value="#{login.lozinka}" required="true" label="password" />
+                                            <f:facet name="footer">
+                                                <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px" action="/faces/resetLozinke.xhtml"></p:commandLink>
+                                                <p:commandButton value="Prijavite se" action="#{login.login()}" style="float: right" />
+                                            </f:facet>
+
+                                        </p:panelGrid>
+                                    </p:dialog>
+                                </h:form>
+                                
+                            </div>
+                            <div id="registracijadugme" class="col-sm-6">
+                                <h:form id="forma1" prependId="false">
+                                    <b:commandButton class="btn btn-outline-light btn-lg registracija-dugme" id="dugmeRegistracija" value="Registracija" onclick="PF('dlg2').show();" />
+
+                                    <p:dialog id="dlg2" header="Registrujte se kao" widgetVar="dlg2" resizable="false">
+                                        <p:panelGrid style="width:300px;">
+                                            <p:row>
+                                                <p:column colspan="4" style="text-align: center">Student</p:column>
+                                                <p:column colspan="4" style="text-align: center">Kompanija</p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="4">
+                                                    <h:commandLink action="/faces/korisnickiProfilStudent.xhtml">
+                                                        <h:graphicImage value="resources/images/imgStudent.png"/>
+                                                    </h:commandLink>
+                                                </p:column>
+                                                <p:column colspan="4">
+                                                    <h:commandLink action="/faces/korisnickiProfilKompanija.xhtml">
+                                                        <h:graphicImage value="resources/images/imgKompanija.png"/>
+                                                    </h:commandLink>
+                                                </p:column>
+                                            </p:row>
+
+                                        </p:panelGrid>
+                                    </p:dialog>    
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+            <div id="middleVesti">
+                <div class="row" id="vesti">
+                    <div id="kontejnerVesti" class="col-lg-10">
+                        <div class="col-lg-4" id="vest-prva">
+                            <!-- <div id="vestSplitter11" class="col-lg-1 vestiSplitter">
+                                <svg id="linijicaLomiPravila11" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                        </pattern>
+                                    </defs>
+                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div> -->
+                            <div id="vestNaslov1" class="col-lg-10 offset-lg-1 vestiNaslov">
+                                <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(2)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(2)}"></b:link>
+                            </div>
+                            <div id="vestSplitter12" class="col-lg-1 vestiSplitter">
+                                <svg id="linijicaLomiPravila12" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                        </pattern>
+                                    </defs>
+                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div>
+                            <div id="vestAutorDatum1" class="col-lg-10 offset-lg-1 vestiAutorDatum">
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(2)}" class="vestiAutor"></h:outputText>
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(2)}" class="vestiDatum"></h:outputText>
+                            </div>
+                            <div id="vestMeta1" class="col-lg-10 offset-lg-1 vestiMeta">
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(2)}"></h:outputText>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" id="vest-druga">
+                            <div id="vestSplitter21" class="col-lg-1 vestiSplitter">
+                                <svg id="linijicaLomiPravila21" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                        </pattern>
+                                    </defs>
+                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div>
+                            <div id="vestNaslov2" class="col-lg-10 vestiNaslov">
+                                <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(1)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(1)}"></b:link>
+                            </div>
+                            <div id="vestSplitter22" class="col-lg-1 vestiSplitter">
+                                <svg id="linijicaLomiPravila22" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                        </pattern>
+                                    </defs>
+                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div>
+                            <div id="vestAutorDatum2" class="col-lg-10 offset-lg-1 vestiAutorDatum">
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(1)}" class="vestiAutor"></h:outputText>
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(1)}" class="vestiDatum"></h:outputText>
+                            </div>
+                            <div id="vestMeta2" class="col-lg-10 offset-lg-1 vestiMeta">
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(1)}"></h:outputText>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" id="vest-treca">
+                            <div id="vestSplitter31" class="col-lg-1 vestiSplitter">
+                                <svg id="linijicaLomiPravila31" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                        </pattern>
+                                    </defs>
+                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div>
+                            <div id="vestNaslov3" class="col-lg-10 vestiNaslov">
+                                <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(0)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(0)}"></b:link>
+                            </div>
+                            <div id="vestSplitter32" class="col-lg-1 vestiSplitter">
+                                <svg id="linijicaLomiPravila32" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                        </pattern>
+                                    </defs>
+                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div>
+                            <div id="vestAutorDatum3" class="col-lg-10 offset-lg-1 vestiAutorDatum">
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(0)}" class="vestiAutor"></h:outputText>
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(0)}" class="vestiDatum"></h:outputText>
+                            </div>
+                            <div id="vestMeta3" class="col-lg-10 offset-lg-1 vestiMeta">
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(0)}"></h:outputText>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1" id="vestiDiv">
+                        <div id="vestiOutputText" class="col-lg-10">
+                            <h:outputText value="Vesti"></h:outputText>
+                        </div>
+                    </div>
+                    <div class="col-lg-1" id="vestiDugmeDiv">
+                        <b:link outcome="mojeVesti.xhtml" id="strelicaID">
+                            <svg id="strelicasvgVesti" width="140px" height="120px" viewBox="58.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                <rect id="svgEditorBackgroundVesti" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                <defs id="svgEditorDefsVesti"><polygon id="svgEditorShapeDefs" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                </defs>
+                                <path id="strelicaLinijaVesti" d="M 180 190 180 380" style="fill:none; stroke:#17A2B8; stroke-width:5px; stroke-linecap: round"/>
+                                <path id="strelicaCetvrtaVesti" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:none; stroke:#17A2B8; vector-effect:non-scaling-stroke;stroke-width:2px;" transform="matrix(28.3028, 0, 0, 28.3028, 430.243, 283.337)"/>
+                                <path id="strelicaTrecaVesti" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:none; stroke:#17A2B8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.7;" transform="matrix(21.4183, 0, 0, 21.4183, 346.454, 283.498)"/>
+                                <path id="strelicaDrugaVesti" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:none; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(17.0837, 0, 0, 17.0837, 273.771, 283.24)"/>
+                                <path id="strelicaPrvaVesti" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.2;fill-opacity:0.6;" transform="matrix(12.239, 0, 0, 12.239, 216.882, 284.353)"/>
+                            </svg>
+                        </b:link>
+                    </div>
+                </div>
+            </div>
+            <div id="middleObavestenja" style="background-color: white; box-shadow: inset 0px 10px 30px black;">
+                <div class="row" id="obavestenjaRow">
+                    <div class="col-lg-1" id="obavestenjaPocetak">
+                        <div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="obavestenjaSvgElement1">
+                        <div class="row">
+
+                            <svg id="elementLevoObavestenja" version="1.1" width="98px" height="259px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 98 259">
+                                <defs>
+                                    <linearGradient id='linearLineObavestenja'>
+                                        <stop class="stopStart0" offset='0%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart1" offset='10%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart2" offset='20%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart3" offset='30%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart4" offset='40%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart5" offset='50%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStartZavrsna" offset='100%' style="stop-color: #17a2b8; stop-opacity: 1;">
+                                        </stop>
+                                    </linearGradient>
+                                    <linearGradient id='linearLineDiskusije'>
+                                        <stop class="stopStart01" offset='0%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart11" offset='10%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart21" offset='20%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart31" offset='30%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart41" offset='40%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart51" offset='50%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStartZavrsna1" offset='100%' style="stop-color: #17a2b8; stop-opacity: 1;">
+                                        </stop>
+                                    </linearGradient>
+                                    <linearGradient id='linearLineAnkete'>
+                                        <stop class="stopStart02" offset='0%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart12" offset='10%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart22" offset='20%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart32" offset='30%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart42" offset='40%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart52" offset='50%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStartZavrsna2" offset='100%' style="stop-color: #17a2b8; stop-opacity: 1;">
+                                        </stop>
+                                    </linearGradient>
+                                    <linearGradient id='linearLinePreporuke'>
+                                        <stop class="stopStart03" offset='0%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart13" offset='10%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart23" offset='20%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart33" offset='30%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart43" offset='40%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart53" offset='50%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStartZavrsna3" offset='100%' style="stop-color: #17a2b8; stop-opacity: 1;">
+                                        </stop>
+                                    </linearGradient>
+                                    <linearGradient id='linearLineOglasi'>
+                                        <stop class="stopStart04" offset='0%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart14" offset='10%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart24" offset='20%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart34" offset='30%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart44" offset='40%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStart54" offset='50%' style="stop-color: white; stop-opacity: 1;" >
+                                        </stop>
+
+                                        <stop class="stopStartZavrsna4" offset='100%' style="stop-color: #17a2b8; stop-opacity: 1;">
+                                        </stop>
+                                    </linearGradient>
+
+                                </defs>
+
+                                <path class="linijaPrvaObavestenja" d="M 19 15 19 19 98 19" style="stroke:url(#linearLineObavestenja); fill:none; stroke-width:5px;"/>
+                                <path class="linijaDrugaObavestenja"  d="M 19 73 19 76 98 76" style="stroke:url(#linearLineDiskusije); fill:none; stroke-width:5px;"/>
+                                <path class="linijaTrecaObavestenja"  d="M 19 126 19 129 98 129" style="fill:none; stroke:url(#linearLineAnkete); stroke-width:5px;"/>
+                                <path class="linijaCetvrtaObavestenja"  d="M 19 184 19 187 98 187" style="stroke:url(#linearLinePreporuke); fill:none; stroke-width:5px;"/>
+                                <path class="linijaPetaObavestenja"  d="M 19 242 19 245 98 245" style="stroke:url(#linearLineOglasi); fill:none; stroke-width:5px;"/>
+
+                                <!--<defs>
+                                    <filter id="inset-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                        <feComponentTransfer in="SourceAlha">
+                                            <feFuncA type="table" tableValues="1 0" />
+                                        </feComponentTransfer>
+                                        <feGaussianBlur stdDeviation="2"/>
+
+                                        <feComposite in2="SourceAlpha" operator="in" />
+                                        <feMerge>
+                                            <feMergeNode in="SourceGraphic" />
+                                            <feMergeNode />
+                                        </feMerge>
+                                    </filter>
+                                    <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="white" stop-opacity="0">
+                                            
+                                        </stop>
+                                        <stop offset="100%" stop-color="#bceef6" stop-opacity="1">
+                                            <animate attributeName="stop-color" values="#bceef6; #17a2b8" dur="2s" fill="freeze"></animate>
+                                        </stop>
+                                    </linearGradient>
+                                </defs>
+                                
+                                <rect class="linijaPrvaObavestenja" x="29" y="16" width="69" height="5" fill="url(#linear)" filter="url(#inset-shadow)"/>
+                                <rect class="linijaDrugaObavestenja" x="29" y="74" width="69" height="5" fill="url(#linear)" filter="url(#inset-shadow)"/>
+                                <rect class="linijaTrecaObavestenja" x="29" y="131" width="69" height="5" fill="url(#linear)" filter="url(#inset-shadow)"/>
+                                <rect class="linijaCetvrtaObavestenja" x="29" y="188" width="69" height="5" fill="url(#linear)" filter="url(#inset-shadow)"/>-->
+
+                            </svg>
+
+                            <ul class="nav nav-pills nav-stacked piluleZaLilule" role="tablist" id="piluleLista">
+                                <li class="nav-item"><a class="nav-link active dugmeObavestenja1" data-toggle="pill" href="#obavestenja">Obavestenja</a></li>
+                                <li class="nav-item"><a class="nav-link dugmeObavestenja2" data-toggle="pill" href="#diskusije">Diskusije</a></li>
+                                <li class="nav-item"><a class="nav-link dugmeObavestenja3" data-toggle="pill" href="#ankete">Ankete</a></li>
+                                <li class="nav-item"><a class="nav-link dugmeObavestenja4" data-toggle="pill" href="#preporuke">Preporuke</a></li>
+                                <li class="nav-item"><a class="nav-link dugmeObavestenja5" data-toggle="pill" href="#oglasi">Oglasi</a></li>
+                            </ul>
+
+                            <svg id="elementDesnoObavestenja" version="1.1" width="30%" height="259px" preserveAspectRatio="xMinYMin meet" viewBox="0 0 98 259">
+                                <defs>
+                                    <linearGradient id='linearLineDesno'>
+                                        <stop class="stopStartDesno0" offset='0%' style="stop-color: #17a2b8;" >
+                                        </stop>
+
+                                        <stop class="stopStartDesnoZavrsna" offset='100%' style="stop-color: white;">
+                                        </stop>
+                                    </linearGradient>
+
+                                </defs>
+                                <path class="linijaPrvaObavestenjaDesno" d="M 0 19 C 100 19 120 129 220 129" style="stroke:url(#linearLineDesno); fill:none; stroke-width:5px;"/>
+                                <path class="linijaDrugaObavestenjaDesno"  d="M 0 76 C 100 76 120 129 220 129" style="stroke:url(#linearLineDesno); fill:none; stroke-width:5px;"/>
+                                <path class="linijaTrecaObavestenjaDesno"  d="M 0 126 0 129 220 129" style="fill:none; stroke:url(#linearLineDesno); stroke-width:5px;"/>
+                                <path class="linijaCetvrtaObavestenjaDesno"  d="M 0 187 C 100 187 120 129 220 129" style="stroke:url(#linearLineDesno); fill:none; stroke-width:5px;"/>
+                                <path class="linijaPetaObavestenjaDesno"  d="M 0 245 C 100 245 120 129 220 129" style="stroke:url(#linearLineDesno); fill:none; stroke-width:5px;"/>
+                            </svg>    
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 tab-content" id="obavestenjaPiluleZaLilule">
+                        <div id="obavestenja" role="tabpanel" class="tab-pane fade active show obavestenja">
+                            <div id="UnutrasnjiDivObavestenja" class="col-lg-12 unutrasnjiDivObavestenja">
+                                <div id="sliderObavestenja" class="carousel slide" data-ride="carousel" data-interval="false" style="width:100%">
+                                    <div id="prvaStrelicaObavestenja" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="left" href="#sliderObavestenja" role="button" data-slide="prev">
+                                            <svg id="strelicasvgLevoObavestenja" width="30px" height="60px" viewBox="-38.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundObavestenja" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsObavestenja"><polygon id="svgEditorShapeDefsObavestenja" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaObavestenja" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(-27.0837, 0, 0, 27.0837, 273.771, 283.24)"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <div id="srednjiDeoObavestenja" class="col-lg-10">
+                                        <div class="carousel-inner" role="listbox">
+                                            <ui:repeat value="#{ucitajObavestenjaZaKorisnika.listaPoslednjihPetObavestenjaZaKorisnika}" var="obavestenje" varStatus="index" >
+                                                <h:panelGroup rendered="#{index.index==0}">
+                                                    <div id="prvoObavestenjeDiv" class="col-lg-12 item active">
+                                                        <div id="prvoObavestenjeNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{obavestenje.naslovObavestenja}" outcome="prikazObavestenja.xhtml?idObavestenja=#{obavestenje.idObavestenja}"></b:link>
+                                                        </div>
+                                                        <div id="prviUnderlineDiv" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvoObavestenjePrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineDiv" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvoObavestenjeDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="prvoObavestenjeMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{obavestenje.metaObavestenja}"></h:outputText>
+                                                        </div>
+                                                        <div id="prvoObavestenjeAutorOverline" class="col-lg-6 obavestenjaAutorOverlineKlasa">
+                                                            <svg id="linijaPrvoObavestenjeAutorOverline" class="linijaObavestenjeAutorOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaOverlineAutorPrva'>
+                                                                        <stop class="linijaOverline0" offset='0%' style="stop-color: #17a2b8; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaOverline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlineAutorPrva)" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="prvoObavestenjeDatumOverline" class="col-lg-6 obavestenjaDatumOverlineKlasa">
+                                                            <svg id="linijaPrvoObavestenjeDatumOverline" class="linijaObavestenjeDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                                                <defs>
+                                                                    <linearGradient id="linijaOverlineDatumPrva">
+                                                                        <stop class="linijaOverline0" offset='0%' style="stop-color: white;" >
+                                                                        </stop>
+                                                                        <stop class="linijaOverline1" offset='100%' style="stop-color: #17a2b8;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 -13 0 0 170 0 " stroke="url(#linijaOverlineDatumPrva)" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="prvoObavestenjeAutor" class="col-lg-6 obavestenjeAutorKlasa">
+                                                            <h:outputText id="obavestenjeAutor" value="#{obavestenje.autorObavestenja}"></h:outputText>
+                                                        </div>
+                                                        <div id="prvoObavestenjeDatum" class="col-lg-6 obavestenjeDatumKlasa">
+                                                            <h:outputText id="obavestenjeDatum" value="#{obavestenje.datumKreiranja}"></h:outputText>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{index.index!=0}">
+                                                    <div id="obavestenjeDiv" class="col-lg-12 item">
+                                                        <div id="obavestenjeNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{obavestenje.naslovObavestenja}" outcome="prikazObavestenja.xhtml?idObavestenja=#{obavestenje.idObavestenja}"></b:link>
+                                                        </div>
+                                                        <div id="prviUnderlineDiv" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovObavestenjaPrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineDiv" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovObavestenjaDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="obavestenjeMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{obavestenje.metaObavestenja}"></h:outputText>
+                                                        </div>
+                                                        <div id="obavestenjeAutorOverline" class="col-lg-6 obavestenjaAutorOverlineKlasa">
+                                                            <svg id="linijaObavestenjeAutorOverline" class="linijaObavestenjeAutorOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaOverlineAutor#{index.index}'>
+                                                                        <stop class="linijaOverline0" offset='0%' style="stop-color: #17a2b8; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaOverline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlineAutor#{index.index})" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="obavestenjeDatumOverline" class="col-lg-6 obavestenjaDatumOverlineKlasa">
+                                                            <svg id="linijaObavestenjeAutorOverline" class="linijaObavestenjeDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                                                <defs>
+                                                                    <linearGradient id="linijaOverlineDatum#{index.index}">
+                                                                        <stop class="linijaOverline0" offset='0%' style="stop-color: white;" >
+                                                                        </stop>
+                                                                        <stop class="linijaOverline1" offset='100%' style="stop-color: #17a2b8;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 -13 0 0 170 0 " stroke="url(#linijaOverlineDatum#{index.index})" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="obavestenjeAutor" class="col-lg-6 obavestenjeAutorKlasa">
+                                                            <h:outputText value="#{obavestenje.autorObavestenja}"></h:outputText>
+                                                        </div>
+                                                        <div id="obavestenjeDatum" class="col-lg-6 obavestenjeDatumKlasa">
+                                                            <h:outputText value="#{obavestenje.datumKreiranja}"></h:outputText>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </ui:repeat>
+                                        </div>
+                                    </div>
+                                    <div id="drugaStrelicaObavestenja" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="right" href="#sliderObavestenja" role="button" data-slide="next">
+                                            <svg id="strelicasvgDesnoObavestenja" width="30px" height="60px" viewBox="-8.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundObavestenja" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsObavestenja"><polygon id="svgEditorShapeDefsObavestenja" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaDesnoObavestenja" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(27.0837, 0, 0, 27.0837, 273.771, 283.24)"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="diskusije" role="tabpanel" class="tab-pane fade obavestenja">
+                            <div id="UnutrasnjiDivDiskusije" class="col-lg-12 unutrasnjiDivObavestenja">
+                                <div id="sliderDiskusije" class="carousel slide" data-ride="carousel" data-interval="false" style="width:100%">
+                                    <div id="prvaStrelicaDiskusije" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="left" href="#sliderDiskusije" role="button" data-slide="prev">
+                                            <svg id="strelicasvgLevoDiskusije" width="30px" height="60px" viewBox="-38.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundDiskusije" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsDiskusije"><polygon id="svgEditorShapeDefsDiskusije" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaDiskusije" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(-27.0837, 0, 0, 27.0837, 273.771, 283.24)"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <div id="srednjiDeoDiskusije" class="col-lg-10">
+                                        <div class="carousel-inner" role="listbox">
+                                            <ui:repeat value="#{ucitajDiskusijeZaKorisnika.listaPoslednjihPetDiskusijaZaKorisnika}" var="diskusija" varStatus="index" >
+                                                <h:panelGroup rendered="#{index.index==0}">
+                                                    <div id="prvaDiskusijaDiv" class="col-lg-12 item active">
+                                                        <div id="diskusijeNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{diskusija.nazivDiskusije}" outcome="prikazDiskusije.xhtml?idDiskusije=#{diskusija.idDiskusija}"></b:link>
+                                                        </div>
+                                                        <div id="prviUnderlineDivDiskusija" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaDiskusijaPrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineDivDiskusija" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaDiskusijaDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="diskusijeMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{diskusija.metaDiskusija}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlineMetaDiv" class="col-lg-12 diskusijeUnderlineMetaKlasa">
+                                                            <svg id="prvaDiskusijaMetaUnderline" class="linijaPrvaDiskusijaMetaUnderlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaDiskusijaMetaUnderline'>
+                                                                        <stop class="linijaDiskusijeMetaUnderline0" offset='0%' style="stop-color: #17a2b8; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaDiskusijeMetaUnderline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaPrvaDiskusijaMetaUnderline)" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="diskusijeKomentar" class="col-lg-12 diskusijeKomentarKlasa">
+                                                            <h:outputText value="#{diskusija.prviKomentar}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlineKomentarDiv" class="col-lg-12">
+                                                            <svg id="prvaDiskusijaKomentarUnderline" class="linijaPrvaDiskusijaKomentarUnderlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaDiskusijaKomentarUnderline'>
+                                                                        <stop class="linijaKomentarUnderline0" offset='0%' style="stop-color: #999999; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaKomentarUnderline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaPrvaDiskusijaKomentarUnderline)" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="diskusijeDrugiKomentar" class="col-lg-12 diskusijeDrugiKomentarKlasa">
+                                                            <h:outputText value="..."></h:outputText>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{index.index!=0}">
+                                                    <div id="prvaDiskusijaDiv" class="col-lg-12 item">
+                                                        <div id="diskusijeNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{diskusija.nazivDiskusije}" outcome="prikazDiskusije.xhtml?idDiskusije=#{diskusija.idDiskusija}"></b:link>
+                                                        </div>
+                                                        <div id="prviUnderlineDivDiskusija" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaDiskusijaPrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineDivDiskusija" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaDiskusijaDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="diskusijeMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{diskusija.metaDiskusija}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlineMetaDiv" class="col-lg-12 diskusijeUnderlineMetaKlasa">
+                                                            <svg id="prvaDiskusijaMetaUnderline" class="linijaPrvaDiskusijaMetaUnderlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaDiskusijaMetaUnderline#{index.index}'>
+                                                                        <stop class="linijaDiskusijeMetaUnderline0" offset='0%' style="stop-color: #17a2b8; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaDiskusijeMetaUnderline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaPrvaDiskusijaMetaUnderline#{index.index})" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="diskusijeKomentar" class="col-lg-12 diskusijeKomentarKlasa">
+                                                            <h:outputText value="#{diskusija.prviKomentar}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlineKomentarDiv" class="col-lg-12">
+                                                            <svg id="prvaDiskusijaKomentarUnderline" class="linijaPrvaDiskusijaKomentarUnderlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaDiskusijaKomentarUnderline#{index.index}'>
+                                                                        <stop class="linijaKomentarUnderline0" offset='0%' style="stop-color: #999999; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaKomentarUnderline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaPrvaDiskusijaKomentarUnderline#{index.index})" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="diskusijeDrugiKomentar" class="col-lg-12 diskusijeDrugiKomentarKlasa">
+                                                            <h:outputText value="..."></h:outputText>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </ui:repeat>
+                                        </div>
+                                    </div>
+                                    <div id="drugaStrelicaDiskusije" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="right" href="#sliderDiskusije" role="button" data-slide="next">
+                                            <svg id="strelicasvgDesnoDiskusije" width="30px" height="60px" viewBox="-8.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundDiskusije" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsDiskusije"><polygon id="svgEditorShapeDefsDiskusije" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaDesnoDiskusije" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(27.0837, 0, 0, 27.0837, 273.771, 283.24)"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ankete" role="tabpanel" class="tab-pane fade obavestenja">
+                            <div id="UnutrasnjiDivAnkete" class="col-lg-12 unutrasnjiDivObavestenja">
+                                <div id="sliderAnkete" class="carousel slide" data-ride="carousel" data-interval="false" style="width:100%">
+                                    <div id="prvaStrelicaAnkete" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="left" href="#sliderAnkete" role="button" data-slide="prev">
+                                            <svg id="strelicasvgLevoAnkete" width="30px" height="60px" viewBox="-38.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundAnkete" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsAnkete"><polygon id="svgEditorShapeDefsAnkete" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaAnkete" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(-27.0837, 0, 0, 27.0837, 273.771, 283.24)"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <div id="srednjiDeoAnkete" class="col-lg-10">
+                                        <div class="carousel-inner" role="listbox">
+                                            <ui:repeat value="#{ucitajAnketeZaKorisnika.listaPoslednjihPetAnketaZaKorisnika}" var="anketa" varStatus="index" >
+                                                <h:panelGroup rendered="#{index.index==0}">
+                                                    <div id="prvaAnketaDiv" class="col-lg-12 item active">
+                                                        <div id="anketeNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{anketa.nazivAnkete}" outcome="prikazAnkete.xhtml?idAnketa=#{anketa.idAnketa}"></b:link>
+                                                        </div>
+                                                        <div id="prviUnderlineDivAnkete" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaAnketaPrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineDivAnkete" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaAnketeDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="anketeMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{anketa.metaAnkete}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlineAnketaDiv" class="col-lg-12 diskusijeUnderlineMetaKlasa">
+                                                            <svg id="prvaAnketeMetaUnderline" class="linijaPrvaAnketaMetaUnderlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaAnketaMetaUnderline'>
+                                                                        <stop class="linijaAnketeMetaUnderline0" offset='0%' style="stop-color: #17a2b8; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaAnketeMetaUnderline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaPrvaAnketaMetaUnderline)" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="anketePitanje" class="col-lg-12 anketePitanjeKlasa">
+                                                            <h:outputText value="#{anketa.prvoPitanje}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlinePitanjeDiv" class="col-lg-12">
+                                                            <svg id="prvaAnketaPitanjeUnderline" class="linijaPrvaAnketaPitanjeUnderlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaAnketaPitanjeUnderline'>
+                                                                        <stop class="linijaPitanjeUnderline0" offset='0%' style="stop-color: #999999; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaPitanjeUnderline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaPrvaAnketaPitanjeUnderline)" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="anketeDrugoPitanje" class="col-lg-12 anketeDrugoPitanjeKlasa">
+                                                            <h:outputText value="..."></h:outputText>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{index.index!=0}">
+                                                    <div id="anketaDiv" class="col-lg-12 item">
+                                                        <div id="anketeNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{anketa.nazivAnkete}" outcome="prikazAnkete.xhtml?idAnketa=#{anketa.idAnketa}"></b:link>
+                                                        </div>
+                                                        <div id="prviUnderlineDivAnkete" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaAnketaPrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineDivAnkete" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaAnketeDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="anketeMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{anketa.metaAnkete}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlineAnketaDiv" class="col-lg-12 diskusijeUnderlineMetaKlasa">
+                                                            <svg id="prvaAnketeMetaUnderline" class="linijaPrvaAnketaMetaUnderlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaAnketaMetaUnderline#{index.index}'>
+                                                                        <stop class="linijaAnketeMetaUnderline0" offset='0%' style="stop-color: #17a2b8; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaAnketeMetaUnderline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaPrvaAnketaMetaUnderline#{index.index})" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="anketePitanje" class="col-lg-12 anketePitanjeKlasa">
+                                                            <h:outputText value="#{anketa.prvoPitanje}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlinePitanjeDiv" class="col-lg-12">
+                                                            <svg id="prvaAnketaPitanjeUnderline" class="linijaPrvaAnketaPitanjeUnderlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaAnketaPitanjeUnderline#{index.index}'>
+                                                                        <stop class="linijaPitanjeUnderline0" offset='0%' style="stop-color: #999999; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaPitanjeUnderline1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaPrvaAnketaPitanjeUnderline#{index.index})" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="anketeDrugoPitanje" class="col-lg-12 anketeDrugoPitanjeKlasa">
+                                                            <h:outputText value="..."></h:outputText>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </ui:repeat>
+                                        </div>
+                                    </div>
+                                    <div id="drugaStrelicaAnkete" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="right" href="#sliderAnkete" role="button" data-slide="next">
+                                            <svg id="strelicasvgDesnoAnkete" width="30px" height="60px" viewBox="-8.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundAnkete" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsAnkete"><polygon id="svgEditorShapeDefsAnkete" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaDesnoAnkete" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(27.0837, 0, 0, 27.0837, 273.771, 283.24)"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="preporuke" role="tabpanel" class="tab-pane fade obavestenja">
+                            <div id="UnutrasnjiDivPreporuke" class="col-lg-12 unutrasnjiDivObavestenja">
+                                <div id="sliderPreporuke" class="carousel slide" data-ride="carousel" data-interval="false" style="width:100%">
+                                    <div id="prvaStrelicaPreporuke" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="left" href="#sliderPreporuke" role="button" data-slide="prev">
+                                            <svg id="strelicasvgLevoPreporuke" width="30px" height="60px" viewBox="-38.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundPreporuke" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsPreporuke"><polygon id="svgEditorShapeDefsPreporuke" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaPreporuke" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(-27.0837, 0, 0, 27.0837, 273.771, 283.24)"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <div id="srednjiDeoPreporuke" class="col-lg-10">
+                                        <div class="carousel-inner" role="listbox">
+                                            <ui:repeat value="#{ucitajPreporukeZaKorisnika.listaPoslednjihPetPreporukaZaKorisnika}" var="preporuka" varStatus="index" >
+                                                <h:panelGroup rendered="#{index.index==0}">
+                                                    <div id="prvaPreporukaDiv" class="col-lg-12 item active">
+                                                        <div id="PreporukeNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{preporuka.nazivPreporuke}" outcome="prikazPreporuka.xhtml?idPreporuke=#{preporuka.idPreporuke}"></b:link>
+                                                        </div>
+                                                        <div id="prviUnderlineDivPreporuke" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaPreporukaPrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineDivPreporuke" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaPreporukaDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="preporukeMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{preporuka.metaPreporuke}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlinePreporukaDiv" class="col-lg-10 offset-lg-1 preporukeUnderlineMetaKlasa">
+                                                            <svg id="prvaPreporukaMetaUnderline" class="linijaPrvaPreporukaMetaUnderlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 400 1" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaPreporukaMetaUnderline'>
+                                                                        <stop class="linijaPreporukaMetaUnderline0" offset='0%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                        <stop class="linijaPreporukaMetaUnderline1" offset='50%' style="stop-color: #000; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                        <stop class="linijaPreporukaMetaUnderline2" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 400 0 400 -13 " stroke="url(#linijaPrvaPreporukaMetaUnderline)" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="preporukeOcena" class="col-lg-12 preporukeOcenaKlasa">
+                                                            <div class="col-lg-10 offset-lg-1">
+                                                                <div id="prvaPreporukaZvezdaPrva" class="col-lg-2 offset-lg-1 prvaPreporukaZvezdaPrvaKlasa">
+                                                                    <h:panelGroup>
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div id="prvaPreporukaZvezdaDruga" class="col-lg-2 prvaPreporukaZvezdaDrugaKlasa">
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &lt; 1.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="transparent" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &gt;= 1.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div id="prvaPreporukaZvezdaTreca" class="col-lg-2 prvaPreporukaZvezdaTrecaKlasa">
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &lt; 2.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="transparent" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &gt;= 2.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div id="prvaPreporukaZvezdaCetvrta" class="col-lg-2 prvaPreporukaZvezdaCetvrtaKlasa">
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &lt; 3.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="transparent" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &gt;= 3.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div id="prvaPreporukaZvezdaPeta" class="col-lg-2 prvaPreporukaZvezdaPetaKlasa">
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &lt; 4.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="transparent" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &gt;= 4.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{index.index!=0}">
+                                                    <div id="prvaPreporukaDiv" class="col-lg-12 item">
+                                                        <div id="PreporukeNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{preporuka.nazivPreporuke}" outcome="prikazPreporuka.xhtml?idPreporuke=#{preporuka.idPreporuke}"></b:link>
+                                                        </div>
+                                                        <div id="prviUnderlineDivPreporuke" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaPreporukaPrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineDivPreporuke" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrvaPreporukaDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="preporukeMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{preporuka.metaPreporuke}"></h:outputText>
+                                                        </div>
+                                                        <div id="underlinePreporukaDiv" class="col-lg-10 offset-lg-1 preporukeUnderlineMetaKlasa">
+                                                            <svg id="prvaPreporukaMetaUnderline" class="linijaPrvaPreporukaMetaUnderlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 400 1" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaPrvaPreporukaMetaUnderline#{index.index}'>
+                                                                        <stop class="linijaPreporukaMetaUnderline0" offset='0%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                        <stop class="linijaPreporukaMetaUnderline1" offset='50%' style="stop-color: #000; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                        <stop class="linijaPreporukaMetaUnderline2" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 400 0 400 -13 " stroke="url(#linijaPrvaPreporukaMetaUnderline#{index.index})" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="preporukeOcena" class="col-lg-12 preporukeOcenaKlasa">
+                                                            <div class="col-lg-10 offset-lg-1">
+                                                                <div id="prvaPreporukaZvezdaPrva" class="col-lg-2 offset-lg-1 prvaPreporukaZvezdaPrvaKlasa">
+                                                                    <h:panelGroup>
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div id="prvaPreporukaZvezdaDruga" class="col-lg-2 prvaPreporukaZvezdaDrugaKlasa">
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &lt; 1.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="transparent" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &gt;= 1.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div id="prvaPreporukaZvezdaTreca" class="col-lg-2 prvaPreporukaZvezdaTrecaKlasa">
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &lt; 2.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="transparent" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &gt;= 2.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div id="prvaPreporukaZvezdaCetvrta" class="col-lg-2 prvaPreporukaZvezdaCetvrtaKlasa">
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &lt; 3.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="transparent" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &gt;= 3.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                                <div id="prvaPreporukaZvezdaPeta" class="col-lg-2 prvaPreporukaZvezdaPetaKlasa">
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &lt; 4.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="transparent" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                    <h:panelGroup rendered="#{preporuka.prosecnaOcena &gt;= 4.5}">
+                                                                        <svg  version="1.1" width="100%" height="20px" viewBox="0 0 38 20" preserveAspectRatio="xMidYMid meet">
+                                                                            <path d="M 5 10 C 10 10 19 5 19 0 C 19 5 30 10 33 10 C 28 10 19 15 19 20 C 19 15 10 10 5 10" stroke="#17a2b8" fill="#17a2b8" stroke-width="2" />
+                                                                        </svg>
+                                                                    </h:panelGroup>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </ui:repeat>
+                                        </div>
+                                    </div>
+                                    <div id="drugaStrelicaPreporuke" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="right" href="#sliderPreporuke" role="button" data-slide="next">
+                                            <svg id="strelicasvgDesnoPreporuke" width="30px" height="60px" viewBox="-8.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundPreporuke" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsPreporuke"><polygon id="svgEditorShapeDefsPreporuke" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaDesnoPreporuke" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(27.0837, 0, 0, 27.0837, 273.771, 283.24)"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="oglasi" role="tabpanel" class="tab-pane fade obavestenja">
+                            <div id="UnutrasnjiDivOglasi" class="col-lg-12 unutrasnjiDivObavestenja">
+                                <div id="sliderOglasi" class="carousel slide" data-ride="carousel" data-interval="false" style="width:100%">
+                                    <div id="prvaStrelicaOglasi" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="left" href="#sliderOglasi" role="button" data-slide="prev">
+                                            <svg id="strelicasvgLevoOglasi" width="30px" height="60px" viewBox="-38.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundOglasi" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsOglasi"><polygon id="svgEditorShapeDefsOglasi" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaOglasi" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(-27.0837, 0, 0, 27.0837, 273.771, 283.24)"/>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <div id="srednjiDeoOglasi" class="col-lg-10">
+                                        <div class="carousel-inner" role="listbox">
+                                            <ui:repeat value="#{ucitajOglaseZaKorisnika.listaPoslednjihPetOglasaZaKorisnika}" var="oglas" varStatus="index" >
+                                                <h:panelGroup rendered="#{index.index==0}">
+                                                    <div id="prviOglasDiv" class="col-lg-12 item active">
+                                                        <div id="prviOglasNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{oglas.naslovOglasa}" outcome="prikazOglasa.xhtml?idOglasi=#{oglas.idOglasi}"></b:link>
+                                                        </div>
+                                                        <div id="prviUnderlineOglasDiv" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrviOglasPrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineOglasDiv" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrviOglasDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="prviOglasMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{oglas.metaOglasi}"></h:outputText>
+                                                        </div>
+                                                        <div id="prviOglasAutorOverline" class="col-lg-6 obavestenjaAutorOverlineKlasa">
+                                                            <svg id="linijaPrviOglasAutorOverline" class="linijaObavestenjeAutorOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaOverlineOglasAutorPrva'>
+                                                                        <stop class="linijaOverlineOglas0" offset='0%' style="stop-color: #17a2b8; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaOverlineOglas1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlineOglasAutorPrva)" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="prviOglasDatumOverline" class="col-lg-6 obavestenjaDatumOverlineKlasa">
+                                                            <svg id="linijaPrviOglasDatumOverline" class="linijaObavestenjeDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                                                <defs>
+                                                                    <linearGradient id="linijaOverlineOglasDatumPrva">
+                                                                        <stop class="linijaOverlineOglas0" offset='0%' style="stop-color: white;" >
+                                                                        </stop>
+                                                                        <stop class="linijaOverlineOglas1" offset='100%' style="stop-color: #17a2b8;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 -13 0 0 170 0 " stroke="url(#linijaOverlineOglasDatumPrva)" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="prviOglasAutor" class="col-lg-6 obavestenjeAutorKlasa">
+                                                            <h:outputText id="oglasAutor" value="#{oglas.autorOglasa}"></h:outputText>
+                                                        </div>
+                                                        <div id="prviOglasDatum" class="col-lg-6 obavestenjeDatumKlasa">
+                                                            <h:outputText id="oglasDatum" value="#{oglas.datumPostavljanjaOglasa}"></h:outputText>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{index.index!=0}">
+                                                    <div id="oglasDiv" class="col-lg-12 item">
+                                                        <div id="oglasNaslov" class="col-lg-12 obavestenjaNaslov">
+                                                            <b:link value="#{oglas.naslovOglasa}" outcome="prikazOglasa.xhtml?idOglasi=#{oglas.idOglasi}"></b:link>
+                                                        </div>
+                                                        <div id="underlineOglasDiv" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrviOglasPrva" class="linijaUnderlineNaslovPrva" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="drugiUnderlineOglasDiv" class="col-lg-12 naslovUnderlineDiv">
+                                                            <svg id="linijaUnderlineNaslovPrviOglasDruga" class="linijaUnderlineNaslovDruga" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <line x1="0" y1="1" x2="700" y2="1" fill="none" stroke="#000" stroke-width="2"></line>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="prviOglasMeta" class="col-lg-12 obavestenjaMeta">
+                                                            <h:outputText value="#{oglas.metaOglasi}"></h:outputText>
+                                                        </div>
+                                                        <div id="oglasAutorOverline" class="col-lg-6 obavestenjaAutorOverlineKlasa">
+                                                            <svg id="linijaOglasAutorOverline" class="linijaObavestenjeAutorOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                                <defs>
+                                                                    <linearGradient id='linijaOverlineOglasAutorPrva#{index.index}'>
+                                                                        <stop class="linijaOverlineOglas0" offset='0%' style="stop-color: #17a2b8; stop-opacity: 1;" >
+                                                                        </stop>
+
+                                                                        <stop class="linijaOverlineOglas1" offset='100%' style="stop-color: #fff; stop-opacity: 1;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlineOglasAutorPrva#{index.index})" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="oglasDatumOverline" class="col-lg-6 obavestenjaDatumOverlineKlasa">
+                                                            <svg id="linijaOglasDatumOverline" class="linijaObavestenjeDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                                                <defs>
+                                                                    <linearGradient id="linijaOverlineOglasDatumPrva#{index.index}">
+                                                                        <stop class="linijaOverlineOglas0" offset='0%' style="stop-color: white;" >
+                                                                        </stop>
+                                                                        <stop class="linijaOverlineOglas1" offset='100%' style="stop-color: #17a2b8;" >
+                                                                        </stop>
+                                                                    </linearGradient>
+                                                                </defs>
+                                                                <path d="M 0 -13 0 0 170 0 " stroke="url(#linijaOverlineOglasDatumPrva#{index.index})" fill="none" stroke-width="4"></path>
+                                                            </svg>
+                                                        </div>
+                                                        <div id="oglasAutorDiv" class="col-lg-6 obavestenjeAutorKlasa">
+                                                            <h:outputText value="#{oglas.autorOglasa}"></h:outputText>
+                                                        </div>
+                                                        <div id="oglasDatumDiv" class="col-lg-6 obavestenjeDatumKlasa">
+                                                            <h:outputText value="#{oglas.datumPostavljanjaOglasa}"></h:outputText>
+                                                        </div>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </ui:repeat>
+                                        </div>
+                                    </div>
+                                    <div id="drugaStrelicaOglasi" class="col-lg-1 obavestenjaStrelice">
+                                        <a class="right" href="#sliderOglasi" role="button" data-slide="next">
+                                            <svg id="strelicasvgDesnoOglasi" width="30px" height="60px" viewBox="-8.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                                <rect id="svgEditorBackgroundOglasi" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                                <defs id="svgEditorDefsOglasi"><polygon id="svgEditorShapeDefsOglasi" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                                    <pattern height="10" id="hatch-black-dash-120" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                                </defs>
+                                                <path id="strelicaDesnoOglasi" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#17a2b8; stroke:#17a2b8; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(27.0837, 0, 0, 27.0837, 273.771, 283.24)"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1" id="obavestenjaKraj">
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="middleStatistike">
+                <div class="row" id="statistike">
+
+                    <div id="kontejnerStatistike" class="col-lg-10">
+                        <div class="col-lg-6" id="statistika-prva">
+                            <div id="statistikaNaslov1" class="col-lg-11 statistikeNaslov ">
+                                <b:link value="#{ucitajStatistikeZaKorisnika.poslednjaStatistikaZaKorisnika.nazivStatistike}" outcome="prikazStatistike.xhtml?idStatistike=#{ucitajStatistikeZaKorisnika.poslednjaStatistikaZaKorisnika.idStatistike}"></b:link>
+                            </div>
+                            <div id="statistikeSplitter12" class="col-lg-1 statistikeSplitter">
+                                <svg id="statistickaLinijicaLomiPravila12" class="statistikeSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    <line x1="-1" y1="-34" x2="2" y2="320" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div>
+                            <div id="statistikaChart1" class="col-lg-7 statistikeChart">
+                                <p:chart type="pie" model="#{ucitajStatistikeZaKorisnika.modelZaPoslednjuStatistiku}" style="width:100%;min-height:230px" responsive="true"/>
+                            </div>
+                            <div id="statistikaMeta1" class="col-lg-4 statistikeMeta">
+                                <h:outputText value="#{ucitajStatistikeZaKorisnika.poslednjaStatistikaZaKorisnika.metaStatistike}"></h:outputText>
+                            </div>
+                        </div>
+                        <div class="col-lg-6" id="statistika-druga">
+                            <!-- <div id="statistikaSplitter21" class="col-lg-1 statistikeSplitter">
+                                <svg id="statistickaLinijicaLomiPravila21" class="statistikeSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    
+                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div> -->
+                            <div id="statistikaNaslov2" class="col-lg-11 statistikeNaslov">
+                                <b:link value="#{ucitajStatistikeZaKorisnika.poslednjaAnketaSaStatistikomZaKorisnika.nazivAnkete}" outcome="prikazAnkete.xhtml?idAnkete=#{ucitajStatistikeZaKorisnika.poslednjaAnketaSaStatistikomZaKorisnika.idAnketa}" rendered="#{ucitajStatistikeZaKorisnika.anketaModelPostoji == true}"></b:link>
+                                <b:link value="#{ucitajStatistikeZaKorisnika.pretposlednjaStatistikaZaKorisnika.nazivStatistike}" outcome="prikazStatistike.xhtml?idStatistike=#{ucitajStatistikeZaKorisnika.pretposlednjaStatistikaZaKorisnika.idStatistike}" rendered="#{ucitajStatistikeZaKorisnika.anketaModelPostoji == false}"></b:link>
+                            </div>
+                            <div id="statistikeSplitter22" class="col-lg-1 statistikeSplitter">
+                                <svg id="statistickaLinijicaLomiPravila22" class="statistikeSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    <line x1="-1" y1="-34" x2="2" y2="320" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div>
+                            <div id="statistikaChart1" class="col-lg-7 statistikeChart">
+                                <p:chart type="bar" model="#{ucitajStatistikeZaKorisnika.modelPrvogPitanjaPoslednjeAnkete}" style="width:100%;min-height:230px" rendered="#{ucitajStatistikeZaKorisnika.anketaModelPostoji == true}" />
+                                <p:chart type="pie" model="#{ucitajStatistikeZaKorisnika.modelZaDruguStatistiku}" style="width:100%;min-height:230px" rendered="#{ucitajStatistikeZaKorisnika.anketaModelPostoji == false}" />
+                            </div>
+                            <div id="statistikaMeta2" class="col-lg-4 statistikeMeta">
+                                <h:outputText value="#{ucitajStatistikeZaKorisnika.poslednjaAnketaSaStatistikomZaKorisnika.metaAnkete}" rendered="#{ucitajStatistikeZaKorisnika.anketaModelPostoji == true}"></h:outputText>
+                                <h:outputText value="#{ucitajStatistikeZaKorisnika.pretposlednjaStatistikaZaKorisnika.metaStatistike}" rendered="#{ucitajStatistikeZaKorisnika.anketaModelPostoji == false}"></h:outputText>
+                            </div>
+                        </div>
+                        <!-- <div class="col-lg-4" id="statistika-treca">
+                            <div id="statistikaSplitter31" class="col-lg-1 vestiSplitter">
+                                <svg id="statistickaLinijicaLomiPravila31" class="statistikeSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    
+                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div>
+                            <div id="statistikaNaslov3" class="col-lg-10 statistikeNaslov">
+                                <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(0)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(0)}"></b:link>
+                            </div>
+                            <div id="statistikaSplitter32" class="col-lg-1 statistikeSplitter">
+                                <svg id="statistickaLinijicaLomiPravila32" class="statistikeSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                    <defs>
+                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                        </pattern>
+                                    </defs>
+                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                </svg>
+                            </div>
+                            <div id="statistikaAutorDatum3" class="col-lg-10 offset-lg-1 statistikeAutorDatum">
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(0)}" class="statistikeAutor"></h:outputText>
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(0)}" class="statistikeDatum"></h:outputText>
+                            </div>
+                            <div id="statistikaMeta3" class="col-lg-10 offset-lg-1 statistikeMeta">
+                                <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(0)}"></h:outputText>
+                            </div>
+                        </div> -->
+                    </div> 
+                    <div class="col-lg-1" id="statistikeDiv">
+                        <div id="statistikeOutputText" class="col-lg-10">
+                            <h:outputText value="Statistike"></h:outputText>
+                        </div>
+                    </div>
+                    <div class="col-lg-1" id="statistikeDugmeDiv">
+                        <b:link outcome="mojeStatistike.xhtml" id="strelicaIDStatistike">
+                            <svg id="strelicasvgStatistike" width="180px" height="140px" viewBox="58.9343 78.7869 596.459 391.869" preserveAspectRatio="xMidYMid slice">
+                                <rect id="svgEditorBackgroundStatistike" x="0" y="0" width="550" height="520" style="fill:none; stroke: none;"/>
+                                <defs id="svgEditorDefsStatistike"><polygon id="svgEditorShapeDefsStatistike" style="fill:khaki;stroke:black;vector-effect:non-scaling-stroke;stroke-width:1px;"/>
+                                    <pattern height="10" id="hatch-black-dash-120Statistike" patternTransform="rotate(120) scale(0.4)" patternUnits="userSpaceOnUse" viewBox="0 0 24 10" width="24" x="0" y="0"><line style="stroke:black;stroke-width:1px;stroke-dasharray:4,4;" x1="0" x2="24" y1="5" y2="5"/></pattern>
+                                </defs>
+                                <path id="strelicaLinijaStatistike" d="M 180 190 180 380" style="fill:none; stroke:#04443C; stroke-width:5px; stroke-linecap: round"/>
+                                <path id="strelicaCetvrtaStatistike" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:none; stroke:#04443C; vector-effect:non-scaling-stroke;stroke-width:2px;" transform="matrix(28.3028, 0, 0, 28.3028, 430.243, 283.337)"/>
+                                <path id="strelicaTrecaStatistike" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:none; stroke:#04443C; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.7;" transform="matrix(21.4183, 0, 0, 21.4183, 346.454, 283.498)"/>
+                                <path id="strelicaDrugaStatistike" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:none; stroke:#04443C; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.4;" transform="matrix(17.0837, 0, 0, 17.0837, 273.771, 283.24)"/>
+                                <path id="strelicaPrvaStatistike" d="M 3.725 0 l -3.725 -3.725 c -0.625 -0.625 -1.875 0.625 -1.25 1.25 l 2.5 2.5 l -2.5 2.5 c -0.625 0.625 0.625 1.875 1.25 1.25 l3.725 -3.725z" style="fill:#04443C; stroke:#04443C; vector-effect:non-scaling-stroke;stroke-width:2px;stroke-opacity:0.2;fill-opacity:0.6;" transform="matrix(12.239, 0, 0, 12.239, 216.882, 284.353)"/>
+                            </svg>
+                        </b:link>
+                    </div>
+                </div>
+            </div>
+            <div id="footer" style="background-image: linear-gradient(to left top, #00b16a, #009564, #00795a, #005e4d, #04443c);">
+
+            </div>
+        </div>
+
+        <script>
+            function donutCharts() {
+                this.cfg.grid = {
+                    drawBorder: false,
+                    drawGridlines: false,
+                    background: '#ffffff',
+                    shadow: false
+                };
+                this.cfg.seriesDefaults = {
+                    seriesColors: ['#07ab95', '#00a8e6', '#7b76d5', '#d1b140', '#f35858', '#009387'],
+                    renderer: jQuery.jqplot.DonutRenderer,
+                    rendererOptions: {
+                        varyBarColor: true,
+                        showDataLabels: true,
+                        totalLabel: true,
+                        dataLabels: 'label',
+                        sliceMargin: 4
+                    }
+                };
+                this.cfg.legend = {
+                    show: false
+                };
+            }
+
+            function pieCharts() {
+                this.cfg.grid = {
+                    drawBorder: false,
+                    drawGridlines: false,
+                    background: '#ffffff',
+                    shadow: false
+                };
+                this.cfg.seriesDefaults = {
+                    seriesColors: ['#07ab95', '#00a8e6', '#7b76d5', '#d1b140', '#f35858', '#009387'],
+                    shadow: false,
+                    renderer: jQuery.jqplot.PieRenderer,
+                    rendererOptions: {
+                        padding: 2,
+                        sliceMargin: 2,
+                        showDataLabels: true
+                    }
+                };
+                this.cfg.legend = {
+                    show: true,
+                    fontSize: '12px',
+                    location: 'w',
+                    border: 'none',
+
+                };
+            }
+
+            function barCharts() {
+                this.cfg.seriesDefaults = {
+                    seriesColors: ['#07ab95', '#00a8e6', '#7b76d5', '#d1b140', '#f35858', '#009387'],
+                    renderer: jQuery.jqplot.BarRenderer,
+                    rendererOptions: {
+                        varyBarColor: true
+                    }
+                };
+            }
+            $(".dugmeObavestenja1").click(function () {
+                $(".stopStart1").attr('class', 'stopStart1 stopStart1Animacija');
+                $(".stopStart2").attr('class', 'stopStart2 stopStart2Animacija');
+                $(".stopStart3").attr('class', 'stopStart3 stopStart3Animacija');
+                $(".stopStart4").attr('class', 'stopStart4 stopStart4Animacija');
+                $(".stopStart5").attr('class', 'stopStart5 stopStart5Animacija');
+                $(".stopStartZavrsna").attr('class', 'stopStartZavrsna stopStartZavrsnaAnimacija');
+                $(".dugmeObavestenja1").addClass('dugmeObavestenjaClick');
+                $(".linijaPrvaObavestenjaDesno").addClass('obavestenjaDesnoAnimacija');
+                $("#obavestenja").addClass('boxShadow');
+                $(".dugmeObavestenja2, .dugmeObavestenja3, .dugmeObavestenja4, .dugmeObavestenja5").removeClass('dugmeObavestenjaClick');
+                //1 sec delay to complete the animation before removing it and disabling the button.
+                setTimeout(function () {
+                    $(".stopStart1").attr('class', 'stopStart1');
+                    $(".stopStart2").attr('class', 'stopStart2');
+                    $(".stopStart3").attr('class', 'stopStart3');
+                    $(".stopStart4").attr('class', 'stopStart4');
+                    $(".stopStart5").attr('class', 'stopStart5');
+                    $('.stopStartZavrsna').attr('class', 'stopStartZavrsna');
+                }, 2000);
+                setTimeout(function () {
+                    $(".linijaPrvaObavestenjaDesno").removeClass('obavestenjaDesnoAnimacija');
+                }, 3500);
+            });
+
+            $(".dugmeObavestenja2").click(function () {
+                $(".stopStart11").attr('class', 'stopStart11 stopStart1Animacija');
+                $(".stopStart21").attr('class', 'stopStart21 stopStart2Animacija');
+                $(".stopStart31").attr('class', 'stopStart31 stopStart3Animacija');
+                $(".stopStart41").attr('class', 'stopStart41 stopStart4Animacija');
+                $(".stopStart51").attr('class', 'stopStart51 stopStart5Animacija');
+                $(".stopStartZavrsna1").attr('class', 'stopStartZavrsna1 stopStartZavrsnaAnimacija');
+                $(".dugmeObavestenja2").addClass('dugmeObavestenjaClick');
+                $(".linijaDrugaObavestenjaDesno").addClass('obavestenjaDesnoAnimacija');
+                $("#diskusije").addClass('boxShadow');
+                $(".dugmeObavestenja1, .dugmeObavestenja3, .dugmeObavestenja4, .dugmeObavestenja5").removeClass('dugmeObavestenjaClick');
+                //1 sec delay to complete the animation before removing it and disabling the button.
+                setTimeout(function () {
+                    $(".stopStart11").attr('class', 'stopStart11');
+                    $(".stopStart21").attr('class', 'stopStart21');
+                    $(".stopStart31").attr('class', 'stopStart31');
+                    $(".stopStart41").attr('class', 'stopStart41');
+                    $(".stopStart51").attr('class', 'stopStart51');
+                    $('.stopStartZavrsna1').attr('class', 'stopStartZavrsna1');
+                }, 2000);
+                setTimeout(function () {
+                    $(".linijaDrugaObavestenjaDesno").removeClass('obavestenjaDesnoAnimacija');
+                }, 3500);
+            });
+
+            $(".dugmeObavestenja3").click(function () {
+                $(".stopStart12").attr('class', 'stopStart12 stopStart1Animacija');
+                $(".stopStart22").attr('class', 'stopStart22 stopStart2Animacija');
+                $(".stopStart32").attr('class', 'stopStart32 stopStart3Animacija');
+                $(".stopStart42").attr('class', 'stopStart42 stopStart4Animacija');
+                $(".stopStart52").attr('class', 'stopStart52 stopStart5Animacija');
+                $(".stopStartZavrsna2").attr('class', 'stopStartZavrsna2 stopStartZavrsnaAnimacija');
+                $(".dugmeObavestenja3").addClass('dugmeObavestenjaClick');
+                $(".linijaTrecaObavestenjaDesno").addClass('obavestenjaDesnoAnimacija');
+                $("#ankete").addClass('boxShadow');
+                $(".dugmeObavestenja2, .dugmeObavestenja1, .dugmeObavestenja4, .dugmeObavestenja5").removeClass('dugmeObavestenjaClick');
+                //1 sec delay to complete the animation before removing it and disabling the button.
+                setTimeout(function () {
+                    $(".stopStart12").attr('class', 'stopStart12');
+                    $(".stopStart22").attr('class', 'stopStart22');
+                    $(".stopStart32").attr('class', 'stopStart32');
+                    $(".stopStart42").attr('class', 'stopStart42');
+                    $(".stopStart52").attr('class', 'stopStart52');
+                    $('.stopStartZavrsna2').attr('class', 'stopStartZavrsna2');
+                }, 2000);
+                setTimeout(function () {
+                    $(".linijaTrecaObavestenjaDesno").removeClass('obavestenjaDesnoAnimacija');
+                }, 3500);
+            });
+
+            $(".dugmeObavestenja4").click(function () {
+                $(".stopStart13").attr('class', 'stopStart13 stopStart1Animacija');
+                $(".stopStart23").attr('class', 'stopStart23 stopStart2Animacija');
+                $(".stopStart33").attr('class', 'stopStart33 stopStart3Animacija');
+                $(".stopStart43").attr('class', 'stopStart43 stopStart4Animacija');
+                $(".stopStart53").attr('class', 'stopStart53 stopStart5Animacija');
+                $(".stopStartZavrsna3").attr('class', 'stopStartZavrsna3 stopStartZavrsnaAnimacija');
+                $(".dugmeObavestenja4").addClass('dugmeObavestenjaClick');
+                $(".linijaCetvrtaObavestenjaDesno").addClass('obavestenjaDesnoAnimacija');
+                $("#preporuke").addClass('boxShadow');
+                $(".dugmeObavestenja2, .dugmeObavestenja3, .dugmeObavestenja1, .dugmeObavestenja5").removeClass('dugmeObavestenjaClick');
+                //1 sec delay to complete the animation before removing it and disabling the button.
+                setTimeout(function () {
+                    $(".stopStart13").attr('class', 'stopStart13');
+                    $(".stopStart23").attr('class', 'stopStart23');
+                    $(".stopStart33").attr('class', 'stopStart33');
+                    $(".stopStart43").attr('class', 'stopStart43');
+                    $(".stopStart53").attr('class', 'stopStart53');
+                    $('.stopStartZavrsna3').attr('class', 'stopStartZavrsna3');
+                }, 2000);
+                setTimeout(function () {
+                    $(".linijaCetvrtaObavestenjaDesno").removeClass('obavestenjaDesnoAnimacija');
+                }, 3500);
+            });
+
+            $(".dugmeObavestenja5").click(function () {
+                $(".stopStart14").attr('class', 'stopStart14 stopStart1Animacija');
+                $(".stopStart24").attr('class', 'stopStart24 stopStart2Animacija');
+                $(".stopStart34").attr('class', 'stopStart34 stopStart3Animacija');
+                $(".stopStart44").attr('class', 'stopStart44 stopStart4Animacija');
+                $(".stopStart54").attr('class', 'stopStart54 stopStart5Animacija');
+                $(".stopStartZavrsna4").attr('class', 'stopStartZavrsna4 stopStartZavrsnaAnimacija');
+                $(".dugmeObavestenja5").addClass('dugmeObavestenjaClick');
+                $(".linijaPetaObavestenjaDesno").addClass('obavestenjaDesnoAnimacija');
+                $("#oglasi").addClass('boxShadow');
+                $(".dugmeObavestenja2, .dugmeObavestenja3, .dugmeObavestenja4, .dugmeObavestenja1").removeClass('dugmeObavestenjaClick');
+                //1 sec delay to complete the animation before removing it and disabling the button.
+                setTimeout(function () {
+                    $(".stopStart14").attr('class', 'stopStart14');
+                    $(".stopStart24").attr('class', 'stopStart24');
+                    $(".stopStart34").attr('class', 'stopStart34');
+                    $(".stopStart44").attr('class', 'stopStart44');
+                    $(".stopStart54").attr('class', 'stopStart54');
+                    $('.stopStartZavrsna4').attr('class', 'stopStartZavrsna4');
+                }, 2000);
+                setTimeout(function () {
+                    $(".linijaPetaObavestenjaDesno").removeClass('obavestenjaDesnoAnimacija');
+                }, 3500);
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        <h:outputScript library="bsf" name="js/transition.js" />
+    </h:body>
+</html>

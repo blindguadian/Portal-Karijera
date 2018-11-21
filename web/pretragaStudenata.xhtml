@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+<h:head>
+    <title>Oglas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</h:head>
+    
+<h:body>
+    <h:outputStylesheet library="css" name="vestiitd.css"></h:outputStylesheet>
+    
+<div class="container1">
+        <div id="header" class="row">
+            
+            <div id="logo" class="col-1"> 
+                <img class="image-fluid rounded" src="resources\images\PortalITkarijeralogo.jpg" style="width: 90px"/>
+            </div>
+            
+            <div id="naslov" class="col-8">
+                <h2> Portal Karijera polaznika kurseva IT obuke </h2> 
+            </div>
+            
+            <div class="col-1"></div>
+            
+            <div id="odjavadugme" class="col-2">
+                <h:form id="forma1">
+                    <p:commandButton id="dugme2" value="Odjava" actionListener="#{buttonView.buttonAction}" ajax="false" />
+                </h:form>
+            </div>
+        </div>
+    </div>
+        
+        <div id="navigacija" class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-sm navbar-custom">
+                     <a href="faces/index.xhtml" class="navbar-brand">Pocetna</a>
+                <div id="navbar1" class="navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="faces/prikazSvihVesti.xhtml">Vesti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faces/prikazSvihDiskusija.xhtml">Diskusije</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faces/prikazSvihObavestenja.xhtml">Obavestenja</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faces/prikazSvihGrupa.xhtml">Grupe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faces/prikazSvihAnketa">Ankete</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faces/prikazSvihOglasa.xhtml">Oglasi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faces/prikazSvihPreporuka.xhtml">Preporuke</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faces/kontakt.xhtml">Kontakt</a>
+                        </li>
+                    </ul>
+                </div>
+                    <div class="col-3"></div>
+                    <div id="navbar2" class="navbar col-2">
+                        <h:form id="i">
+                            <p:growl id="messages" showDetail="true"/>
+                            <p:menuButton value="Dobrodosli">
+                                <p:menuitem value="Azurirajte profil" />
+                                <p:menuitem value="Moje vesti" />
+                                <p:menuitem value="Moje diskusije"/>
+                                <p:menuitem value="Moja obavestenja"/>
+                                <p:menuitem value="Moje ankete"/>
+                                <p:menuitem value="Moje grupe"/>
+                                <p:menuitem value="Moje preporuke"/>
+                                <p:menuitem value="Moji oglasi"/>
+                            </p:menuButton>
+                        </h:form>
+                    </div>
+               </nav>
+            </div>
+        </div>
+    
+    <div class="container2">
+        <br></br>
+
+<div class="row">
+    <div class=" offset-1 col-8" style="width:900px;margin-top: 50px"> 
+        
+        <h:form>
+    <p:dataTable var="korisnik" value="#{FilterView.korisnici}" widgetVar="korisnikPrikaz" emptyMessage="Nije pronadjen nijedan rezultat"  filteredValue="#{FilterView.filtriraniKorisnici}" lazy="false">
+ 
+        <f:facet name="header">
+            <p:outputPanel>
+                <h:outputText value="Pretrazi sva polja:" />
+                <p:inputText id="globalFilter" onkeyup="PF('korisnikPrikaz').filter()" style="width:200px" placeholder="Ukucaj trazeni pojam"/>
+            </p:outputPanel>
+        </f:facet>
+        
+        <p:column filterBy="#{korisnik.javnoIme}" headerText="Javno ime" filterMatchMode="contains">
+            <h:link value="#{korisnik.javnoIme}" outcome="korisnickiProfil?javnoIme=#{korisnik.javnoIme}"/>
+        </p:column>
+        
+        
+ 
+        <p:column filterBy="#{korisnik.nazivMesta}" headerText="Mesto" filterMatchMode="contains">
+            <h:outputText value="#{korisnik.nazivMesta}" />
+        </p:column>
+        
+        <p:column filterBy="#{korisnik.kurs}" headerText="Kurs" filterMatchMode="contains">
+            <h:outputText value="#{korisnik.kurs}" />
+        </p:column>
+        
+        <p:column filterBy="#{korisnik.nazivFakulteta}" headerText="Fakultet" filterMatchMode="contains">
+            <h:outputText value="#{korisnik.nazivFakulteta}"/>
+        </p:column>
+        
+        <p:column filterBy="#{korisnik.nazivInteresovanja}" headerText=" Oblast interesovanja" filterMatchMode="contains">
+            <h:outputText value="#{korisnik.nazivInteresovanja}" />
+        </p:column>
+  
+        
+ 
+    </p:dataTable>
+</h:form>
+        </div>
+    
+    </div>
+    
+</div>
+    <br></br>
+    <br></br>
+<div id="footer">
+            <div id="adresa">
+               <p id="kontakt">
+                   KONTAKT
+                   <br></br>
+                   Adresa:
+                   <br></br>
+                   Telefon:
+               </p> 
+            </div>
+        </div>
+    <div id="copyright">
+    <p style="float: left">Copyright &copy; 2018 - All Rights Reserved</p>
+    </div>
+</h:body>
+</html>

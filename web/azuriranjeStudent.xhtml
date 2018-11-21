@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>student</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="ruza_1.css"/>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet name="ruza_1.css"></h:outputStylesheet>
+            <div class="container1">
+                <div id="header" class="row">
+                    <div id="logo" class="col-2"> 
+                        <img class="image-fluid rounded" src="resources\images\PortalITkarijeralogo.jpg" style="width: 90px;"/>
+                    </div>
+                <div id="naslov" class="col-7">
+                    <h1> Portal Karijera polaznika kurseva IT obuke </h1> 
+                </div>
+                <div class="col-3">
+                </div>
+                </div> 
+                <div id="navigacija" class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-sm navbar-custom">                           
+                        <div id="navbar1" class="navbar">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/">Početna</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Vesti</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Diskusije</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Obaveštenja</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Grupe</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Ankete</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Oglasi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Preporuke</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">Kontakt</a>
+                                </li>
+                            </ul>
+                        </div>
+                        </nav>
+                    </div>
+                </div>    
+    </div>
+        <div class="container">
+            <h:form class="register">
+                <h1>Ažuriranje profila</h1>
+                <br></br>
+                <div class="row1">
+                        <p:panelGrid styleClass="tabela" >
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Korisničko ime*"></h:outputText>
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Lozinka*"></h:outputText>
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                                </p:row>    
+                        </p:panelGrid>
+                </div>
+                <br></br>
+                    <div clas="row2">
+                        <legend>Osnovni podaci</legend>
+                        <p:panelGrid styleClass="tabela" >
+                            <p:row>
+                                <p:column colspan="1" >
+                                    <p:outputLabel  for="slika" value="Izaberite sliku" />
+                                    <p:fileUpload id="slika"  multiple="false" sizeLimit="1000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  requiredMessage="Izaberite sliku" mode="simple" value="#{azurirajPodatke.slikaStudenta}" update="growl" />
+                                    <!-- <p:commandButton value="Submit" ajax="false" actionListener="fileBean.storeImage"></p:commandButton> -->
+                                    <p:graphicImage value="#" height="150" binding="#{image}"></p:graphicImage>             
+                                </p:column>
+                                <p:column></p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox   />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column colspan="1">
+                                    <h:outputText value="Ime*"></h:outputText>
+                                </p:column>
+                                <p:column colspan="1">
+                                    <h:outputText value="#{korisnik.ime}" ></h:outputText>
+                                </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                
+                            </p:row>
+                            <p:row>
+                                <p:column >
+                                    <h:outputText value="Srednje ime*"></h:outputText>
+                                </p:column>
+                                <p:column colspan="1">
+                                    <p:inputText ></p:inputText>
+                                </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Prezime*" />
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:inputText  ></p:inputText>
+                                    </p:column>  
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Datum rođenja*" />
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <h:outputText value="#{korisnik.datumRodjenja}"/>
+                                    </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="1">
+                                       <h:outputText value="Pol*" />
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <h:selectOneMenu id="pol" styleClass="dropdown1"  style="width:70px">
+                                            <f:selectItem itemLabel="Muško" itemValue="1"/>
+                                            <f:selectItem itemLabel="Žensko" itemValue="2"/>
+                                            <f:selectItem itemLabel="Nije se izjasnio" itemValue="3"/>     
+                                        </h:selectOneMenu>
+                                    </p:column>
+                                    <p:column></p:column>
+                                    <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Ulica i broj prebivališta*" />
+                                    </p:column>
+                                   <p:column colspan="1">
+                                       <p:inputText  placeholder="Ulica" style="width: 100%" ></p:inputText>
+                                    </p:column>
+                                   <p:column colspan="1">
+                                       <p:inputText  placeholder="broj" style="width: 40px; margin: 0px"></p:inputText>
+                                    </p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                               </p:row>
+                               <p:row>
+                                   <p:column colspan="1">
+                                       <h:outputText value="Mesto prebivališta*"></h:outputText>
+                                   </p:column>
+                                   <p:column colspan="1">
+                                        <p:inputText  ></p:inputText>
+                                    </p:column>
+                                   <p:column></p:column>
+                                   <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                               </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Državljanstvo*"></h:outputText>
+                                    </p:column>
+                                   <p:column colspan="1">
+                                        <p:inputText  ></p:inputText>
+                                    </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                               </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Kontakt telefon*" />       
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:inputText  ></p:inputText>
+                                    </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                               </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="E-mail*" />       
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:inputText  ></p:inputText>
+                                    </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Kurs*" />       
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <h:selectOneMenu  id="kurs" styleClass="dropdown1"  style="width:70px">
+                                            <f:selectItem itemLabel="Java" itemValue="1"/>
+                                            <f:selectItem itemLabel="PHP" itemValue="2"/>
+                                            <f:selectItem itemLabel="Kukičanje" itemValue="3"/>
+                                        </h:selectOneMenu>
+                                    </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="PIN*" />       
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:inputText  ></p:inputText>
+                                    </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Status*" />       
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <h:selectOneMenu  id="status" styleClass="dropdown1"  style="width:90px">
+                                            <f:selectItem itemLabel="Zaposlen/a" itemValue="1"/>
+                                            <f:selectItem itemLabel="Nezaposlen/a" itemValue="2"/>
+                                            <f:selectItem itemLabel="Nastavio/la usavršavanje" itemValue="3"/>
+                                        </h:selectOneMenu>
+                                    </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                </p:row>
+                            <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Javno ime*" />       
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                                <p:column></p:column>
+                                <p:column></p:column>
+                                </p:row>
+                            <p:row>
+                                <p:column colspan="1" >
+                                    <h:outputText value="Postavite CV*"></h:outputText>
+                                </p:column>
+                                <p:column colspan="1" >
+                                    <h:form >
+                                        <p:growl id="CV" showDetail="true" />
+                                        <p:fileUpload value="#{azurirajPodatke.CVStudenta}" mode="simple" />
+                                    </h:form>
+                                </p:column>
+                                <p:column></p:column>
+                                <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                             </p:row>
+                        </p:panelGrid>
+                    </div>
+                <br></br>
+                <br></br>
+                        <div class="row3">
+                            <h1>Dodatni podaci</h1>
+                          
+                            <legend>Podaci o diplomi</legend>
+                            
+                            <p:panelGrid styleClass="tabela" >
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Fakultet*" />
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>  
+                               </p:row>
+                               <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Odsek" />
+                                    </p:column>
+                                   <p:column colspan="1">
+                                       <p:inputText ></p:inputText>
+                                    </p:column>
+                               </p:row>
+                               <p:row>
+                                   <p:column colspan="1">
+                                       <h:outputText value="Nivo studija" />         
+                                   </p:column>
+                                   <p:column colspan="4">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                               </p:row>
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Godina upisa*" />       
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Godina završetka*" />       
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Zvanje*" />       
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                               </p:row>
+                            </p:panelGrid>
+                            <br></br>
+                                <legend>Podaci o zaposlenju</legend>
+                           <p:panelGrid styleClass="tabela"  >
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Ime kompanije*" />
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>  
+                               </p:row>
+                               <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Mesto kompanije" />
+                                    </p:column>
+                                   <p:column colspan="1">
+                                       <p:inputText ></p:inputText>
+                                    </p:column>
+                               </p:row>
+                               <p:row>
+                                   <p:column colspan="1">
+                                       <h:outputText value="Pozicija*" />         
+                                   </p:column>
+                                   <p:column colspan="4">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                               </p:row>
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Od kada" />       
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Do kada" />       
+                                    </p:column>
+                                    <p:column colspan="3">
+                                        <p:inputText ></p:inputText>
+                                    </p:column>
+                                </p:row>
+                           </p:panelGrid>
+                                <br></br>
+                                <legend>Podaci o trenuntnim studijama</legend>
+                            <p:panelGrid styleClass="tabela"  >
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Univezitet" />
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:inputText ></p:inputText>
+                                    </p:column> 
+                                    <p:column colspan="1">
+                                    <p:selectBooleanCheckbox />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                               </p:row>
+                               <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Fakultet" />
+                                    </p:column>
+                                   <p:column colspan="1">
+                                       <p:inputText ></p:inputText>
+                                    </p:column>
+                                   <p:column colspan="1">
+                                    <p:selectBooleanCheckbox />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                               </p:row>
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Sedište fakulteta" />
+                                    </p:column>
+                                   <p:column colspan="1">
+                                       <p:inputText  placeholder="Grad"  ></p:inputText>
+                                    </p:column>
+                                    <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="1"></p:column>
+                                   <p:column colspan="1">
+                                       <p:inputText   placeholder="Država" ></p:inputText>
+                                    </p:column>
+                                        <p:column colspan="1">
+                                    <p:selectBooleanCheckbox/>
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                        </p:row>
+                              
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Nivo studija" />       
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:inputText  ></p:inputText>
+                                    </p:column>
+                                    <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                               </p:row>
+                                <p:row>
+                                    <p:column colspan="1">
+                                        <h:outputText value="Godina upisa*" />       
+                                    </p:column>
+                                    <p:column colspan="1">
+                                        <p:inputText  ></p:inputText>
+                                    </p:column>
+                                    <p:column colspan="1">
+                                    <p:selectBooleanCheckbox  />
+                                    <p:spacer height="10" width="10"/>
+                                    <h:outputText value="Javni podatak" ></h:outputText>
+                                </p:column>
+                                </p:row>
+                    <p:row>
+                        <p:column style="margin: 30px">* obavezna polja</p:column>
+                                </p:row>
+                                  <div class="row4" align="center" >
+                                <p:row>
+                                    <p:column></p:column>
+                                    <p:column colspan="1" >
+                                        <h:commandButton value="Ažurirajte podatke"   id="azuriranje" actionListener="#{azurirajPodatke.azurirajKorisnika()}" />        
+                                    </p:column>
+                                </p:row> 
+                           
+                    </div>
+                               
+                 </p:panelGrid>
+                                </div>
+            </h:form>        
+         </div>
+       <div id="footer">
+            <div id="adresa">
+               <p style="float: left;padding:30px;font-family: Verdana, Geneva, sans-serif; color: #7E587E">
+                   KONTAKT
+                   <br></br>
+                   Adresa:
+                   <br></br>
+                   Telefon:
+               </p> 
+            </div>
+        </div>
+    <div id="copyright">
+    <p style="float: left">Copyright &copy; 2018 - All Rights Reserved</p>
+    </div>
+        
+         </h:body>
+</html>

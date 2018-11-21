@@ -1,0 +1,1252 @@
+
+/*gost
+background-image: linear-gradient(to left top, #ffffff, #c5c0d3, #9283a7, #63497b, #39104e);
+
+student
+background-image: linear-gradient(to left top, #ffffff, #b9b9b9, #777777, #3b3b3b, #000000);
+
+kompanija
+background-image: linear-gradient(to left top, #f7fff8, #bbd6bc, #82ae82, #4b864a, #045f0f);
+
+admin
+background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d35448, #b30707);
+*/
+
+/* sa glavne strane, treba raspodeliti*/
+
+
+            .dugmeObavestenjaClick{
+                background: linear-gradient(to right, #17a2b8, rgba(23, 162, 184, 0.1));
+                background-size: 1000% 1000%;
+                -webkit-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+                -moz-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+                animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+                animation-fill-mode: forwards;
+                color: white!important;
+            }
+
+            .dugmeObavestenjaClick:hover{
+                box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+                color: white;
+                background: linear-gradient(to right, #17a2b8, rgba(23, 162, 184, 0.1));
+                background-size: 1000% 1000%;
+                -webkit-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+                -moz-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+                animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+                animation-fill-mode: forwards;
+            }
+
+            .stopStart1Animacija{
+                animation: 1.6s stopStart1Animacija linear 1;
+            }
+            .stopStart2Animacija{
+                animation: 1.6s stopStart2Animacija linear 1;
+                animation-delay: 0.1s;
+            }
+            .stopStart3Animacija{
+                animation: 1.6s stopStart3Animacija linear 1;
+                animation-delay: 0.2s;
+            }
+            .stopStart4Animacija{
+                animation: 1.6s stopStart4Animacija linear 1;
+                animation-delay: 0.3s;
+            }
+            .stopStart5Animacija{
+                animation: 1.6s stopStart5Animacija linear 1;
+                animation-delay: 0.4s;
+            }
+            .stopStartZavrsnaAnimacija{
+                animation: 1s stopStartZadnjaAnimacija linear 1;
+                animation-delay: 0.6s;
+            }
+            #strelicaDrugaVesti{
+                webkit-animation: 10s arrowAnimation infinite forwards;
+                animation: arrowAnimation 10s linear infinite;
+                animation-delay: 0.2s;
+            }
+
+            #strelicaTrecaVesti{
+                webkit-animation: 10s arrowAnimation infinite forwards;
+                animation: arrowAnimation 10s linear infinite;
+                animation-delay: 0.4s;
+            }
+
+            #strelicaCetvrtaVesti{
+                webkit-animation: 10s arrowAnimation infinite forwards;
+                animation: arrowAnimation 10s linear infinite;
+                animation-delay: 0.6s;
+            }
+
+            #strelicaDrugaStatistike{
+                webkit-animation: 10s arrowAnimationStatistika infinite forwards;
+                animation: arrowAnimationStatistika 10s linear infinite;
+                animation-delay: 0.2s;
+            }
+
+            #strelicaTrecaStatistike{
+                webkit-animation: 10s arrowAnimationStatistika infinite forwards;
+                animation: arrowAnimationStatistika 10s linear infinite;
+                animation-delay: 0.4s;
+            }
+
+            #strelicaCetvrtaStatistike{
+                webkit-animation: 10s arrowAnimationStatistika infinite forwards;
+                animation: arrowAnimationStatistika 10s linear infinite;
+                animation-delay: 0.6s;
+            }
+
+            .middle-line-second {
+                stroke-dasharray: 2 70;
+                stroke-dashoffset: 0;
+                -webkit-animation: 1.4s dashAppear linear forwards;
+                animation: dashAppear 1.4s linear;
+            }
+
+            #strelicasvgVesti, #strelicasvgStatistike{
+                transition: 0.2s;
+                float: right;
+            }
+
+            #strelicasvgVesti:hover, #strelicasvgStatistike:hover{
+                filter: drop-shadow( 3px 3px 3px #000 );
+            }
+
+            #ikonicaDiv:hover .middle-line-second {
+                -webkit-animation: 1s dash linear forwards;
+                animation: dash 1s linear;
+                animation-fill-mode: forwards;
+            }
+
+            #ikonicaDiv:hover .middle-dot-upper {
+                -webkit-animation: 1s dot linear forwards;
+                animation: dotUpper 1s linear;
+                animation-delay: 0.4s;
+            }
+
+            #ikonicaDiv:hover .middle-dot-lower {
+                -webkit-animation: 1s dot linear forwards;
+                animation: dotLower 1s linear;
+                animation-delay: 0.4s;
+            }
+
+
+            #menuItems:hover .gornja-meni-linija {
+                -webkit-animation: 1s dashMenuLine linear forwards;
+                animation: dashMenuLine 1s linear;
+                animation-delay: 1.4s;
+                animation-fill-mode: forwards;
+            }
+
+
+            #menuItems:hover .donja-meni-linija {
+                -webkit-animation: 1s dashMenuLine linear forwards;
+                animation: dashMenuLine 1s linear;
+                animation-delay: 1.4s;
+                animation-fill-mode: forwards;
+            }
+
+            #menuItems:hover #gornja-menu-linija, #menuItems:hover #donja-menu-linija {
+                visibility:visible;
+                opacity:1;
+                transition-delay: 1.4s;
+            }
+
+            #gornja-menu-linija, #donja-menu-linija{
+                visibility: hidden;
+                opacity: 0; 
+                transition:visibility linear 1s,opacity 1s linear;
+            }
+
+            .gornja-meni-linija, .donja-meni-linija{
+                -webkit-animation: 1s dashMenuLineRetreat linear forwards;
+                animation: dashMenuLineRetreat 1s linear;
+            }
+
+            .gornja-meni-linija, .donja-meni-linija{
+                visibility: hidden;
+            }
+
+            #svgMenu{
+                transition: 0.4s;
+            }
+
+            #ikonicaDiv:hover #svgMenu{
+                filter: drop-shadow( 5px 5px 5px #000 );
+            }
+
+            .elementDesnoObavestenja{
+                filter: drop-shadow( 5px 5px 5px #000 );
+            }
+
+            .linijaPrvaObavestenjaDesno, .linijaDrugaObavestenjaDesno, .linijaTrecaObavestenjaDesno, .linijaCetvrtaObavestenjaDesno, .linijaPetaObavestenjaDesno{
+                visibility: hidden;
+            }
+
+            .obavestenjaDesnoAnimacija{
+                visibility: hidden;
+                transition: 0.2s;
+                stroke-dasharray: 0 300;
+                stroke-dashoffset: 0;
+                -webkit-animation: 2s obavestenjaDesnoGradientAppear cubic-bezier(.01,.45,.78,.56) forwards;
+                animation: obavestenjaDesnoGradientAppear 2s cubic-bezier(.01,.45,.78,.56);
+                animation-delay: 1.5s;
+            }
+
+            .obavestenja{
+                transition: 0.4s;
+            }
+
+            .boxShadow{
+                transition: linear 0.4s;
+                -webkit-animation: 1.5s boxShadow cubic-bezier(.01,.45,.78,.56) forwards;
+                animation: 1.5s boxShadow linear forwards;
+                animation-delay: 3s;
+            }
+
+            @keyframes boxShadow{
+                0% {
+                    box-shadow: rgba(0, 73, 54, 0.1) 0px 0px 8px 2px;
+                }
+                20%{
+                    box-shadow: rgba(0, 73, 54, 0.2) 0px 0px 12px 4px;
+                }
+                40%{
+                    box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 16px 6px;
+                }
+                60%{
+                    box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 20px 8px;
+                }
+                80%{
+                    box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 24px 10px;
+                }
+                100% {
+                    box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 28px 13px;
+                }
+            }
+
+            @keyframes obavestenjaDesnoGradientAppear {
+                0% {
+                    visibility: visible;
+                    stroke-dasharray: 0 300;
+                }
+                80%{
+                    stroke-dasharray: 300;
+                }
+                100% {
+                    stroke-opacity: 0;
+                }
+            }
+
+            @keyframes obavestenjaClickPozadinaAnimacija{
+                0% {
+                    background-position: 100% 50%
+                }
+                100% {
+                    background-position: 0% 50%
+                }
+            }
+
+            @keyframes stopStart1Animacija{
+                0%{
+                    stop-color: white; 
+                    stop-opacity: 0.3;
+                }
+
+                50%{
+                    stop-color: #17a2b8; 
+                    stop-opacity: 0.3;
+                }
+
+                100%{
+                    stop-color: white;
+                    stop-opacity: 0.5;
+                }
+            }
+
+            @keyframes stopStart2Animacija{
+                0%{
+                    stop-color: white; 
+                    stop-opacity: 0.5;
+                }
+
+                50%{
+                    stop-color: #17a2b8; 
+                    stop-opacity: 0.6;
+                }
+
+                100%{
+                    stop-color: white;
+                    stop-opacity: 0.7;
+                }
+            }
+
+            @keyframes stopStart3Animacija{
+                0%{
+                    stop-color: white; 
+                    stop-opacity: 0.7;
+                }
+
+                50%{
+                    stop-color: #17a2b8; 
+                    stop-opacity: 0.9;
+                }
+
+                100%{
+                    stop-color: white;
+                    stop-opacity: 0.7;
+                }
+            }
+
+            @keyframes stopStart4Animacija{
+                0%{
+                    stop-color: white; 
+                    stop-opacity: 1;
+                }
+
+                50%{
+                    stop-color: #17a2b8; 
+                    stop-opacity: 1;
+                }
+
+                100%{
+                    stop-color: white;
+                    stop-opacity: 1;
+                }
+            }
+
+            @keyframes stopStart5Animacija{
+                0%{
+                    stop-color: white; 
+                    stop-opacity: 1;
+                }
+
+                50%{
+                    stop-color: #17a2b8; 
+                    stop-opacity: 1;
+                }
+
+                80%{
+                    stop-color: #17a2b8; 
+                    stop-opacity: 0.7;
+                }
+
+                100%{
+                    stop-color: white;
+                    stop-opacity: 0.5;
+                }
+            }
+
+            @keyframes stopStartPocetnaAnimacija{
+                0%{
+                    stop-color: white; 
+                    stop-opacity: 1;
+                }
+
+                50%{
+                    stop-color: #17a2b8; 
+                    stop-opacity: 1;
+                }
+
+                100%{
+                    stop-color: white;
+                    stop-opacity: 1;
+                }
+            }
+
+            @keyframes stopStartSrednjaAnimacija{
+                0%{
+                    stop-color: white; 
+                    stop-opacity: 1;
+                }
+
+                50%{
+                    stop-color: #17a2b8; 
+                    stop-opacity: 1;
+                }
+
+                100%{
+                    stop-color: white;
+                    stop-opacity: 1;
+                }
+            }
+
+            @keyframes stopStartZadnjaAnimacija{
+                0%{
+                    stop-color: #17a2b8; 
+                    stop-opacity: 1;
+                }
+
+                50%{
+                    stop-color: #17a2b8;
+                    stop-opacity: 1;
+                }
+
+                100%{
+                    stop-color: #17a2b8;
+                    stop-opacity: 1;
+                }
+            }
+
+            @keyframes dashMenuLineRetreat{
+                0% {
+                    stroke-opacity: 1;
+                    visibility: visible;
+                    opacity: 1;
+                }
+                100% {
+                    stroke-opacity: 0;
+                    visibility: hidden;
+                    opacity: 0;
+                }
+            }
+
+            @keyframes dashMenuLine {
+                0% {
+                    stroke-opacity: 1;
+                    stroke-width: 12;
+                    stroke-dasharray: 0 630;
+                    visibility: visible;
+                    opacity: 1;
+                }
+                100% {
+                    stroke-opacity: 1;
+                    stroke-width: 4;
+                    stroke-dasharray: 630 630;
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+
+            @keyframes dotUpper{
+                50%{
+                    fill-opacity: 1;
+                }
+
+                100%{
+                    fill-opacity: 0;
+                    cx: 102;
+                    cy: -8;
+                }
+            }
+
+            @keyframes dotLower{
+                50%{
+                    fill-opacity: 1;
+                }
+
+                100%{
+                    fill-opacity: 0;
+                    cx: 102;
+                    cy: 38;
+                }
+            }
+
+            @keyframes dash {
+                0% {
+                    stroke-dasharray: 2 70;
+                }
+                80%{
+                    stroke: #17a2b8;
+                    stroke-dasharray: 70;
+                }
+                100% {
+                    stroke-opacity: 0;
+                }
+            }
+
+            @keyframes dashAppear {
+                0% {
+                    stroke-opacity: 0;
+                }
+                30% {
+                    stroke-opacity: 0;
+                }
+                100% {
+                    stroke-opacity: 1;
+                }
+            }
+
+            @keyframes arrowAnimation{
+                0% {
+                    fill: #17a2b8;
+                    fill-opacity:0;
+                }
+                80% {
+                    fill: #17a2b8;
+                    fill-opacity:0;
+                }
+                90% {
+                    fill: #17a2b8;
+                    fill-opacity: 1;
+                }
+                100% {
+                    fill: #17a2b8;
+                    fill-opacity:0;
+                }
+            }
+
+            @keyframes arrowAnimationStatistika{
+                0% {
+                    fill: #04443C;
+                    fill-opacity:0;
+                }
+                80% {
+                    fill: #04443C;
+                    fill-opacity:0;
+                }
+                90% {
+                    fill: #04443C;
+                    fill-opacity: 1;
+                }
+                100% {
+                    fill: #04443C;
+                    fill-opacity:0;
+                }
+            }
+
+
+/*opste*/
+
+.nav-pills .nav-link.active{
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+/*stil svih pf dugmica*/
+
+@media (min-width: 1200px){
+    [id^=dugme] {
+        font-size: 1.2vw;
+    }
+}
+
+@media (min-width: 1000px) and (max-width: 1199px) {
+    [id^=dugme] {
+        font-size: 1.5vw;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 999px) {
+    [id^=dugme] {
+        font-size: 1.8vw;
+    }
+}
+
+@media (max-width: 599px){
+    [id^=dugme] {
+        font-size: 2vw;
+    }
+}
+
+/*homepage*/
+
+.container{
+    width: 100%;
+}
+
+#top{
+    background-repeat:no-repeat;
+    background-size: cover;
+    width: 100%;
+    background-color: #7E587E;
+    box-shadow: 0 18px 16px -6px #04443c;
+    position: relative;
+    z-index: 1;
+}
+
+/*header*/
+
+#header {
+    padding-top: 40px;
+    height: 200px;
+    padding-bottom: 40px;
+    /*margin:0;
+    width: 100%;
+    
+    background-size: cover;*/
+}
+
+
+.logoImg{
+    display: block;
+    margin: auto;
+}
+
+#logo{
+    padding-left: 15px;
+}
+
+
+#menu{
+    font-family:  Verdana, Geneva, sans-serif;
+    font-size: 1.8rem;   
+}
+
+.infoTekstHeader{
+    font-family: 'Titillium', serif;
+    font-size: 45px;
+}
+
+.infoTekstParagraph{
+    font-family: 'Titillium', serif;
+}
+
+#naslov {
+    position: relative;
+    width: 100%;
+    text-align:center;
+    font-family:  Verdana, Geneva, sans-serif;
+    font-size: 40px;
+    color: gray;
+    padding-top: 35px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+/*drugi red*/
+
+#drugiRed{
+    height: 40%;
+    width: 100%;
+    margin:0;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+/* vesti front page*/
+
+#middleVesti{
+    background-color: white;
+    margin: 0px;
+
+    /*    box-shadow: inset 0px 10px 30px black;*/
+}
+
+#vestiDugmeDiv{
+    padding-left: 0px;
+}
+
+@media (max-width: 999px){
+    #strelicasvgVesti{
+        width: 100px;
+        height: 50px;
+    }   
+}
+
+@media (min-width: 1000px) and (max-width: 1299px){
+    #strelicasvgVesti{
+        width: 90px;
+        height: 90px;
+    }   
+}
+
+@media (min-width: 1300px) and (max-width: 1500px){
+    #strelicasvgVesti{
+        width: 100px;
+        height: 100px;
+    }   
+}
+
+@media (min-width: 1500px){
+    #strelicasvgVesti{
+        width: 120px;
+        height: 130px;
+    }   
+}
+
+@media (min-width: 1100px) {
+    #middleVesti {
+        padding-top: 140px;
+        padding-bottom: 140px;
+    }
+
+}
+
+@media (max-width: 1099px) {
+    #middleVesti {
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+}
+
+#vesti{
+    align-items: center;
+    height: 100%;
+}
+
+#kontejnerVesti{
+    /*font-size: 1.5vw;*/
+    font-size: 1.5rem;
+    text-align: center;
+    align-items: center;
+}
+
+.vestiNaslov{
+    font-weight: bold;
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+.vestiNaslov a:link, .vestiNaslov a:visited{
+    color: #04443c;
+}
+
+.vestiSplitter{
+}
+
+#linijicaLomiPravila11, #linijicaLomiPravila12, #linijicaLomiPravila21, #linijicaLomiPravila22, #linijicaLomiPravila31, #linijicaLomiPravila32{
+    overflow: visible;
+}
+
+.vestiAutorDatum{
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 7;
+}
+
+.vestiAutor{
+    float: left;
+}
+
+.vestiDatum{
+    float: right;
+}
+
+.vestiMeta{
+
+}
+
+#vest-prva, #vest-druga, #vest-treca{
+    /*box-shadow: 25px 0px 35px -24px rgba(23, 162, 184, 0.7);*/
+    padding: 0px;
+}
+
+#vestiDiv{
+    align-items: center;
+    text-align: right;
+    font-size: 1.5vw;
+    padding-left: 0px;
+}
+
+#vestiOutputText{
+
+}
+
+#vestiLinkDiv{
+
+}
+
+[id|=vest]
+
+/*obavestenja front page*/
+
+#middleObavestenja{
+    background-color: white;
+    box-shadow: inset 0px 10px 30px black;
+}
+
+@media (min-width: 1100px) {
+    #middleObavestenja {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+}
+
+@media (max-width: 1099px) {
+    #middleObavestenja {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
+
+#obavestenjaRow{
+    align-items: center;
+    height: 100%;
+}
+
+.piluleZaLilule > li + li {
+    margin-top: 20px;
+}
+
+.piluleZaLilule{
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: block;
+    text-align: center;
+}
+
+/*.piluleZaLilule a{
+    color: black;
+    border: 1px solid #17a2b8;
+    transition: 1s ease;
+}
+
+.piluleZaLilule a:hover{
+    box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: rgba(23, 162, 184, 0.2)!important;
+    color: black;
+}
+
+#piluleLista a:focus{
+    background-color: #17a2b8;
+    color: white;
+}*/
+.piluleZaLilule a{
+    color: black;
+    border: 1px solid #17a2b8;
+    transition: 1s ease;
+}
+
+.piluleZaLilule a:hover{
+    box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: rgba(23, 162, 184, 0.4)!important;
+    color: black;
+}
+
+
+#obavestenjaPiluleZaLilule{
+    border: 1px solid black;
+    border-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#000), color-stop(0.45, #fff), color-stop(0.55, #fff));
+    border-image-slice: 1;
+    border-left-width: 0px;
+    height: 100vh; 
+    max-height: 300px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    box-shadow: inset 0px 0px 30px white;
+    position: relative;
+}
+
+#obavestenjaPiluleZaLilule::before{
+    border: 0.5px solid black;
+    height: 100%;
+    content: '';
+    position: absolute;
+    left: 0;
+}
+
+.obavestenja{
+    border: 2px solid black;
+    border-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#000), color-stop(0.45, #fff), color-stop(0.55, #fff));
+    border-image-slice: 1;
+    border-left-width: 0px;
+    height: 80vh;
+    max-height: 250px;
+    width: 46vw;
+    position: relative;
+}
+
+.obavestenja::before{
+    border: 1px solid black;
+    height: 100%;
+    content: '';
+    position: absolute;
+}
+
+.unutrasnjiDivObavestenja{
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+.obavestenjaStrelice{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+
+.obavestenjaNaslov{
+    font-weight: bold;
+    font-size: 2.2rem;
+    padding-top: 5%;
+}
+
+.obavestenjaNaslov a:link, .obavestenjaNaslov a:visited{
+    color: #04443c;
+}
+
+.obavestenjaNaslov a:hover{
+    text-decoration: none;
+}
+
+.naslovUnderlineDiv{
+    height: 5px;
+}
+
+.linijaUnderlineNaslovPrva{
+    max-width: 40%;
+    transform: translate(0, -10px);
+}
+
+.linijaUnderlineNaslovDruga{
+    max-width: 30%;
+    transform: translate(0, -10px);
+}
+
+/*obavestenja*/
+
+
+.obavestenjaMeta{
+    font-size: 1.2rem;
+    padding-top: 20px;
+    min-height: 45px;
+}
+
+.obavestenjeDatumKlasa{
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: right;
+}
+
+.obavestenjeAutorKlasa{
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: left;
+}
+
+.obavestenjaDatumOverlineKlasa{
+    padding-top: 10px;
+}
+
+.obavestenjaAutorOverlineKlasa{
+    padding-top: 10px;
+}
+
+/*diskusije*/
+
+.diskusijeUnderlineMetaKlasa{
+    padding-top: 10px;
+}
+
+.diskusijeKomentarKlasa{
+    line-height: 2;
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: left;
+}
+
+.diskusijeDrugiKomentarKlasa{
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    line-height: 1;
+}
+
+
+/*ankete*/
+
+.diskusijeUnderlineMetaKlasa{
+    padding-top: 10px;
+}
+
+.anketePitanjeKlasa{
+    line-height: 2;
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: left;
+}
+
+.anketeDrugoPitanjeKlasa{
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+    line-height: 1;
+}
+
+/*preporuke*/
+
+.preporukeOcenaKlasa{
+    padding-top: 10px;
+}
+
+/*middle statistike*/
+
+
+#statistike{
+    height: 100%;
+    align-items: center;
+}
+
+#middleStatistike{
+    background-color: white;
+    margin: 0px;
+}
+
+@media (min-width: 1100px) {
+    #middleStatistike {
+        padding-top: 140px;
+        padding-bottom: 140px;
+    }
+
+}
+
+@media (max-width: 1099px) {
+    #middleStatistike {
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+}
+
+#kontejnerStatistike{
+    /*font-size: 1.5vw;*/
+    font-size: 1.5rem;
+    text-align: center;
+    align-items: center;
+}
+
+.statistikeNaslov{
+    font-weight: bold;
+    font-size: 2.2rem;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.statistikeMeta{
+    text-align: left;
+    padding-top: 50px;
+}
+
+.statistikeNaslov a:link, .statistikeNaslov a:visited{
+    color: #17A2B8;
+}
+
+.statistikeChart{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 30px;
+}
+
+#statistickaLinijicaLomiPravila12, #statistickaLinijicaLomiPravila22{
+    overflow: visible;
+}
+
+#statistikeDiv{
+    align-items: center;
+    text-align: right;
+    font-size: 1.5vw;
+    padding-left: 0px;
+}
+
+#statistikeDugmeDiv{
+    padding-left: 0px;
+}
+
+@media (max-width: 999px){
+    #strelicasvgStatistike{
+        width: 100px;
+        height: 50px;
+    }   
+}
+
+@media (min-width: 1000px) and (max-width: 1299px){
+    #strelicasvgStatistike{
+        width: 90px;
+        height: 90px;
+    }   
+}
+
+@media (min-width: 1300px) and (max-width: 1500px){
+    #strelicasvgStatistike{
+        width: 100px;
+        height: 100px;
+    }   
+}
+
+@media (min-width: 1500px){
+    #strelicasvgStatistike{
+        width: 120px;
+        height: 130px;
+    }   
+}
+
+
+/*search box*/
+.search{
+    height: 75%;
+    width: 83%;
+    /*padding-top: 20%;*/
+}
+
+
+
+.searchInput{
+    background-color: rgba(255, 255, 255,0.15);
+}
+
+.searchInput:focus{
+    background-color: rgba(0,0,0,0.2);
+}
+
+
+
+
+#headerPrijavaDugmici{
+    padding-top: 40px;
+}
+
+
+
+.ui-button, 
+button.ui-button.ui-state-default, 
+.ui-button.ui-state-default{
+    border-radius: 12px;
+    border: 1px solid #a8a8a8;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 1.0em;
+    background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
+    font-weight:normal;
+    color: #373737;
+    text-shadow: 0px 1px 0px rgba(255,255,255,0.7);
+}
+
+
+.prijava-dugme:hover{
+    box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.registracija-dugme{
+    border-radius: 0px 15px 0px 15px;
+}
+
+.registracija-dugme:hover{
+    box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    border-color: white;
+    background-color: #0e606d;
+    color: white;
+}
+
+
+/*navigacija*/
+
+#ikonicaDiv{
+    transform: translate(0, -22%);
+    width: 10%;
+    padding-bottom: 1%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    margin: 0px;
+}
+
+
+
+#ikonicaDiv:hover ~ #mainmenuDiv {
+    visibility:visible;
+    opacity:1;
+    transition-delay:1s;
+}
+
+
+#menuItems{
+    padding-top: 40px;
+}
+
+#mainmenuDiv a:hover{
+    color: #17A2B8;
+} 
+
+#mainmenuDiv:hover{
+    visibility:visible;
+    opacity:1;
+    transition-delay:0s;
+}
+
+#mainmenuDiv{
+    visibility: hidden;
+    opacity: 0; 
+    transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+}
+
+#mainMenu {
+    padding: 0px;
+    display: block;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+#mainMenu a {
+    color: white;
+}
+
+#gornja-menu-linija{
+    height: 6px;
+}
+
+#svgMenuBorderUpper{
+    transform: translate(0, -18px);
+    filter: drop-shadow( 1px 2px 7px #000 );
+    /*display: block;
+    margin: auto;*/
+}
+
+#svgMenuBorderLower{
+    transform: translate(0, -18px);
+    filter: drop-shadow( 1px -2px 7px #000 );
+}
+
+#mainMenu{
+    padding-left: 2%;
+}
+
+#logoHolder{
+    clear: left;
+}
+
+.mainmenu-nav{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 1.6rem;
+    padding-top: 0px;
+    display: inline;
+    width: 100%;
+    vertical-align: top;
+    /*transform: translate(0, -46%);*/
+    /*border-bottom: 3px double #17a2b8;
+    border-top: 3px double #17a2b8;*/
+    margin: 0 auto;
+}
+
+.mainmenu-nav li{
+    float: left;
+    display: inline-block;
+}
+
+.mainmenu-nav a{
+    display:inline-block;
+}
+
+.navbar{
+    margin-bottom: 0px;
+
+}
+
+/*dugme za podesavanja*/
+
+#navbar2{
+    float: right;
+}
+
+
+.mainmenu-nav > li > a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+/*body*/
+
+.container{
+    /*    margin: 0px;
+        padding-left: 0px;
+        padding-right: 0px;*/
+    width:100%;
+    max-width: 100%;
+}
