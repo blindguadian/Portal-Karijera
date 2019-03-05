@@ -91,67 +91,55 @@
 
                     <div class="col-md-2" id="headerPrijavaDugmici">
                         <div class="row">
-
                             <div id="logindugme" class="col-sm-6">
-                                <h:panelGrid rendered="#{session.getAttribute('ulogovan')=='false'}">
-                                    <h:form id="formaPrijava" prependId="false" >
-                                        <b:commandButton class="btn btn-info btn-lg prijava-dugme" id="dugmePrijava" ajax="true" oncomplete="PF('dlg1').show();" value="Prijava">
+                                <h:form id="forma" prependId="false" >
+                                    <b:commandButton class="btn btn-info btn-lg prijava-dugme" id="dugmePrijava" ajax="true" oncomplete="PF('registracijaDijalog').hide(); PF('prijavaDijalog').show();" value="Prijava">
 
-                                        </b:commandButton>
+                                    </b:commandButton>
 
-                                        <p:dialog id="dlg1" header="Prijava" widgetVar="dlg1" resizable="false" styleClass="loginforma">
-                                            <p:panelGrid columns="2">
-                                                <h:outputLabel for="username" value="Korisnicko ime:" />
-                                                <p:inputText id="username" value="#{login.korisnickoIme}" required="true" label="username"/>
-                                                <h:outputLabel for="password" value="Lozinka:" />
-                                                <p:password id="password" value="#{login.lozinka}" required="true" label="password" />
-                                                <f:facet name="footer">
-                                                    <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px" action="/faces/resetLozinke.xhtml"></p:commandLink>
-                                                    <p:commandButton value="Prijavite se" action="#{login.login()}" style="float: right" />
-                                                </f:facet>
+                                    <p:dialog id="prijavaDijalog" header="Prijava" widgetVar="prijavaDijalog" resizable="false" styleClass="loginforma" hideEffect="drop" showEffect="drop">
+                                        <p:panelGrid columns="2">
+                                            <h:outputLabel for="username" value="Korisnicko ime:" />
+                                            <p:inputText id="username" value="#{login.korisnickoIme}" required="true" label="username"/>
+                                            <h:outputLabel for="password" value="Lozinka:" />
+                                            <p:password id="password" value="#{login.lozinka}" required="true" label="password" />
+                                            <f:facet name="footer">
+                                                <p:commandButton value="Prijavite se" action="#{login.login()}" style="float: right" />
+                                                <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px" action="/faces/resetLozinke.xhtml"></p:commandLink>
+                                            </f:facet>
 
-                                            </p:panelGrid>
-                                        </p:dialog>
-                                    </h:form>
-                                </h:panelGrid>
-                                <h:panelGrid rendered="#{session.getAttribute('ulogovan')=='true'}">
-                                    <h:form id="formaOdjava" prependId="false" >
-                                        <b:commandButton id="dugmeOdjava" class="btn btn-info btn-lg prijava-dugme" action="#{logout.izlogujSe()}" value="Odjava">
-                                        </b:commandButton>
-                                    </h:form>
-                                </h:panelGrid>
+                                        </p:panelGrid>
+                                    </p:dialog>
+                                </h:form>
+
                             </div>
                             <div id="registracijadugme" class="col-sm-6">
-                                <h:panelGrid rendered="#{session.getAttribute('ulogovan')=='false'}">
-                                    <h:form id="forma1" prependId="false">
-                                        <b:commandButton class="btn btn-outline-light btn-lg registracija-dugme" id="dugmeRegistracija" value="Registracija" onclick="PF('dlg2').show();" />
+                                <h:form id="forma1" prependId="false">
+                                    <b:commandButton class="btn btn-outline-light btn-lg registracija-dugme" id="dugmeRegistracija" ajax="true" value="Registracija" oncomplete="PF('prijavaDijalog').hide(); PF('registracijaDijalog').show();" />
 
-                                        <p:dialog id="dlg2" header="Registrujte se kao" widgetVar="dlg2" resizable="false">
-                                            <p:panelGrid style="width:300px;">
-                                                <p:row>
-                                                    <p:column colspan="4" style="text-align: center">Student</p:column>
-                                                    <p:column colspan="4" style="text-align: center">Kompanija</p:column>
-                                                </p:row>
-                                                <p:row>
-                                                    <p:column colspan="4">
-                                                        <h:commandLink action="/faces/korisnickiProfilStudent.xhtml">
-                                                            <h:graphicImage value="resources/images/imgStudent.png"/>
-                                                        </h:commandLink>
-                                                    </p:column>
-                                                    <p:column colspan="4">
-                                                        <h:commandLink action="/faces/korisnickiProfilKompanija.xhtml">
-                                                            <h:graphicImage value="resources/images/imgKompanija.png"/>
-                                                        </h:commandLink>
-                                                    </p:column>
-                                                </p:row>
+                                    <p:dialog id="registracijaDijalog" header="Registrujte se kao" widgetVar="registracijaDijalog" resizable="false" hideEffect="drop" showEffect="drop">
+                                        <p:panelGrid style="width:300px;">
+                                            <p:row>
+                                                <p:column colspan="4" style="text-align: center">Student</p:column>
+                                                <p:column colspan="4" style="text-align: center">Kompanija</p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="4">
+                                                    <h:commandLink action="/faces/korisnickiProfilStudent.xhtml">
+                                                        <h:graphicImage value="resources/images/imgStudent.png"/>
+                                                    </h:commandLink>
+                                                </p:column>
+                                                <p:column colspan="4">
+                                                    <h:commandLink action="/faces/korisnickiProfilKompanija.xhtml">
+                                                        <h:graphicImage value="resources/images/imgKompanija.png"/>
+                                                    </h:commandLink>
+                                                </p:column>
+                                            </p:row>
 
-                                            </p:panelGrid>
-                                        </p:dialog>    
-                                    </h:form>
-                                </h:panelGrid>
+                                        </p:panelGrid>
+                                    </p:dialog>    
+                                </h:form>
                             </div>
-
-
                         </div>
                     </div>
                     <div class="col-sm-1"></div>

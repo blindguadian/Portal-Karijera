@@ -15,13 +15,13 @@
 
         <h:outputScript library="bsf" name="js/carousel.js" />
         <f:metadata>
-            <f:viewAction action="#{ucitajVestiZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
+            <f:viewAction action="#{ucitajVestiZaKorisnika.ucitajPoslednjihPetZaKorisnika()}"></f:viewAction>
             <f:viewAction action="#{ucitajStatistikeZaKorisnika.ucitajStatistikeNaGlavnojStrani()}"></f:viewAction>
-            <f:viewAction action="#{ucitajObavestenjaZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
-            <f:viewAction action="#{ucitajDiskusijeZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
-            <f:viewAction action="#{ucitajOglaseZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
-            <f:viewAction action="#{ucitajAnketeZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
-            <f:viewAction action="#{ucitajPreporukeZaKorisnika.ucitajPoslednjihPetZaGosta()}"></f:viewAction>
+            <f:viewAction action="#{ucitajObavestenjaZaKorisnika.ucitajPoslednjihPetZaKorisnika()}"></f:viewAction>
+            <f:viewAction action="#{ucitajDiskusijeZaKorisnika.ucitajPoslednjihPetZaKorisnika()}"></f:viewAction>
+            <f:viewAction action="#{ucitajOglaseZaKorisnika.ucitajPoslednjihPetZaKorisnika()}"></f:viewAction>
+            <f:viewAction action="#{ucitajAnketeZaKorisnika.ucitajPoslednjihPetAnketaZaKorisnika()}"></f:viewAction>
+            <f:viewAction action="#{ucitajPreporukeZaKorisnika.ucitajPoslednjihPetZaKorisnika()}"></f:viewAction>
         </f:metadata>
 
         <style>
@@ -55,28 +55,28 @@
                             <nav id="mainMenu" class="navbar navbar-expand-sm">
                                 <ul class="navbar-nav mainmenu-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihVesti.xhtml">Vesti</a>
+                                        <a class="nav-link" href="prikazSvihVesti.xhtml">Vesti</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihDiskusija.xhtml">Diskusije</a>
+                                        <a class="nav-link" href="prikazSvihDiskusija.xhtml">Diskusije</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihObavestenja.xhtml">Obavestenja</a>
+                                        <a class="nav-link" href="prikazSvihObavestenja.xhtml">Obavestenja</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihGrupa.xhtml">Grupe</a>
+                                        <a class="nav-link" href="prikazSvihGrupa.xhtml">Grupe</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihAnketa">Ankete</a>
+                                        <a class="nav-link" href="prikazSvihAnketa">Ankete</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihOglasa.xhtml">Oglasi</a>
+                                        <a class="nav-link" href="prikazSvihOglasa.xhtml">Oglasi</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="faces/prikazSvihPreporuka.xhtml">Preporuke</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="faces/kontakt.xhtml">Kontakt</a>
+                                        <a class="nav-link" href="kontakt.xhtml">Kontakt</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -93,31 +93,31 @@
                         <div class="row">
                             <div id="logindugme" class="col-sm-6">
                                 <h:form id="forma" prependId="false" >
-                                    <b:commandButton class="btn btn-info btn-lg prijava-dugme" id="dugmePrijava" ajax="true" oncomplete="PF('dlg1').show();" value="Prijava">
-                                        
+                                    <b:commandButton class="btn btn-info btn-lg prijava-dugme" id="dugmePrijava" ajax="true" oncomplete="PF('registracijaDijalog').hide(); PF('prijavaDijalog').show();" value="Prijava">
+
                                     </b:commandButton>
 
-                                    <p:dialog id="dlg1" header="Prijava" widgetVar="dlg1" resizable="false" styleClass="loginforma">
+                                    <p:dialog id="prijavaDijalog" header="Prijava" widgetVar="prijavaDijalog" resizable="false" styleClass="loginforma" hideEffect="drop" showEffect="drop">
                                         <p:panelGrid columns="2">
                                             <h:outputLabel for="username" value="Korisnicko ime:" />
                                             <p:inputText id="username" value="#{login.korisnickoIme}" required="true" label="username"/>
                                             <h:outputLabel for="password" value="Lozinka:" />
                                             <p:password id="password" value="#{login.lozinka}" required="true" label="password" />
                                             <f:facet name="footer">
-                                                <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px" action="/faces/resetLozinke.xhtml"></p:commandLink>
                                                 <p:commandButton value="Prijavite se" action="#{login.login()}" style="float: right" />
+                                                <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px" action="/resetLozinke.xhtml"></p:commandLink>
                                             </f:facet>
 
                                         </p:panelGrid>
                                     </p:dialog>
                                 </h:form>
-                                
+
                             </div>
                             <div id="registracijadugme" class="col-sm-6">
                                 <h:form id="forma1" prependId="false">
-                                    <b:commandButton class="btn btn-outline-light btn-lg registracija-dugme" id="dugmeRegistracija" value="Registracija" onclick="PF('dlg2').show();" />
+                                    <b:commandButton class="btn btn-outline-light btn-lg registracija-dugme" id="dugmeRegistracija" ajax="true" value="Registracija" oncomplete="PF('prijavaDijalog').hide(); PF('registracijaDijalog').show();" />
 
-                                    <p:dialog id="dlg2" header="Registrujte se kao" widgetVar="dlg2" resizable="false">
+                                    <p:dialog id="registracijaDijalog" header="Registrujte se kao" widgetVar="registracijaDijalog" resizable="false" hideEffect="drop" showEffect="drop">
                                         <p:panelGrid style="width:300px;">
                                             <p:row>
                                                 <p:column colspan="4" style="text-align: center">Student</p:column>
@@ -125,12 +125,12 @@
                                             </p:row>
                                             <p:row>
                                                 <p:column colspan="4">
-                                                    <h:commandLink action="/faces/korisnickiProfilStudent.xhtml">
+                                                    <h:commandLink action="/korisnickiProfilStudent.xhtml">
                                                         <h:graphicImage value="resources/images/imgStudent.png"/>
                                                     </h:commandLink>
                                                 </p:column>
                                                 <p:column colspan="4">
-                                                    <h:commandLink action="/faces/korisnickiProfilKompanija.xhtml">
+                                                    <h:commandLink action="/korisnickiProfilKompanija.xhtml">
                                                         <h:graphicImage value="resources/images/imgKompanija.png"/>
                                                     </h:commandLink>
                                                 </p:column>
@@ -147,8 +147,8 @@
             </div>
             <div id="middleVesti">
                 <div class="row" id="vesti">
-                    <div id="kontejnerVesti" class="col-lg-10">
-                        <div class="col-lg-4" id="vest-prva">
+                    <div id="kontejnerVesti" class="col-10">
+                        <div class="col-4 col-lg-4" id="vest-prva">
                             <!-- <div id="vestSplitter11" class="col-lg-1 vestiSplitter">
                                 <svg id="linijicaLomiPravila11" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
                                     <defs>
@@ -163,109 +163,223 @@
                                     <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
                                 </svg>
                             </div> -->
-                            <div id="vestNaslov1" class="col-lg-10 offset-lg-1 vestiNaslov">
-                                <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(2)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(2)}"></b:link>
+                            <div class="row">
+                                <div id="vestNaslov1" class="col-10 offset-1 vestiNaslov">
+                                    <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(2)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(2)}"></b:link>
+                                </div>
+                                <div id="vestSplitter12" class="col-1 vestiSplitter">
+                                    <svg id="linijicaLomiPravila12" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                            <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                            </pattern>
+                                        </defs>
+                                        <line x1="-1" y1="-40" x2="2" y2="200" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                    </svg>
+                                </div>
                             </div>
-                            <div id="vestSplitter12" class="col-lg-1 vestiSplitter">
-                                <svg id="linijicaLomiPravila12" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
-                                    <defs>
-                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
-                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
-                                        </pattern>
-                                    </defs>
-                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
-                                </svg>
+                            <div class="row">
+                                <div id="vestMeta1" class="col-10 offset-1 vestiMeta">
+                                    <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(2)}"></h:outputText>
+                                </div>
                             </div>
-                            <div id="vestAutorDatum1" class="col-lg-10 offset-lg-1 vestiAutorDatum">
-                                <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(2)}" class="vestiAutor"></h:outputText>
-                                <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(2)}" class="vestiDatum"></h:outputText>
+                            <div class="row">
+                                <div id="vestAutorOverline1" class="col-5 offset-1 obavestenjaAutorOverlineKlasa">
+                                    <svg id="linijaVestAutorOverline1" class="linijaVestOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                            <linearGradient id='linijaOverlineVestAutorPrva'>
+                                                <stop class="linijaVestOverline0" offset='0%' style="stop-color: #d9dbdd; stop-opacity: 1;" >
+                                                </stop>
+
+                                                <stop class="linijaVestOverline1" offset='100%' style="stop-color: white; stop-opacity: 1;" >
+                                                </stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlineVestAutorPrva)" fill="none" stroke-width="4"></path>
+                                    </svg>
+                                </div>
+                                <div id="vestDatumOverline1" class="col-5 obavestenjaAutorOverlineKlasa">
+                                    <svg id="linijasveDiskusijeDatumOverline" class="linijaVestDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                        <defs>
+                                            <linearGradient id="linijaVestOverlineDatumPrva">
+                                                <stop class="linijaVestOverline0" offset='0%' style="stop-color: white;" >
+                                                </stop>
+                                                <stop class="linijaVestOverline1" offset='100%' style="stop-color: #d9dbdd;" >
+                                                </stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0 -13 0 0 170 0 " stroke="url(#linijaVestOverlineDatumPrva)" fill="none" stroke-width="4"></path>
+                                    </svg>
+                                </div>
                             </div>
-                            <div id="vestMeta1" class="col-lg-10 offset-lg-1 vestiMeta">
-                                <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(2)}"></h:outputText>
-                            </div>
-                        </div>
-                        <div class="col-lg-4" id="vest-druga">
-                            <div id="vestSplitter21" class="col-lg-1 vestiSplitter">
-                                <svg id="linijicaLomiPravila21" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
-                                    <defs>
-                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
-                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
-                                        </pattern>
-                                    </defs>
-                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
-                                </svg>
-                            </div>
-                            <div id="vestNaslov2" class="col-lg-10 vestiNaslov">
-                                <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(1)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(1)}"></b:link>
-                            </div>
-                            <div id="vestSplitter22" class="col-lg-1 vestiSplitter">
-                                <svg id="linijicaLomiPravila22" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
-                                    <defs>
-                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
-                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
-                                        </pattern>
-                                    </defs>
-                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
-                                </svg>
-                            </div>
-                            <div id="vestAutorDatum2" class="col-lg-10 offset-lg-1 vestiAutorDatum">
-                                <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(1)}" class="vestiAutor"></h:outputText>
-                                <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(1)}" class="vestiDatum"></h:outputText>
-                            </div>
-                            <div id="vestMeta2" class="col-lg-10 offset-lg-1 vestiMeta">
-                                <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(1)}"></h:outputText>
+                            <div class="row">
+                                <div id="vestAutor1" class="col offset-1 vestiAutor">
+                                    <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(2)}" class="vestiAutor"></h:outputText>
+                                </div>
+                                <div id="vestDatum1" class="col vestiDatum">
+                                    <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(2)}" class="vestiDatum"></h:outputText>
+                                </div>
+                                <div class="offset-1"></div>
                             </div>
                         </div>
-                        <div class="col-lg-4" id="vest-treca">
-                            <div id="vestSplitter31" class="col-lg-1 vestiSplitter">
-                                <svg id="linijicaLomiPravila31" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
-                                    <defs>
-                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
-                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
-                                        </pattern>
-                                    </defs>
-                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
-                                </svg>
+                        <div class="col-4 col-lg-4" id="vest-druga">
+                            <div class="row">
+                                <div id="vestSplitter21" class="col-1 vestiSplitter">
+                                    <svg id="linijicaLomiPravila21" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                            <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                            </pattern>
+                                        </defs>
+                                        <line x1="-1" y1="-40" x2="2" y2="200" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                    </svg>
+                                </div>
+                                <div id="vestNaslov2" class="col-10 vestiNaslov">
+                                    <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(1)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(1)}"></b:link>
+                                </div>
+                                <div id="vestSplitter22" class="col-1 vestiSplitter">
+                                    <svg id="linijicaLomiPravila22" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                            <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                            </pattern>
+                                        </defs>
+                                        <line x1="-1" y1="-40" x2="2" y2="200" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                    </svg>
+                                </div>
                             </div>
-                            <div id="vestNaslov3" class="col-lg-10 vestiNaslov">
-                                <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(0)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(0)}"></b:link>
+                            <div class="row">
+                                <div id="vestMeta2" class="col-10 offset-lg-1 vestiMeta">
+                                    <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(1)}"></h:outputText>
+                                </div>
                             </div>
-                            <div id="vestSplitter32" class="col-lg-1 vestiSplitter">
-                                <svg id="linijicaLomiPravila32" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
-                                    <defs>
-                                        <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
-                                            <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
-                                            <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
-                                        </pattern>
-                                    </defs>
-                                    <line x1="-1" y1="-64" x2="2" y2="250" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
-                                </svg>
+                            <div class="row">
+                                <div id="vestAutorOverline2" class="col-5 offset-1 obavestenjaAutorOverlineKlasa">
+                                    <svg id="linijaVestAutorOverline2" class="linijaVestOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                            <linearGradient id='linijaOverlineVestAutorDruga'>
+                                                <stop class="linijaVestOverline0" offset='0%' style="stop-color: #d9dbdd; stop-opacity: 1;" >
+                                                </stop>
+
+                                                <stop class="linijaVestOverline1" offset='100%' style="stop-color: white; stop-opacity: 1;" >
+                                                </stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlineVestAutorDruga)" fill="none" stroke-width="4"></path>
+                                    </svg>
+                                </div>
+                                <div id="vestDatumOverline2" class="col-5 obavestenjaAutorOverlineKlasa">
+                                    <svg id="linijasveDiskusijeDatumOverline2" class="linijaVestDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                        <defs>
+                                            <linearGradient id="linijaVestOverlineDatumDruga">
+                                                <stop class="linijaVestOverline0" offset='0%' style="stop-color: white;" >
+                                                </stop>
+                                                <stop class="linijaVestOverline1" offset='100%' style="stop-color: #d9dbdd;" >
+                                                </stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0 -13 0 0 170 0 " stroke="url(#linijaVestOverlineDatumDruga)" fill="none" stroke-width="4"></path>
+                                    </svg>
+                                </div>
                             </div>
-                            <div id="vestAutorDatum3" class="col-lg-10 offset-lg-1 vestiAutorDatum">
-                                <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(0)}" class="vestiAutor"></h:outputText>
-                                <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(0)}" class="vestiDatum"></h:outputText>
+                            <div class="row">
+                                <div id="vestAutor2" class="col offset-1 vestiAutor">
+                                    <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(1)}" class="vestiAutor"></h:outputText>
+                                </div>
+                                <div id="vestDatum2" class="col vestiDatum">
+                                    <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(1)}" class="vestiDatum"></h:outputText>
+                                </div>
+                                <div class="offset-1"></div>
                             </div>
-                            <div id="vestMeta3" class="col-lg-10 offset-lg-1 vestiMeta">
-                                <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(0)}"></h:outputText>
+                        </div>
+                        <div class="col-4 col-lg-4" id="vest-treca">
+                            <div class="row">
+                                <div id="vestSplitter31" class="col-1 vestiSplitter">
+                                    <svg id="linijicaLomiPravila31" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                            <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                            </pattern>
+                                        </defs>
+                                        <line x1="-1" y1="-40" x2="2" y2="200" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                    </svg>
+                                </div>
+                                <div id="vestNaslov3" class="col-10 vestiNaslov">
+                                    <b:link value="#{ucitajVestiZaKorisnika.getNaslovPoslednjihVesti(0)}" outcome="prikazVesti.xhtml?idVesti=#{ucitajVestiZaKorisnika.getIdPoslednjihVesti(0)}"></b:link>
+                                </div>
+                                <div id="vestSplitter32" class="col-1 vestiSplitter">
+                                    <svg id="linijicaLomiPravila32" class="vestiSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                            <pattern height="100%" id="ellipse-center" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                            </pattern>
+                                        </defs>
+                                        <line x1="-1" y1="-40" x2="2" y2="200" fill="none" stroke="url(#ellipse-center)" stroke-width="1"></line>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="vestMeta3" class="col-10 offset-1 vestiMeta">
+                                    <h:outputText value="#{ucitajVestiZaKorisnika.getMetaPoslednjihVesti(0)}"></h:outputText>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="vestAutorOverline3" class="col-5 offset-1 obavestenjaAutorOverlineKlasa">
+                                    <svg id="linijaVestAutorOverline3" class="linijaVestOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                        <defs>
+                                            <linearGradient id='linijaOverlineVestAutorTreca'>
+                                                <stop class="linijaVestOverline0" offset='0%' style="stop-color: #d9dbdd; stop-opacity: 1;" >
+                                                </stop>
+
+                                                <stop class="linijaVestOverline1" offset='100%' style="stop-color: white; stop-opacity: 1;" >
+                                                </stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlineVestAutorTreca)" fill="none" stroke-width="4"></path>
+                                    </svg>
+                                </div>
+                                <div id="vestDatumOverline3" class="col-5 obavestenjaAutorOverlineKlasa">
+                                    <svg id="linijasveDiskusijeDatumOverline3" class="linijaVestDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                        <defs>
+                                            <linearGradient id="linijaVestOverlineDatumTreca">
+                                                <stop class="linijaVestOverline0" offset='0%' style="stop-color: white;" >
+                                                </stop>
+                                                <stop class="linijaVestOverline1" offset='100%' style="stop-color: #d9dbdd;" >
+                                                </stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M 0 -13 0 0 170 0 " stroke="url(#linijaVestOverlineDatumTreca)" fill="none" stroke-width="4"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="vestAutor2" class="col offset-1 vestiAutor">
+                                    <h:outputText value="#{ucitajVestiZaKorisnika.getAutorPoslednjihVesti(0)}" class="vestiAutor"></h:outputText>
+                                </div>
+                                <div id="vestDatum2" class="col vestiDatum">
+                                    <h:outputText value="#{ucitajVestiZaKorisnika.getDatumPostavljanjaPoslednjihVesti(0)}" class="vestiDatum"></h:outputText>
+                                </div>
+                                <div class="offset-1"></div>
                             </div>
                         </div>
                     </div>
@@ -292,7 +406,14 @@
                     </div>
                 </div>
             </div>
-            <div id="middleObavestenja" style="background-color: white; box-shadow: inset 0px 10px 30px black;">
+            <div id="middleObavestenja">
+                <div class="row">
+                    <div class="col-sm-8 offset-2 middleObavestenjaGornjiSplitterLinija">
+                        <svg version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                            <path d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#e2e2e2" stroke-width="2"></path><path d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#e2e2e2" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                </div>
                 <div class="row" id="obavestenjaRow">
                     <div class="col-lg-1" id="obavestenjaPocetak">
                         <div>
@@ -1270,6 +1391,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-8 offset-2 middleObavestenjaDonjiSplitterLinija">
+                        <svg version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                            <path d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#e2e2e2" stroke-width="2"></path><path d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#e2e2e2" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                </div>
             </div>
             <div id="middleStatistike">
                 <div class="row" id="statistike">
@@ -1421,8 +1549,7 @@
                     show: true,
                     fontSize: '12px',
                     location: 'w',
-                    border: 'none',
-
+                    border: 'none'
                 };
             }
 

@@ -1,205 +1,1014 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    
-<h:head>
-    <title>Diskusije</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</h:head>
-    
-<h:body>
-    <h:outputStylesheet library="css" name="vestiitd.css"></h:outputStylesheet>
-    
-<div class="container1">
-        <div id="header" class="row">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Diskusije</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+        <link rel="stylesheet" type="text/css" href="resources/css/noviSvet.css"></link>
+
+
+
+        <f:metadata>
+            <f:viewAction action="#{ucitajDiskusijeZaKorisnika.ucitajSveDiskusijeZaKorisnika()}"></f:viewAction>
+            <f:viewAction action="#{ucitajDiskusijeZaKorisnika.ucitajSveDiskusijeKojeJeKorisnikNapisao()}"></f:viewAction>
+            <f:viewAction action="#{ucitajGrupeStudenata.ucitajGrupeUKojimaSeKorisnikNalazi()}"></f:viewAction>
+            <f:viewAction action="#{ucitajDiskusijeZaKorisnika.ucitajBrojNeprocitanihDiskusijaZaGrupeUKojimaSeKorisnikNalazi()}"></f:viewAction>
+        </f:metadata>
+
+    </h:head>
+    <h:body>
+        <script>
+
+            var win = $(window);
+            var indexLista = new Map();
+            var noviIndexLista = new Map();
+            var aktivanTab = '#kontejnerPrikazSvihDiskusija';
+            var animiraniTabovi = new Array();
+
+            var indexListaGrupe = new Map();
+            var noviIndexListaGrupe = new Map();
+            var animiraneGrupe = new Array();
+
+
+            $(document).ready(function () {
+                //$('#L4').attr('style', 'visibility: hidden;');
+                $('#L4').toggle();
+
+                podesiVelicinuDivaZaEkrane();
+
+                animirajTab(aktivanTab);
+                animiraniTabovi.push(aktivanTab);
+
+                $(".dropdownDiskusijeIzGrupe").change(function () {
+                        indexLista.set('#kontejnerPrikazDiskusijaIzGrupe', indexListaGrupe.get($(this).val()));
+                        noviIndexLista.set('#kontejnerPrikazDiskusijaIzGrupe', noviIndexListaGrupe.get($(this).val()));
+                        animirajTab('#kontejnerPrikazDiskusijaIzGrupe');
+                        if (!animiraneGrupe.includes($(this).val())) {
+                            animiraneGrupe.push($(this).val());
+                    }
+                });
+
+                $("#tabovi ul>li a").on("click", function () {
+                    aktivanTab = $(this).attr('href');
+                    if (animiraniTabovi.includes(aktivanTab) || (aktivanTab === '#kontejnerPrikazDiskusijaIzGrupe' &amp;&amp; animiraneGrupe.length === 0)) {
+                        return;
+                    } else {
+                        animirajTab(aktivanTab);
+                        animiraniTabovi.push(aktivanTab);
+                    }
+                });
+
+            });
+
+
+            function animirajTab(tab) {
+                function animirajDivove() {
+
+                    var klasaDiskusijeDiv;
+
+                    switch (tab) {
+                        case '#kontejnerPrikazSvihDiskusija':
+                            klasaDiskusijeDiv = 'sveDiskusijeDivKlasa' + indexLista.get(tab);
+                            break;
+                        case '#kontejnerPrikazMojihDiskusija':
+                            klasaDiskusijeDiv = 'mojeDiskusijeDivKlasa' + indexLista.get(tab);
+                            break;
+                        case '#kontejnerPrikazDiskusijaIzGrupe':
+                            klasaDiskusijeDiv = 'diskusijeIzGrupeDivKlasa' + indexLista.get(tab);
+                            break;
+                    }
+
+                    var klasaDonjiSplitterDiv;
+                    var donjiSplitterPathLeviKlasa;
+                    var donjiSplitterPathDesniKlasa;
+
+
+                    if ($(window).width() >= 1509) {
+                        if (indexLista.get(tab) % 3 === 0) {
+                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterLargeKlasa' + indexLista.get(tab) / 3;
+                        }
+                    } else if ($(window).width() >= 991) {
+                        if (indexLista.get(tab) % 2 === 0) {
+                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterMediumKlasa' + indexLista.get(tab) / 2;
+                        }
+                    } else {
+                        klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterSmallKlasa' + indexLista.get(tab);
+                    }
+
+
+                    $('.' + klasaDiskusijeDiv).addClass('diskusijeDivKlasaAnimacija');
+
+                    if ($(window).width() >= 1509) {
+                        if (indexLista.get(tab) % 3 === 0) {
+                            donjiSplitterPathLeviKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + indexLista.get(tab);
+                            donjiSplitterPathDesniKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + (indexLista.get(tab) + 1);
+                            $('.' + donjiSplitterPathLeviKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                            $('.' + donjiSplitterPathDesniKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                        }
+                    } else if ($(window).width() >= 991) {
+                        if (indexLista.get(tab) % 2 === 0) {
+                            donjiSplitterPathLeviKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + indexLista.get(tab);
+                            donjiSplitterPathDesniKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + (indexLista.get(tab) + 1);
+                            $('.' + donjiSplitterPathLeviKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                            $('.' + donjiSplitterPathDesniKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                        }
+                    } else {
+                        donjiSplitterPathLeviKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + indexLista.get(tab);
+                        donjiSplitterPathDesniKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + (indexLista.get(tab) + 1);
+                        $('.' + donjiSplitterPathLeviKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                        $('.' + donjiSplitterPathDesniKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                    }
+
+                    setTimeout(function () {
+                        $('.' + klasaDiskusijeDiv).removeClass('nevidljiviDiv');
+                        $('[class*=' + klasaDonjiSplitterDiv + ']').removeClass('nevidljiviDiv');
+                    }, 50);
+
+                    setTimeout(function () {
+                        $('.' + klasaDiskusijeDiv).removeClass('diskusijeDivKlasaAnimacija');
+                        $('.' + donjiSplitterPathLeviKlasa).removeClass('diskusijeDonjiSplitterLinijaAnimacija');
+                        $('.' + donjiSplitterPathDesniKlasa).removeClass('diskusijeDonjiSplitterLinijaAnimacija');
+                    }, 1100);
+
+                    if (indexLista.get(tab) === noviIndexLista.get(tab) - 1)
+                        clearInterval(animirajDivoveInterval);
+                    indexLista.set(tab, indexLista.get(tab) + 1);
+                }
+                var animirajDivoveInterval = setInterval(animirajDivove, 300);
+            }
+
+            function podesiVelicinuDivaZaEkrane() {
+                if ($(window).width() >= 1509) {
+                    $('[class*=DiskusijeDivKlasa]').addClass("col-xl-4");
+                    $('[class*=DiskusijeDivKlasa]').removeClass("col-xl-6");
+                } else {
+                    $('[class*=DiskusijeDivKlasa]').addClass("col-xl-6");
+                    $('[class*=DiskusijeDivKlasa]').removeClass("col-xl-4");
+                }
+            }
             
-            <div id="logo" class="col-1"> 
-                <img class="image-fluid rounded" src="resources\images\PortalITkarijeralogo.jpg" style="width: 90px"/>
-            </div>
-            
-            <div id="naslov" class="col-8">
-                <h2> Portal Karijera polaznika kurseva IT obuke </h2> 
-            </div>
-            
-            <div id="logindugme" class="col-1">
-               <h:form id="forma" prependId="false">
-                    <p:commandButton styleClass="pravologindugme" value="Prijava" rendered="#{session.getAttribute('ulogovan')!='true'}">
-                         <p:ajax update="forma:dlg1" oncomplete="PF('dlg1').show();"></p:ajax>
-                    </p:commandButton>
-                   
-                   <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-                    <p:dialog id="dlg1" header="Prijava" widgetVar="dlg1" resizable="false" styleClass="loginforma">
-                        <p:panelGrid columns="2">
-                            <h:outputLabel for="username" value="Korisnicko ime:" />
-                            <p:inputText id="username" value="#{login.korisnickoIme}" required="true" label="username"/>
-                            <h:outputLabel for="password" value="Lozinka:" />
-                            <p:password id="password" value="#{login.lozinka}" required="true" label="password" />
-                        <f:facet name="footer">
-                            <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px"></p:commandLink>
-                            <p:commandButton value="Prijavite se" update="forma" action="#{login.login()}" style="float: right" />
-                        </f:facet>  
-                        </p:panelGrid>
-                    </p:dialog>
-                </h:form>
-                <h:form>
-                    <p:commandButton id="dugme2" value="Odjava" action="#{logout.izlogujSe()}" rendered="#{session.getAttribute('ulogovan')=='true'}" >
-                   <p:ajax update="@form"></p:ajax>
-                   </p:commandButton>
-                </h:form>
-                
-            </div>
-            
-            <div id="registracijadugme" class="col-2">
-                <h:form id="forma1">
-                    <p:commandButton id="dugme1" value="Registracija" onclick="PF('dlg2').show();" rendered="#{session.getAttribute('ulogovan')!='true'}"/>
+            function podesiVelicinuDivaZaVelikeISrednjeMaleEkrane() {
+                if ($(window).width() >= 1509) {
+                    $('[class*=diskusijeDonjiSplitterMediumKlasa]').addClass('nevidljiviDiv');
+                    $('[class*=diskusijeDonjiSplitterSmallKlasa]').addClass('nevidljiviDiv');
+
+                    $('[class*=diskusijeDonjiSplitterLargeKlasa]').removeClass('nevidljiviDiv');
+                } else if($(window).width() >= 991) {
+                    $('[class*=diskusijeDonjiSplitterLargeKlasa]').addClass('nevidljiviDiv');
+                    $('[class*=diskusijeDonjiSplitterSmallKlasa]').addClass('nevidljiviDiv');
+
+                    $('[class*=diskusijeDonjiSplitterMediumKlasa]').removeClass('nevidljiviDiv');
+                } else {
+                    $('[class*=diskusijeDonjiSplitterMediumKlasa]').addClass('nevidljiviDiv');
+                    $('[class*=diskusijeDonjiSplitterLargeKlasa]').addClass('nevidljiviDiv');
+
+                    $('[class*=diskusijeDonjiSplitterSmallKlasa]').removeClass('nevidljiviDiv');
+                }
+            }
+
+
+            win.scroll(function () {
+
+                if (win.height() + win.scrollTop() + 40 >= $(document).height()) {
+
+                    var divScope = $(aktivanTab).height();
+                    $(aktivanTab).height(divScope + 800);
+
+                    $(aktivanTab).find('.dugme').click();
                     
-                    <p:dialog id="dlg2" header="Registrujte se kao" widgetVar="dlg2" resizable="false">
-                        <p:panelGrid style="width:300px">
-                            <p:row>
-                                <p:column colspan="4" style="text-align: center">Student</p:column>
-                                <p:column colspan="4" style="text-align: center">Kompanija</p:column>
-                            </p:row>
-                            <p:row>
-                            <p:column colspan="4">
-                                <h:commandLink action="/">
-                                   <h:graphicImage value="resources/images/imgStudent.png"/>
-                                </h:commandLink>
-                            </p:column>
-                            <p:column colspan="4">
-                                <h:commandLink action="/">
-                                   <h:graphicImage value="resources/images/imgKompanija.png"/>
-                                </h:commandLink>
-                            </p:column>
-                            </p:row>
-                            
-                        </p:panelGrid>
-                    </p:dialog>    
-                </h:form>
-            </div>
-            </div>
-        </div>
-        
-        <div id="navigacija" class="row">
-            <div class="col-12">
-                <nav class="navbar navbar-expand-sm navbar-custom">
-                    <a href="faces/homepageStudent.xhtml" class="navbar-brand">Pocetna</a>
-                 <div id="navbar1" class="navbar">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="faces/prikazSvihVesti.xhtml">Vesti</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="faces/prikazSvihDiskusija.xhtml">Diskusije</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="faces/prikazSvihObavestenja.xhtml">Obavestenja</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="faces/prikazSvihGrupa.xhtml">Grupe</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="faces/prikazSvihAnketa">Ankete</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="faces/prikazSvihOglasa.xhtml">Oglasi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="faces/prikazSvihPreporuka.xhtml">Preporuke</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="faces/kontakt.xhtml">Kontakt</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-3"></div>
-                    <div id="navbar2" class="navbar col-2">
-                        <h:form id="i" rendered="#{session.getAttribute('ulogovan')=='true'}">
-                            <p:growl id="messages" showDetail="true"/>
-                            <p:menuButton value="Dobrodosli">
-                                <p:menuitem value="Azurirajte profil" outcome="faces/azuriranjeStudent.xhtml" />
-                                <p:menuitem value="Moje vesti" outcome="faces/mojeVesti.xhtml" />
-                                <p:menuitem value="Moje diskusije" outcome="faces/mojeDiskusije.xhtml"/>
-                                <p:menuitem value="Moja obavestenja" outcome="faces/mojaObavestenja.xhtml"/>
-                                <p:menuitem value="Moje ankete" outcome="faces/mojeAnkete.xhtml"/>
-                                <p:menuitem value="Moje grupe" outcome="faces/mojeGrupe.xhtml"/>
-                                <p:menuitem value="Moje preporuke" outcome="faces/mojePreporuke.xhtml"/>
-                                <p:menuitem value="Moji oglasi" outcome="faces/mojiOglasi.xhtml"/>
-                            </p:menuButton>
-                        </h:form>
+                    if(aktivanTab == '#kontejnerPrikazDiskusijaIzGrupe'){
+                        indexListaGrupe.set(aktivanTab, indexListaGrupe.get(aktivanTab) + 12);
+                    } else noviIndexLista.set(aktivanTab, noviIndexLista.get(aktivanTab) + 12);
+
+                    function animirajDivoveScroll() {
+                        
+                        var klasaDiskusijeDiv;
+                        
+                        switch (aktivanTab) {
+                            case '#kontejnerPrikazSvihDiskusija':
+                                klasaDiskusijeDiv = 'sveDiskusijeDivKlasa' + indexLista.get(aktivanTab);
+                                break;
+                            case '#kontejnerPrikazMojihDiskusija':
+                                klasaDiskusijeDiv = 'mojeDiskusijeDivKlasa' + indexLista.get(aktivanTab);
+                                break;
+                            case '#kontejnerPrikazDiskusijaIzGrupe':
+                                klasaDiskusijeDiv = 'diskusijeIzGrupeDivKlasa' + indexLista.get(aktivanTab);
+                                break;
+                        }
+                    
+                        var klasaDonjiSplitterDiv;
+
+                        if ($(window).width() >= 1509) {
+                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterLarge' + indexLista.get(aktivanTab) / 3;
+                        } else if ($(window).width() >= 991) {
+                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterMedium' + indexLista.get(aktivanTab) / 2;
+                        } else {
+                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterSmall' + indexLista.get(aktivanTab);
+                        }
+
+                        $('.' + klasaDiskusijeDiv).addClass('diskusijeDivKlasaAnimacija');
+                        $('.' + klasaDonjiSplitterDiv).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+
+                        setTimeout(function () {
+                            $('.' + klasaDiskusijeDiv).removeClass('nevidljiviDiv');
+                            $('.' + klasaDonjiSplitterDiv).removeClass('nevidljiviDiv');
+                        }, 50);
+
+                        if (indexLista.get(aktivanTab) === noviIndexLista.get(aktivanTab) - 1)
+                            clearInterval(timeout);
+                        indexLista.set(aktivanTab, indexLista.get(aktivanTab) + 1);
+                    }
+
+                    var timeout = setInterval(animirajDivoveScroll, 300);
+                }
+            });
+
+            win.resize(podesiVelicinuDivaZaVelikeISrednjeMaleEkrane);
+            win.resize(podesiVelicinuDivaZaEkrane);
+
+            $(".dugmeNavTab1").click(function () {
+                $(".dugmeNavTab1").addClass('dugmeObavestenjaClick');
+                $(".dugmeNavTab2, .dugmeNavTab3, .dugmeNavTab4").removeClass('dugmeObavestenjaClick');
+            });
+            $(".dugmeNavTab2").click(function () {
+                $(".dugmeNavTab2").addClass('dugmeObavestenjaClick');
+                $(".dugmeNavTab1, .dugmeNavTab3, .dugmeNavTab4").removeClass('dugmeObavestenjaClick');
+            });
+            $(".dugmeNavTab3").click(function () {
+                $(".dugmeNavTab3").addClass('dugmeObavestenjaClick');
+                $(".dugmeNavTab2, .dugmeNavTab1, .dugmeNavTab4").removeClass('dugmeObavestenjaClick');
+            });
+            $(".dugmeNavTab4").click(function () {
+                $(".dugmeNavTab4").addClass('dugmeObavestenjaClick');
+                $(".dugmeNavTab2, .dugmeNavTab3, .dugmeNavTab1").removeClass('dugmeObavestenjaClick');
+            });
+        </script>
+        <div class="container">
+            <div id="top" style="background-image: linear-gradient(to left top, #00b16a, #009564, #00795a, #005e4d, #04443c);">
+                <div id="header" class="row">
+                    <div id="logo" class="col-md-2">
+                        <img class="image-fluid rounded logoImg" src="resources\images\logo4.png" />
                     </div>
-                </nav>
-            </div>
-        </div>
-    
-    <div class="container2">
-        <div class="row">
-            <div class="col-12" style="height:60px">
-                <div class="offset-5 col-6">
-                    <p:button id="dugmeobjavivest" value="Objavite diskusiju" outcome="unosDiskusija"/>
+
+                    <div class="col-md-7" id="menuItems">
+                        <div id="ikonicaDiv" class="col-sm-1">
+                            <b:icon name="menuIcon">
+                                <svg version="1.1" height="30" width="120" id="svgMenu" class="svgMenu" style="overflow-x: visible; overflow-y: visible;">
+                                    <path class="upper-line" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" d="M5 5 60 5" />
+                                    <path class="middle-line-first" stroke-linecap="round" fill="none" stroke="white" stroke-width="5" d="M5 15 40 15" /> <path class="middle-line-second" style="overflow-x: visible;" stroke-linecap="round" stroke="white" stroke-width="5" d="M53 15 103 15" /> <circle id="middle-dot-upper" class="middle-dot-upper" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" /> <circle id="middle-dot-lower" class="middle-dot-lower" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" />
+                                    <path class="lower-line" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" d="M5 25 60 25" />
+                                </svg>
+                            </b:icon>
+                        </div>
+                        <div id="gornja-menu-linija" class="col-sm-11">
+                            <svg version="1.1" height="5" width="700" id="svgMenuBorderUpper">
+                                <path class="gornja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
+                            </svg>
+                        </div>
+                        <div id="mainmenuDiv" class="col-sm-11">
+                            <nav id="mainMenu" class="navbar navbar-expand-sm">
+                                <ul class="navbar-nav mainmenu-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihVesti.xhtml">Vesti</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihDiskusija.xhtml">Diskusije</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihObavestenja.xhtml">Obavestenja</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihGrupa.xhtml">Grupe</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihAnketa">Ankete</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihOglasa.xhtml">Oglasi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/prikazSvihPreporuka.xhtml">Preporuke</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="faces/kontakt.xhtml">Kontakt</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div id="logoHolder" class="col-sm-1"></div>
+                        <div id="donja-menu-linija" class="col-sm-11">
+                            <svg version="1.1" height="5" width="700" id="svgMenuBorderLower">
+                                <path class="donja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2" id="headerPrijavaDugmici">
+                        <div class="row">
+                            <div id="logindugme" class="col-sm-6">
+                                <h:form id="forma" prependId="false" >
+                                    <b:commandButton class="btn btn-info btn-lg prijava-dugme" id="dugmePrijava" ajax="true" oncomplete="PF('registracijaDijalog').hide(); PF('prijavaDijalog').show();" value="Prijava">
+
+                                    </b:commandButton>
+
+                                    <p:dialog id="prijavaDijalog" header="Prijava" widgetVar="prijavaDijalog" resizable="false" styleClass="loginforma" hideEffect="drop" showEffect="drop">
+                                        <p:panelGrid columns="2">
+                                            <h:outputLabel for="username" value="Korisnicko ime:" />
+                                            <p:inputText id="username" value="#{login.korisnickoIme}" required="true" label="username"/>
+                                            <h:outputLabel for="password" value="Lozinka:" />
+                                            <p:password id="password" value="#{login.lozinka}" required="true" label="password" />
+                                            <f:facet name="footer">
+                                                <p:commandButton value="Prijavite se" action="#{login.login()}" style="float: right" />
+                                                <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px" action="/resetLozinke.xhtml"></p:commandLink>
+                                            </f:facet>
+                                        </p:panelGrid>
+                                    </p:dialog>
+                                </h:form>
+                            </div>
+                            <div id="registracijadugme" class="col-sm-6">
+                                <h:form id="forma1" prependId="false">
+                                    <b:commandButton class="btn btn-outline-light btn-lg registracija-dugme" id="dugmeRegistracija" ajax="true" value="Registracija" oncomplete="PF('prijavaDijalog').hide(); PF('registracijaDijalog').show();" />
+
+                                    <p:dialog id="registracijaDijalog" header="Registrujte se kao" widgetVar="registracijaDijalog" resizable="false" hideEffect="drop" showEffect="drop">
+                                        <p:panelGrid style="width:300px;">
+                                            <p:row>
+                                                <p:column colspan="4" style="text-align: center">Student</p:column>
+                                                <p:column colspan="4" style="text-align: center">Kompanija</p:column>
+                                            </p:row>
+                                            <p:row>
+                                                <p:column colspan="4">
+                                                    <h:commandLink action="/faces/korisnickiProfilStudent.xhtml">
+                                                        <h:graphicImage value="resources/images/imgStudent.png"/>
+                                                    </h:commandLink>
+                                                </p:column>
+                                                <p:column colspan="4">
+                                                    <h:commandLink action="/faces/korisnickiProfilKompanija.xhtml">
+                                                        <h:graphicImage value="resources/images/imgKompanija.png"/>
+                                                    </h:commandLink>
+                                                </p:column>
+                                            </p:row>
+
+                                        </p:panelGrid>
+                                    </p:dialog>    
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div id="prikazvesti" >  
-                    <h:form>
-                        <p:dataGrid value="bbb" columns="3" rows="3" layout="grid" style="padding:0px;margin: 0px;width:1200px;"
-                        paginator="true" id="nnnn"  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="6,12,16">
-        <f:facet name="header">
-            Diskusije
-        </f:facet>
-        
-            <p:panelGrid id="vestitabela" styleClass="vestitabela" style="height:300px;width:400px">
-                <p:row>
-                    <p:column colspan="16" style="height:40px; width:100%; text-align: center; background-color: #FFFFE0;border:0px">
-                        <h:outputText value="Naslov" style="font-weight: bold"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column colspan="3" style="height:40px; width:30%;text-align: left;border:0px">
-                        <h:outputText value="Datum"/>
-                    </p:column>
-                    <p:column colspan="13" style="height:40px; width:70%; text-align: right;border:0px">
-                        <h:outputText value="Autor"/>
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column colspan="16" style="height:180px;width:100%;border:0px">
-                        <h:outputText value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding."/>
-                        <br></br>
-                        <p:link id="linkumetatekstu" outcome="index" value="Vise o tome..."></p:link>
-                    </p:column>
-                </p:row>
-            </p:panelGrid>
-        </p:dataGrid>
-    </h:form>
+            <div id="middlePrikazDiskusija">
+                <div class="row" id="prikazDiskusija" style="padding-top: 50px;">
+                    <div id="tabovi" class="col-9 offset-1">
+                        <ul class="nav nav-pills nav-justified objavePillsTab" id="objaveTab" role="tablist">
+                            <li class="nav-item"><a class="nav-link active tabLink dugmeNavTab1" data-toggle="pill" href="#kontejnerPrikazSvihDiskusija">Sve diskusije<h:panelGroup rendered="#{ucitajDiskusijeZaKorisnika.brojNepregledanihSvihDiskusija > 0}"><svg class="tabSVG" width="20px" height="20px" viewBox="0 0 20 20"><g><circle cx="10" cy="14" r="10" fill="#df8cf2"/><text class="tabSVGText" x="50%" y="72%" text-anchor="middle" stroke="white" stroke-width="1px" dy=".3em">#{ucitajDiskusijeZaKorisnika.brojNepregledanihSvihDiskusija}</text></g></svg></h:panelGroup></a></li>
+                            <h:panelGroup rendered="#{session.getAttribute('ulogovan') == 'true'}">
+                                <li class="nav-item"><a class="nav-link tabLink dugmeNavTab2" data-toggle="pill" href="#kontejnerPrikazMojihDiskusija">Moje diskusije</a></li>
+                                <li class="nav-item"><a class="nav-link tabLink dugmeNavTab3" data-toggle="pill" href="#kontejnerPrikazDiskusijaIzGrupe">Diskusije iz grupe<h:panelGroup rendered="#{ucitajDiskusijeZaKorisnika.brojNepregledanihDiskusijaIzGrupa > 0}"><svg class="tabSVG" width="20px" height="20px" viewBox="0 0 20 20"><g><circle cx="10" cy="14" r="10" fill="#df8cf2"/><text class="tabSVGText" x="50%" y="72%" text-anchor="middle" stroke="white" stroke-width="1px" dy=".3em">#{ucitajDiskusijeZaKorisnika.brojNepregledanihDiskusijaIzGrupa}</text></g></svg></h:panelGroup></a></li>
+                            </h:panelGroup>
+                        </ul>
+                        <script>
+                            $("#tabovi ul>li a").each(function () {
+                                indexLista.set($(this).attr('href'), 0);
+                                noviIndexLista.set($(this).attr('href'), 12);
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tab-content col-12">
+                        <div id="kontejnerPrikazSvihDiskusija" class="tab-pane fade show active col-9 offset-1 kontejnerPrikazDivElemenata" role="tabpanel">
+                            <div id="kontejnerDugmeSveDiskusije" class="col-12">
+                                <h:commandButton id="dugmeSveDiskusije" class="dugme" value="ajaxDugme" style="visibility: hidden; width: 0px; height: 0px; font-size:0; border: none">
+                                    <f:ajax id="ajax1" event="click" render="sveDiskusije" listener="#{ucitajDiskusijeZaKorisnika.povecajBrojTrenutnoPrikazanihSvihDiskusija()}"></f:ajax>
+                                </h:commandButton>
+                            </div>
+                            <h:panelGroup id="sveDiskusije">
+                                <ui:repeat var="diskusija" value="#{ucitajDiskusijeZaKorisnika.listaSvihDiskusijaZaKorisnika}" varStatus="status">
+                                    <h:panelGroup rendered="#{(status.index) % 3 == 0 &amp;&amp; status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihSvihDiskusija}">
+                                        <div id="sveDiskusijeDonjiSplitterLarge" class="diskusijeDonjiSplitterLargeKlasa#{(status.index/3)} col-sm-8 offset-2">
+                                            <script>
+                                                if (#{status.index} >= indexLista.get('#kontejnerPrikazSvihDiskusija')) {
+                                                        var klasa = 'diskusijeDonjiSplitterLargeKlasa' + #{(status.index/3)};
+                                                        $('[class*=' + klasa + ']').addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <svg id="sveDiskusijeDonjiSplitterSvgLarge" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                                                <!--<defs>
+                                                    <filter id="innerShadowLarge" x0="-50%" y0="-50%" width="200%" height="200%">
+                                                        <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"></feGaussianBlur>
+                                                        <feOffset dy="1" dx="0"></feOffset>
+                                                        <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+    
+                                                        <feFlood flood-color="#000000" flood-opacity="0.3"></feFlood>
+                                                        <feComposite in2="shadowDiff" operator="in"></feComposite>
+                                                        <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
+    
+    
+                                                        <feGaussianBlur in="firstfilter" stdDeviation="3" result="blur2"></feGaussianBlur>
+                                                        <feOffset dy="-1" dx="0"></feOffset>
+                                                        <feComposite in2="firstfilter" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+    
+                                                        <feFlood flood-color="#000000" flood-opacity="0.3"></feFlood>
+                                                        <feComposite in2="shadowDiff" operator="in"></feComposite>
+                                                        <feComposite in2="firstfilter" operator="over"></feComposite>
+                                                    </filter>
+                                                </defs>-->
+                                                <path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index}" d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path><path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index+1}" d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path>
+                                            </svg>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{(status.index) % 2 == 0 &amp;&amp; status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihSvihDiskusija}">
+                                        <div id="sveDiskusijeDonjiSplitterMedium" class="diskusijeDonjiSplitterMediumKlasa#{(status.index/2)} col-sm-8 offset-2">
+                                            <script>
+                                                if (#{status.index} >= indexLista.get('#kontejnerPrikazSvihDiskusija')) {
+                                                        var klasa = 'diskusijeDonjiSplitterMediumKlasa' + #{(status.index/2)};
+                                                        $('[class*=' + klasa + ']').addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <svg id="sveDiskusijeDonjiSplitterSvgMedium" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                                                <path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index}" d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path><path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index+1}" d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path>
+                                            </svg>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihSvihDiskusija}">
+                                        <div id="sveDiskusijeDonjiSplitterSmall" class="diskusijeDonjiSplitterSmallKlasa#{status.index} col-sm-8 offset-2">
+                                            <script>
+                                                if (#{status.index} >= indexLista.get('#kontejnerPrikazSvihDiskusija')) {
+                                                        var klasa = 'diskusijeDonjiSplitterSmallKlasa' + #{status.index};
+                                                        $('.' + klasa).addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <svg id="sveDiskusijeDonjiSplitterSvgSmall" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                                                <path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index}" d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path><path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index+1}" d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path>
+                                            </svg>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihSvihDiskusija}">
+                                        <div id="sveDiskusijeDiv" class="sveDiskusijeDivKlasa#{status.index} diskusijeDivKlasa col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                                            <script>
+                                                if (#{status.index} >= indexLista.get('#kontejnerPrikazSvihDiskusija')) {
+                                                        var klasa = 'sveDiskusijeDivKlasa' + #{status.index};
+                                                        $('.' + klasa).addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <div class="row">
+                                                <div id="sveDiskusijeNaslov" class="col-11 diskusijeNaslov">
+                                                    <h:panelGroup rendered="#{diskusija.procitana == 'false'}">
+                                                        <svg id="sveDiskusijeNaslovSVG" class="naslovSVGKlasa" width="10px" height="13px" preserveAspectRatio="xMidYMid meet">
+                                                            <circle cx="5" cy="5" r="4" fill="#df8cf2" stroke-width="3" />
+                                                        </svg>
+                                                    </h:panelGroup>
+                                                    <b:link value="#{diskusija.nazivDiskusije}" outcome="prikazDiskusije.xhtml?idDiskusija=#{diskusija.idDiskusija}"></b:link>
+                                                </div>
+                                                <div id="sveDiskusijeSplitterLarge" class="col-1 diskusijeSplitterLarge">
+                                                    <h:panelGroup rendered="#{(status.index+1) % 3 != 0 || status.index eq 0}">
+                                                        <svg id="sveDiskusijeLinijicaLomiPravilaLarge" class="diskusijeSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                                            <defs>
+                                                                <pattern height="100%" id="ellipse-center-sveDiskusije" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                                    <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                                                </pattern>
+                                                            </defs>
+                                                            <line x1="-1" y1="-34" x2="2" y2="150" fill="none" stroke="url(#ellipse-center-sveDiskusije)" stroke-width="1"></line>
+                                                        </svg>
+                                                    </h:panelGroup>
+                                                </div>
+                                                <div id="sveDiskusijeSplitterMedium" class="col-1 diskusijeSplitterMedium" style="padding-right: 0px;">
+                                                    <h:panelGroup rendered="#{status.even}">
+                                                        <svg id="sveDiskusijeLinijicaLomiPravilaMedium" class="diskusijeSplitterLinijaMedium" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                                            <defs>
+                                                                <pattern height="100%" id="ellipse-center-sveDiskusije1" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                                    <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                                                </pattern>
+                                                            </defs>
+                                                            <line x1="-1" y1="-34" x2="2" y2="150" fill="none" stroke="url(#ellipse-center-sveDiskusije1)" stroke-width="1"></line>
+                                                        </svg>
+                                                    </h:panelGroup>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <h:panelGroup rendered="#{diskusija.procitana == 'true'}">
+                                                    <div id="sveDiskusijeMeta" class="col-11 diskusijeMeta">
+                                                        <h:outputText value="#{diskusija.metaDiskusija}"></h:outputText>
+                                                    </div>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{diskusija.procitana == 'false'}">
+                                                    <div id="sveDiskusijeMeta" class="col-11 diskusijeMeta diskusijeMetaNeprocitana">
+                                                        <h:outputText value="#{diskusija.metaDiskusija}"></h:outputText>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </div>
+                                            <div class="row">
+                                                <div id="sveDiskusijeAutorOverline" class="col-5 obavestenjaAutorOverlineKlasa">
+                                                    <svg id="linijasveDiskusijeAutorOverline" class="linijaDiskusijeOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                        <defs>
+                                                            <linearGradient id='linijaOverlinesveDiskusijeAutorPrva'>
+                                                                <stop class="linijaDiskusijeOverline0" offset='0%' style="stop-color: #d9dbdd; stop-opacity: 1;" >
+                                                                </stop>
+
+                                                                <stop class="linijaDiskusijeOverline1" offset='100%' style="stop-color: white; stop-opacity: 1;" >
+                                                                </stop>
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlinesveDiskusijeAutorPrva)" fill="none" stroke-width="4"></path>
+                                                    </svg>
+                                                </div>
+                                                <div id="sveDiskusijeDatumOverline" class="col-5 offset-1 obavestenjaDatumOverlineKlasa">
+                                                    <svg id="linijasveDiskusijeDatumOverline" class="linijaDiskusijeDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                                        <defs>
+                                                            <linearGradient id="linijasveDiskusijeOverlineDatumPrva">
+                                                                <stop class="linijaDiskusijeOverline0" offset='0%' style="stop-color: white;" >
+                                                                </stop>
+                                                                <stop class="linijaDiskusijeOverline1" offset='100%' style="stop-color: #d9dbdd;" >
+                                                                </stop>
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <path d="M 0 -13 0 0 170 0 " stroke="url(#linijasveDiskusijeOverlineDatumPrva)" fill="none" stroke-width="4"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="col-1"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div id="sveDiskusijeAutor" class="col diskusijeAutorKlasa">
+                                                    <h:outputText id="sveDiskusijeAutor" value="#{diskusija.autorDiskusije}"></h:outputText>
+                                                </div>
+                                                <div id="sveDiskusijeObavestenjeDatum" class="col diskusijeDatumKlasa">
+                                                    <h:outputText id="sveDiskusijeDatum" value="#{diskusija.datumPostavljanja}"></h:outputText>
+                                                </div>
+                                                <div class="offset-1"></div>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+                                </ui:repeat>
+                            </h:panelGroup>
+                        </div>
+                        <div id="kontejnerPrikazMojihDiskusija" class="tab-pane fade col-9 offset-1 kontejnerPrikazDivElemenata" role="tabpanel">
+                            <div id="kontejnerDugmeMojeDiskusije" class="col-12">
+                                <h:commandButton id="dugmeMojeDiskusije" class="dugme" value="ajaxDugme" style="visibility: hidden; width: 0px; height: 0px; font-size:0; border: none">
+                                    <f:ajax id="ajax2" event="click" render="mojeDiskusije" listener="#{ucitajDiskusijeZaKorisnika.povecajBrojTrenutnoPrikazanihMojihDiskusija()}"></f:ajax>
+                                </h:commandButton>
+                            </div>
+                            <h:panelGroup id="mojeDiskusije">
+                                <ui:repeat var="diskusija" value="#{ucitajDiskusijeZaKorisnika.listaSvihDiskusijaKojeJeKorisnikNapisao}" varStatus="status">
+                                    <h:panelGroup rendered="#{(status.index) % 3 == 0 &amp;&amp; status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihMojihDiskusija}">
+                                        <div id="mojeDiskusijeDonjiSplitterLarge" class="diskusijeDonjiSplitterLargeKlasa#{(status.index/3)} col-sm-8 offset-2">
+                                            <script>
+                                                if (#{status.index} >= indexLista.get('#kontejnerPrikazMojihDiskusija')) {
+                                                        var klasa = 'diskusijeDonjiSplitterLargeKlasa' + #{(status.index/3)};
+                                                        $('[class*=' + klasa + ']').addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <svg id="mojeDiskusijeDonjiSplitterSvgLarge" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                                                <path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index}" d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path><path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index+1}" d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path>
+                                            </svg>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{(status.index) % 2 == 0 &amp;&amp; status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihMojihDiskusija}">
+                                        <div id="mojeDiskusijeDonjiSplitterMedium" class="diskusijeDonjiSplitterMediumKlasa#{(status.index/2)} col-sm-8 offset-2">
+                                            <script>
+                                                if (#{status.index} >= indexLista.get('#kontejnerPrikazMojihDiskusija')) {
+                                                        var klasa = 'diskusijeDonjiSplitterMediumKlasa' + #{(status.index/2)};
+                                                        $('.' + klasa).addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <svg id="mojeDiskusijeDonjiSplitterSvgMedium" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                                                <path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index}" d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path><path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index+1}" d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path>
+                                            </svg>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihMojihDiskusija}">
+                                        <div id="mojeDiskusijeDonjiSplitterSmall" class="diskusijeDonjiSplitterSmallKlasa#{status.index} col-sm-8 offset-2">
+                                            <script>
+                                                if (#{status.index} >= indexLista.get('#kontejnerPrikazMojihDiskusija')) {
+                                                        var klasa = 'diskusijeDonjiSplitterSmallKlasa' + #{status.index};
+                                                        $('.' + klasa).addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <svg id="mojeDiskusijeDonjiSplitterSvgSmall" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                                                <path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index}" d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path><path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index+1}" d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path>
+                                            </svg>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihMojihDiskusija}">
+                                        <div id="mojeDiskusijeDiv" class="mojeDiskusijeDivKlasa#{status.index} diskusijeDivKlasa col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                                            <script>
+                                                if (#{status.index} >= indexLista.get('#kontejnerPrikazMojihDiskusija')) {
+                                                        var klasa = 'mojeDiskusijeDivKlasa' + #{status.index};
+                                                        $('.' + klasa).addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <div class="row">
+                                                <div id="mojeDiskusijeNaslov" class="col-11 diskusijeNaslov">
+                                                    <h:panelGroup rendered="#{diskusija.procitana == 'false'}">
+                                                        <svg id="mojeDiskusijeNaslovSVG" class="naslovSVGKlasa" width="10px" height="13px" preserveAspectRatio="xMidYMid meet">
+                                                            <circle cx="5" cy="5" r="4" fill="#df8cf2" stroke-width="3" />
+                                                        </svg>
+                                                    </h:panelGroup>
+                                                    <b:link value="#{diskusija.nazivDiskusije}" outcome="prikazDiskusije.xhtml?idDiskusija=#{diskusija.idDiskusija}"></b:link>
+                                                </div>
+                                                <div id="mojeDiskusijeSplitterLarge" class="col-1 diskusijeSplitterLarge">
+                                                    <h:panelGroup rendered="#{(status.index+1) % 3 != 0 || status.index eq 0}">
+                                                        <svg id="mojeDiskusijeLinijicaLomiPravilaLarge" class="diskusijeSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                                            <defs>
+                                                                <pattern height="100%" id="ellipse-center-mojeDiskusije" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                                    <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                                                </pattern>
+                                                            </defs>
+                                                            <line x1="-1" y1="-34" x2="2" y2="150" fill="none" stroke="url(#ellipse-center-mojeDiskusije)" stroke-width="1"></line>
+                                                        </svg>
+                                                    </h:panelGroup>
+                                                </div>
+                                                <div id="mojeDiskusijeSplitterMedium" class="col-1 diskusijeSplitterMedium" style="padding-right: 0px;">
+                                                    <h:panelGroup rendered="#{status.even}">
+                                                        <svg id="mojeDiskusijeLinijicaLomiPravilaMedium" class="diskusijeSplitterLinijaMedium" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                                            <defs>
+                                                                <pattern height="100%" id="ellipse-center-mojeDiskusije1" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                                    <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                                                </pattern>
+                                                            </defs>
+                                                            <line x1="-1" y1="-34" x2="2" y2="150" fill="none" stroke="url(#ellipse-center-mojeDiskusije1)" stroke-width="1"></line>
+                                                        </svg>
+                                                    </h:panelGroup>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <h:panelGroup rendered="#{diskusija.procitana == 'true'}">
+                                                    <div id="mojeDiskusijeMeta" class="col-11 diskusijeMeta">
+                                                        <h:outputText value="#{diskusija.metaDiskusija}"></h:outputText>
+                                                    </div>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{diskusija.procitana == 'false'}">
+                                                    <div id="mojeDiskusijeMeta" class="col-11 diskusijeMeta diskusijeMetaNeprocitana">
+                                                        <h:outputText value="#{diskusija.metaDiskusija}"></h:outputText>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </div>
+                                            <div class="row">
+                                                <div id="mojeDiskusijeAutorOverline" class="col obavestenjaAutorOverlineKlasa">
+                                                    <svg id="linijaMojeDiskusijeAutorOverline" class="linijaDiskusijeOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                        <defs>
+                                                            <linearGradient id='linijaOverlineMojeDiskusijeAutorPrva'>
+                                                                <stop class="linijaDiskusijeOverline0" offset='0%' style="stop-color: #d9dbdd; stop-opacity: 1;" >
+                                                                </stop>
+
+                                                                <stop class="linijaDiskusijeOverline1" offset='100%' style="stop-color: white; stop-opacity: 1;" >
+                                                                </stop>
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlineMojeDiskusijeAutorPrva)" fill="none" stroke-width="4"></path>
+                                                    </svg>
+                                                </div>
+                                                <div id="mojeDiskusijeDatumOverline" class="col obavestenjaDatumOverlineKlasa">
+                                                    <svg id="linijaMojeDiskusijeDatumOverline" class="linijaDiskusijeDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                                        <defs>
+                                                            <linearGradient id="linijaMojeDiskusijeOverlineDatumPrva">
+                                                                <stop class="linijaDiskusijeOverline0" offset='0%' style="stop-color: white;" >
+                                                                </stop>
+                                                                <stop class="linijaDiskusijeOverline1" offset='100%' style="stop-color: #d9dbdd;" >
+                                                                </stop>
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <path d="M 0 -13 0 0 170 0 " stroke="url(#linijaMojeDiskusijeOverlineDatumPrva)" fill="none" stroke-width="4"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="col-1"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div id="mojeDiskusijeAutor" class="col diskusijeAutorKlasa">
+                                                    <h:outputText id="mojeDiskusijeAutor" value="#{diskusija.autorDiskusije}"></h:outputText>
+                                                </div>
+                                                <div id="mojeDiskusijeObavestenjeDatum" class="col diskusijeDatumKlasa">
+                                                    <h:outputText id="mojeDiskusijeDatum" value="#{diskusija.datumPostavljanja}"></h:outputText>
+                                                </div>
+                                                <div class="offset-1"></div>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                </ui:repeat>
+                            </h:panelGroup>
+                        </div>
+                        <div id="kontejnerPrikazDiskusijaIzGrupe" class="tab-pane fade col-9 offset-1 kontejnerPrikazDivElemenata" role="tabpanel">
+                            <div id="kontejnerDugmeDiskusijeIzGrupe" class="col-12">
+                                <h:commandButton id="dugmeDiskusijeIzGrupe" class="dugme" value="ajaxDugme" style="visibility: hidden; width: 0px; height: 0px; font-size:0; border: none">
+                                    <f:ajax id="ajax2" event="click" render="diskusijeIzGrupe" ></f:ajax>
+                                </h:commandButton>
+                                <ui:repeat varStatus="status" var="divv" value="#{ucitajDiskusijeZaKorisnika.brojNeprocitanihDiskusijaPoGrupama}">
+                                    <div id="svgelement#{status.index + 1}" style="visibility: hidden; width: 0px; height: 0px; font-size:0; border: none">
+                                        <h:panelGroup rendered="#{divv.intValue() > 0}"><svg class="tabSVG" width="20px" height="20px" viewBox="0 0 20 20"><g><circle cx="10" cy="14" r="10" fill="#df8cf2"/><text class="tabSVGText" x="50%" y="72%" text-anchor="middle" stroke="white" stroke-width="1px" dy=".3em">#{divv.intValue()}</text></g></svg></h:panelGroup>       
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                            <div class="row kontejnerRedDropdownGrupeZaKorisnika">
+                                <div id="kontejnerDropdownGrupeZaKorisnika" class="col-4 offset-4">
+                                    <h:form>
+                                        <div class="dropdownDiskusijeIzGrupeDiv col-10 offset-1">
+                                            <h:selectOneMenu styleClass="dropdownDiskusijeIzGrupe" value="#{ucitajDiskusijeZaKorisnika.izabranaGrupaStudenata}" label="Izaberite grupu: " valueChangeListener="#{ucitajDiskusijeZaKorisnika.ucitajDiskusijeZaDatuGrupu}" >
+                                                <f:ajax event="change" render="diskusijeIzGrupe" execute="@form"></f:ajax>
+                                                <f:selectItem itemLabel="Izaberite grupu:" itemValue="" noSelectionOption="true"/>
+                                                <f:selectItems value="#{ucitajGrupeStudenata.listaGrupaGdeJeKorisnikClan}" var="grupa" itemValue="#{grupa.nazivGrupe}" itemLabel="#{grupa.nazivGrupe}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </h:form>
+                                </div>
+                                <script>
+                                    var x, i, j, selElmnt, a, b, c, d;
+                                    x = document.getElementsByClassName("dropdownDiskusijeIzGrupeDiv");
+                                    for (i = 0; x.length > i; i++) {
+                                        selElmnt = x[i].getElementsByTagName("select")[0];
+
+                                        a = document.createElement("DIV");
+                                        a.setAttribute("class", "select-selected");
+                                        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+                                        x[i].appendChild(a);
+                                        
+                                        b = document.createElement("DIV");
+                                        b.setAttribute("class", "select-items select-hide");
+                                        for (j = 1; selElmnt.length > j; j++) {
+                                           
+                                            c = document.createElement("DIV");
+                                            c.setAttribute("class", "xxx");
+                                            
+                                            var dropdownElementInnerHTML = selElmnt.options[j].innerHTML;
+                                            var svgCircleNumber = document.getElementById('svgelement' + j);
+                                            var svgCircleNumberInnerHTML = svgCircleNumber.innerHTML;
+                                            
+                                            c.innerHTML = dropdownElementInnerHTML + svgCircleNumberInnerHTML;
+                                            
+                                            c.addEventListener("click", function (e) {
+                                                
+                                                var y, i, k, s, h;
+                                                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                                                h = this.parentNode.previousSibling;
+                                                for (i = 0; s.length > i; i++) {
+                                                    if (s.options[i].innerHTML == this.innerHTML.substring(0, s.options[i].innerHTML.length)) {
+                                                        s.selectedIndex = i;
+                                                        $(".dropdownDiskusijeIzGrupe").trigger('change');
+                                                        h.innerHTML = this.innerHTML;
+                                                        y = this.parentNode.getElementsByClassName("same-as-selected");
+                                                        for (k = 0; y.length > k; k++) {
+                                                            y[k].removeAttribute("class");
+                                                        }
+                                                        this.setAttribute("class", "same-as-selected");
+                                                        break;
+                                                    }
+                                                }
+                                                h.click();
+                                            });
+                                            b.appendChild(c);
+                                        }
+                                        x[i].appendChild(b);
+                                        a.addEventListener("click", function (e) {
+                                            
+                                            e.stopPropagation();
+                                            closeAllSelect(this);
+                                            this.nextSibling.classList.toggle("select-hide");
+                                            this.classList.toggle("select-arrow-active");
+                                            $('[class*=diskusijeIzGrupeDivKlasa]').toggleClass('diskusijeDivKlasaBlur');
+                                        });
+                                    }
+
+                                    function closeAllSelect(elmnt) {
+                                        var x, y, i, arrNo = [];
+                                        x = document.getElementsByClassName("select-items");
+                                        y = document.getElementsByClassName("select-selected");
+                                        for (i = 0; y.length > i; i++) {
+                                            if (elmnt == y[i]) {
+                                                arrNo.push(i)
+                                            } else {
+                                                y[i].classList.remove("select-arrow-active");
+                                            }
+                                        }
+                                        for (i = 0; x.length > i; i++) {
+                                            if (arrNo.indexOf(i)) {
+                                                x[i].classList.add("select-hide");
+                                            }
+                                        }
+                                    }
+
+                                    $(document).click(function() {                                      
+                                        $('[class*=diskusijeIzGrupeDivKlasa]').removeClass('diskusijeDivKlasaBlur');
+                                        closeAllSelect();
+                                    });
+                                </script>
+                                <script>
+                                    $(".dropdownDiskusijeIzGrupe option").each(function () {
+                                        if ($(this).val() !== "") {
+                                            indexListaGrupe.set($(this).val(), 0);
+                                            noviIndexListaGrupe.set($(this).val(), 12);
+                                        }
+                                    });
+                                </script>
+                            </div>
+                            <h:panelGroup id="diskusijeIzGrupe">
+                                <ui:repeat var="diskusija" value="#{ucitajDiskusijeZaKorisnika.listaDiskusijaZaDatuGrupu}" varStatus="status">
+                                    <h:panelGroup rendered="#{(status.index) % 3 == 0 &amp;&amp; status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihDiskusijaIzGrupe}">
+                                        <div id="diskusijeIzGrupeDonjiSplitterLarge" class="diskusijeDonjiSplitterLargeKlasa#{(status.index/3)} col-sm-8 offset-2">
+                                            <script>
+                                                if (#{status.index} >= indexListaGrupe.get($('.dropdownDiskusijeIzGrupe').val())) {
+                                                        var klasa = 'diskusijeDonjiSplitterLargeKlasa' + #{(status.index/3)};
+                                                        $('[class*=' + klasa + ']').addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <svg id="diskusijeIzGrupeDonjiSplitterSvgLarge" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                                                <path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index}" d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path><path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index+1}" d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path>
+                                            </svg>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{(status.index) % 2 == 0 &amp;&amp; status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihDiskusijaIzGrupe}">
+                                        <div id="diskusijeIzGrupeDonjiSplitterMedium" class="diskusijeDonjiSplitterMediumKlasa#{(status.index/2)} col-sm-8 offset-2">
+                                            <script>
+                                                if (#{status.index} >= indexListaGrupe.get($('.dropdownDiskusijeIzGrupe').val())) {
+                                                        var klasa = 'diskusijeDonjiSplitterMediumKlasa' + #{(status.index/2)};
+                                                        $('[class*=' + klasa + ']').addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <svg id="diskusijeIzGrupeDonjiSplitterSvgMedium" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                                                <path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index}" d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path><path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index+1}" d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path>
+                                            </svg>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihDiskusijaIzGrupe}">
+                                        <div id="diskusijeIzGrupeDonjiSplitterSmall" class="diskusijeDonjiSplitterSmallKlasa#{status.index} col-sm-8 offset-2">
+                                            <script>
+                                                if (#{status.index} >= indexListaGrupe.get($('.dropdownDiskusijeIzGrupe').val())) {
+                                                        var klasa = 'diskusijeDonjiSplitterSmallKlasa' + #{status.index};
+                                                        $('[class*=' + klasa + ']').addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <svg id="diskusijeIzGrupeDonjiSplitterSvgSmall" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
+                                                <path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index}" d="M 450 12 10 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path><path class="diskusijeDonjiSplitterLinijaKlasa#{status.index}#{status.index+1}" d="M 450 12 900 12" stroke-linejoin="round" fill="none" stroke-linecap="round" stroke="#df8cf2" stroke-width="3"></path>
+                                            </svg>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihDiskusijaIzGrupe}">
+                                        <div id="diskusijeIzGrupeDiv" class="diskusijeIzGrupeDivKlasa#{status.index} diskusijeDivKlasa col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                                            <script>
+                                                 if (#{status.index} >= indexListaGrupe.get($('.dropdownDiskusijeIzGrupe').val())) {
+                                                        var klasa = 'diskusijeIzGrupeDivKlasa' + #{status.index};
+                                                        $('.' + klasa).addClass('nevidljiviDiv');
+                                                }
+                                            </script>
+                                            <div class="row">
+                                                <div id="diskusijeIzGrupeNaslov" class="col-11 diskusijeNaslov">
+                                                    <h:panelGroup rendered="#{diskusija.procitana == 'false'}">
+                                                        <svg id="sveDiskusijeNaslovSVG" class="naslovSVGKlasa" width="10px" height="13px" preserveAspectRatio="xMidYMid meet">
+                                                            <circle cx="5" cy="5" r="4" fill="#df8cf2" stroke-width="3" />
+                                                        </svg>
+                                                    </h:panelGroup>
+                                                    <b:link value="#{diskusija.nazivDiskusije}" outcome="prikazDiskusije.xhtml?idDiskusija=#{diskusija.idDiskusija}"></b:link>
+                                                </div>
+                                                <div id="diskusijeIzGrupeSplitterLarge" class="col-1 diskusijeSplitterLarge">
+                                                    <h:panelGroup rendered="#{(status.index+1) % 3 != 0 || status.index eq 0}">
+                                                        <svg id="diskusijeIzGrupeLinijicaLomiPravilaLarge" class="diskusijeSplitterLinija" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                                            <defs>
+                                                                <pattern height="100%" id="ellipse-center-diskusijeIzGrupe" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                                    <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                                                </pattern>
+                                                            </defs>
+                                                            <line x1="-1" y1="-34" x2="2" y2="150" fill="none" stroke="url(#ellipse-center-diskusijeIzGrupe)" stroke-width="1"></line>
+                                                        </svg>
+                                                    </h:panelGroup>
+                                                </div>
+                                                <div id="diskusijeIzGrupeSplitterMedium" class="col-1 diskusijeSplitterMedium" style="padding-right: 0px;">
+                                                    <h:panelGroup rendered="#{status.even}">
+                                                        <svg id="diskusijeIzGrupeLinijicaLomiPravilaMedium" class="diskusijeSplitterLinijaMedium" version="1.1" width="10px" height="10px" preserveAspectRatio="xMidYMid meet">
+                                                            <defs>
+                                                                <pattern height="100%" id="ellipse-center-diskusijeIzGrupe1" patternContentUnits="objectBoundingBox" patternUnits="objectBoundingBox" preserveAspectRatio="xMinYMin meet" width="100%" x="0%" y="0%" patternTransform="rotate(0) scale(1.02119 1.02119)">
+                                                                    <circle cx="0.5" cy="0.5" r="0.5" fill="#04443C" fill-opacity="0.1" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.4" fill="#04443C" fill-opacity="0.2" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.3" fill="#04443C" fill-opacity="0.4" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.2" fill="#04443C" fill-opacity="0.6" stroke="none"/>
+                                                                    <circle cx="0.5" cy="0.5" r="0.1" fill="#04443C" fill-opacity="1" stroke="none"/>
+                                                                </pattern>
+                                                            </defs>
+                                                            <line x1="-1" y1="-34" x2="2" y2="150" fill="none" stroke="url(#ellipse-center-diskusijeIzGrupe1)" stroke-width="1"></line>
+                                                        </svg>
+                                                    </h:panelGroup>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <h:panelGroup rendered="#{diskusija.procitana == 'true'}">
+                                                    <div id="diskusijeIzGrupeMeta" class="col-11 diskusijeMeta">
+                                                        <h:outputText value="#{diskusija.metaDiskusija}"></h:outputText>
+                                                    </div>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{diskusija.procitana == 'false'}">
+                                                    <div id="diskusijeIzGrupeMeta" class="col-11 diskusijeMeta diskusijeMetaNeprocitana">
+                                                        <h:outputText value="#{diskusija.metaDiskusija}"></h:outputText>
+                                                    </div>
+                                                </h:panelGroup>
+                                            </div>
+                                            <div class="row">
+                                                <div id="diskusijeIzGrupeAutorOverline" class="col obavestenjaAutorOverlineKlasa">
+                                                    <svg id="linijaDiskusijeIzGrupeAutorOverline" class="linijaDiskusijeOverlineKlasa" version="1.1" width="100%" height="1px" preserveAspectRatio="xMidYMid meet">
+                                                        <defs>
+                                                            <linearGradient id='linijaOverlineDiskusijeIzGrupeAutorPrva'>
+                                                                <stop class="linijaDiskusijeOverline0" offset='0%' style="stop-color: #d9dbdd; stop-opacity: 1;" >
+                                                                </stop>
+
+                                                                <stop class="linijaDiskusijeOverline1" offset='100%' style="stop-color: white; stop-opacity: 1;" >
+                                                                </stop>
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <path d="M 0 0 170 0 170 -13 " stroke="url(#linijaOverlineDiskusijeIzGrupeAutorPrva)" fill="none" stroke-width="4"></path>
+                                                    </svg>
+                                                </div>
+                                                <div id="diskusijeIzGrupeDatumOverline" class="col obavestenjaDatumOverlineKlasa">
+                                                    <svg id="linijaDiskusijeIzGrupeDatumOverline" class="linijaDiskusijeDatumOverlineKlasa" version="1.1" width="100%" height="1px" viewBox="0 0 170 1" preserveAspectRatio="xMaxYMin meet">
+                                                        <defs>
+                                                            <linearGradient id="linijaDiskusijeIzGrupeOverlineDatumPrva">
+                                                                <stop class="linijaDiskusijeOverline0" offset='0%' style="stop-color: white;" >
+                                                                </stop>
+                                                                <stop class="linijaDiskusijeOverline1" offset='100%' style="stop-color: #d9dbdd;" >
+                                                                </stop>
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <path d="M 0 -13 0 0 170 0 " stroke="url(#linijaDiskusijeIzGrupeOverlineDatumPrva)" fill="none" stroke-width="4"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="col-1"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div id="diskusijeIzGrupeAutor" class="col diskusijeAutorKlasa">
+                                                    <h:outputText id="diskusijeIzGrupeAutor" value="#{diskusija.autorDiskusije}"></h:outputText>
+                                                </div>
+                                                <div id="diskusijeIzGrupeObavestenjeDatum" class="col diskusijeDatumKlasa">
+                                                    <h:outputText id="diskusijeIzGrupeDatum" value="#{diskusija.datumPostavljanja}"></h:outputText>
+                                                </div>
+                                                <div class="offset-1"></div>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+                                </ui:repeat>
+                            </h:panelGroup>
+                        </div>
+                    </div>
                 </div>
             </div>
-    
-           
-        </div>
-    </div>
-    
-    <div id="footer">
-            <div id="adresa">
-               <p id="kontakt">
-                   KONTAKT
-                   <br></br>
-                   Adresa:
-                   <br></br>
-                   Telefon:
-               </p> 
+            <div class="row" id="loadingSVG">
+                <div class="col-2 offset-5" id="loading">
+                    <svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0">
+                        <circle fill="#00b16a" stroke="none" cx="6" cy="2" r="2">
+                            <animate
+                                attributeName="opacity"
+                                dur="1s"
+                                values="0;1;0"
+                                repeatCount="indefinite"
+                                begin="0.1"/>    
+                        </circle>
+                        <circle fill="#00795a" stroke="none" cx="12" cy="2" r="2">
+                            <animate
+                                attributeName="opacity"
+                                dur="1s"
+                                values="0;1;0"
+                                repeatCount="indefinite" 
+                                begin="0.2"/>       
+                        </circle>
+                        <circle fill="#04443c" stroke="none" cx="18" cy="2" r="2">
+                            <animate
+                                attributeName="opacity"
+                                dur="1s"
+                                values="0;1;0"
+                                repeatCount="indefinite" 
+                                begin="0.3"/>     
+                        </circle>
+                    </svg>
+                </div>
+            </div>
+            <div class="row" id="dokumentacija" style="height: 700px">
+
             </div>
         </div>
-    <div id="copyright">
-    <p style="float: left">Copyright &copy; 2018 - All Rights Reserved</p>
-    </div>
-</h:body>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    </h:body>
 </html>
