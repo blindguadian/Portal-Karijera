@@ -4,6 +4,7 @@ import beans.Korisnik;
 import beans.Preporuka;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -53,12 +54,20 @@ public class UcitajPreporukeZaKorisnika {
 
         try {
             Connection conn = DriverManager.getConnection(db.db.connectionString, db.db.user, db.db.password);
-            Statement stm = conn.createStatement();
 
             HttpSession sesija = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             Korisnik korisnik = (Korisnik) sesija.getAttribute("korisnik");
 
-            ResultSet rs = stm.executeQuery("select nazivPreporuke, tekstPreporuke, autorPreporuke from preporuke p, ucestvuje_kreira uk, korisnik k where p.idPreporuke=uk.idTipObavestenja && uk.tipObavestenja='preporuka' && uk.idKorisnik=k.idKorisnik && uk.tipUcesnika='kreira' && k.korisnickoIme='" + korisnik.getKorisnickoIme() + "'");
+            PreparedStatement ps;
+
+            if (korisnik != null) {
+                ps = conn.prepareStatement("select nazivPreporuke, tekstPreporuke, autorPreporuke from preporuke p, objave o, ucestvuje_kreira uk, korisnik k where p.idPreporuke=o.idTipObavestenja && o.tipObavestenja='preporuka' && o.idKorisnik=k.idKorisnik && uk.tipUcesnika='kreira' && uk.idObjave=o.idObjave && k.korisnickoIme=?");
+                ps.setString(1, korisnik.getKorisnickoIme());
+            } else {
+                return;
+            }
+
+            ResultSet rs = ps.executeQuery();
 
             listaSvihPreporukaKojeJeKorisnikNapisao = new ArrayList<>();
 
@@ -79,13 +88,25 @@ public class UcitajPreporukeZaKorisnika {
     public void ucitajPreporukeIzGrupe() {
         try {
             Connection conn = DriverManager.getConnection(db.db.connectionString, db.db.user, db.db.password);
-            Statement stm = conn.createStatement();
 
+            HttpSession sesija = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+
+            Korisnik korisnik = (Korisnik) sesija.getAttribute("korisnik");
+
+            PreparedStatement ps;
 
             int idGrupe = Integer.parseInt(params.get("idGrupe"));
 
-            ResultSet rs = stm.executeQuery("SELECT p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke FROM Preporuke p, Vidljivost v, Grupa g, uGrupi ug, Ucestvuje_kreira uk WHERE p.idVidljivost=v.idVidljivost && v.nivoVidljivosti='Formirana grupa studenata' && g.idGrupa=" + idGrupe + " && g.idGrupa=ug.idGrupa && ug.idKorisnik=uk.idKorisnik && uk.idUcestvuje_kreira=p.idUcestvuje_kreira");
+            if (korisnik != null) {
+                ps = conn.prepareStatement("SELECT p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke FROM Preporuke p, Vidljivost v, Grupa g, ucestvujeGrupaStudenata ugs, objave o WHERE p.idVidljivost=v.idVidljivost && g.idGrupa=? && g.idGrupa=ugs.idGrupa && ugs.idObjave=o.idObjave && p.idObjave=o.idObjave");
+                ps.setInt(1, idGrupe);
+            } else {
+                return;
+            }
+
+            ResultSet rs = ps.executeQuery();
+
             listaPreporukaIzGrupe = new ArrayList<>();
 
             while (rs.next()) {
@@ -112,12 +133,20 @@ public class UcitajPreporukeZaKorisnika {
     public void ucitajSvePreporukeZaKorisnika() {
         try {
             Connection conn = DriverManager.getConnection(db.db.connectionString, db.db.user, db.db.password);
-            Statement stm = conn.createStatement();
 
             HttpSession sesija = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             Korisnik korisnik = (Korisnik) sesija.getAttribute("korisnik");
 
-            ResultSet rs = stm.executeQuery("select p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from ucestvuje_kreira uk, preporuke p, korisnik k, vidljivost v where v.idVidljivost=p.idVidljivost && k.idKorisnik=uk.idKorisnik && k.korisnickoIme='" + korisnik.getKorisnickoIme() + "' && p.idPreporuke=uk.idTipObavestenja && uk.tipObavestenja='preporuka' order by p.datumKreiranjaPreporuke desc");
+            PreparedStatement ps;
+
+            if (korisnik != null) {
+                ps = conn.prepareStatement("select p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from ucestvuje_kreira uk, preporuke p, korisnik k, vidljivost v where v.idVidljivost=p.idVidljivost && k.idKorisnik=uk.idKorisnik && uk.idObjave=o.idObjave && k.korisnickoIme=? && p.idObjave=o.idObjave order by p.datumKreiranjaPreporuke desc");
+                ps.setString(1, korisnik.getKorisnickoIme());
+            } else {
+                ps = conn.prepareStatement("select p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from preporuke p, vidljivost v where v.idVidljivost=p.idVidljivost && v.nivoVidljivosti='Svi i gosti' order by p.datumKreiranjaPreporuke desc");
+            }
+
+            ResultSet rs = ps.executeQuery();
 
             listaSvihPreporukaZaKorisnika = new ArrayList<>();
 
@@ -145,12 +174,20 @@ public class UcitajPreporukeZaKorisnika {
     public void ucitajPoslednjihPetZaKorisnika() {
         try {
             Connection conn = DriverManager.getConnection(db.db.connectionString, db.db.user, db.db.password);
-            Statement stm = conn.createStatement();
 
             HttpSession sesija = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             Korisnik korisnik = (Korisnik) sesija.getAttribute("korisnik");
 
-            ResultSet rs = stm.executeQuery("select p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from ucestvuje_kreira uk, preporuke p, korisnik k, vidljivost v where v.idVidljivost=p.idVidljivost && k.idKorisnik=uk.idKorisnik && k.korisnickoIme='" + korisnik.getKorisnickoIme() + "' && p.idPreporuke=uk.idTipObavestenja && uk.tipObavestenja='preporuka' order by p.datumKreiranjaPreporuke desc limit 5");
+            PreparedStatement ps;
+
+            if (korisnik != null) {
+                ps = conn.prepareStatement("select idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from ucestvuje_kreira uk, preporuke p, korisnik k, vidljivost v, objave o where v.idVidljivost=p.idVidljivost && k.idKorisnik=uk.idKorisnik && k.korisnickoIme=? && p.idObjave=o.idObjave && uk.idObjave=o.idObjave order by p.datumKreiranjaPreporuke desc limit 5");
+                ps.setString(1, korisnik.getKorisnickoIme());
+            } else {
+                ps = conn.prepareStatement("select idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from preporuke p, vidljivost v where v.idVidljivost=p.idVidljivost && v.nivoVidljivosti='Svi i gosti' order by p.datumKreiranjaPreporuke desc limit 5");
+            }
+
+            ResultSet rs = ps.executeQuery();
 
             listaPoslednjihPetPreporukaZaKorisnika = new ArrayList<>();
 
@@ -172,57 +209,21 @@ public class UcitajPreporukeZaKorisnika {
             }
 
             for (Preporuka preporuka : listaPoslednjihPetPreporukaZaKorisnika) {
-                ResultSet pitanja = stm.executeQuery("select ocena_komentar from ocenaPreporuke where idPreporuke=" + preporuka.getIdPreporuke());
+
+                PreparedStatement pitanjaPS = conn.prepareStatement("select ocenaPreporuke from ocenaPreporuke where idPreporuke=?");
+                pitanjaPS.setInt(1, preporuka.getIdPreporuke());
+
+                ResultSet pitanja = pitanjaPS.executeQuery();
+
                 int brojOcena = 0, suma = 0, prosecnaOcena = 0;
                 while (pitanja.next()) {
                     brojOcena++;
-                    suma += pitanja.getInt("ocena_komentar");
+                    suma += pitanja.getInt("ocenaPreporuke");
                 }
-                prosecnaOcena = suma / brojOcena;
-                preporuka.setProsecnaOcena(prosecnaOcena);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UcitajVestiZaKorisnika.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void ucitajPoslednjihPetZaGosta() {
-        try {
-            Connection conn = DriverManager.getConnection(db.db.connectionString, db.db.user, db.db.password);
-            Statement stm = conn.createStatement();
-
-            ResultSet rs = stm.executeQuery("select p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from preporuke p, vidljivost vv where vv.nivoVidljivosti='Svi i gosti' && p.idVidljivost=vv.idVidljivost order by p.datumKreiranjaPreporuke desc limit 5");
-
-            listaPoslednjihPetPreporukaZaKorisnika = new ArrayList<>();
-
-            while (rs.next()) {
-                Preporuka p = new Preporuka();
-                p.setIdPreporuke(rs.getInt("idPreporuke"));
-                p.setNazivPreporuke(rs.getString("nazivPreporuke"));
-                p.setTekstPreporuke(rs.getString("tekstPreporuke"));
-                p.setAutorPreporuke(rs.getString("autorPreporuke"));
-                p.setNivoVidljivosti(rs.getString("nivoVidljivosti"));
-                p.setMetaPreporuke(rs.getString("metaPreporuke"));
-
-                DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss.S");
-                LocalDateTime datumPostavljanja = LocalDateTime.parse(rs.getTimestamp("datumKreiranjaPreporuke").toString(), datePattern);
-                p.setDatumKreiranja(rs.getTimestamp("datumKreiranjaPreporuke").toString().substring(0, rs.getTimestamp("datumKreiranjaPreporuke").toString().length() - 5));
-                p.setDatumKreiranjaPreporuke(datumPostavljanja);
-
-                listaPoslednjihPetPreporukaZaKorisnika.add(p);
-            }
-
-            for (Preporuka preporuka : listaPoslednjihPetPreporukaZaKorisnika) {
-                ResultSet pitanja = stm.executeQuery("select ocena_komentar from ocenaPreporuke where idPreporuke=" + preporuka.getIdPreporuke());
-                float prosecnaOcena = 0, brojOcena = 0, suma = 0;
-                while (pitanja.next()) {
-                    brojOcena++;
-                    suma += pitanja.getInt("ocena_komentar");
-                }
-                if (brojOcena == 0) {
-                    prosecnaOcena = 1;
-                } else {
+                if (brojOcena > 0) {
                     prosecnaOcena = suma / brojOcena;
+                } else {
+                    prosecnaOcena = 3;
                 }
                 preporuka.setProsecnaOcena(prosecnaOcena);
             }
@@ -231,33 +232,78 @@ public class UcitajPreporukeZaKorisnika {
         }
     }
 
-    public void ucitajSvePreporukeZaGosta() {
-        try {
-            Connection conn = DriverManager.getConnection(db.db.connectionString, db.db.user, db.db.password);
-            Statement stm = conn.createStatement();
-
-            ResultSet rs = stm.executeQuery("select p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from preporuke p, vidljivost vv where vv.nivoVidljivosti='Svi i gosti' && p.idVidljivost=vv.idVidljivost order by p.datumKreiranjaPreporuke desc");
-
-            listaSvihPreporukaZaKorisnika = new ArrayList<>();
-
-            while (rs.next()) {
-                Preporuka p = new Preporuka();
-                p.setIdPreporuke(rs.getInt("idPreporuke"));
-                p.setNazivPreporuke(rs.getString("nazivPreporuke"));
-                p.setTekstPreporuke(rs.getString("tekstPreporuke"));
-                p.setAutorPreporuke(rs.getString("autorPreporuke"));
-                p.setNivoVidljivosti(rs.getString("nivoVidljivosti"));
-                p.setMetaPreporuke(rs.getString("metaPreporuke"));
-
-                DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss.S");
-                LocalDateTime datumPostavljanja = LocalDateTime.parse(rs.getTimestamp("datumKreiranjaPreporuke").toString(), datePattern);
-                p.setDatumKreiranja(rs.getTimestamp("datumKreiranjaPreporuke").toString().substring(0, rs.getTimestamp("datumKreiranjaPreporuke").toString().length() - 5));
-                p.setDatumKreiranjaPreporuke(datumPostavljanja);
-
-                listaSvihPreporukaZaKorisnika.add(p);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UcitajVestiZaKorisnika.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public void ucitajPoslednjihPetZaGosta() {
+//        try {
+//            Connection conn = DriverManager.getConnection(db.db.connectionString, db.db.user, db.db.password);
+//            Statement stm = conn.createStatement();
+//
+//            ResultSet rs = stm.executeQuery("select p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from preporuke p, vidljivost vv where vv.nivoVidljivosti='Svi i gosti' && p.idVidljivost=vv.idVidljivost order by p.datumKreiranjaPreporuke desc limit 5");
+//
+//            listaPoslednjihPetPreporukaZaKorisnika = new ArrayList<>();
+//
+//            while (rs.next()) {
+//                Preporuka p = new Preporuka();
+//                p.setIdPreporuke(rs.getInt("idPreporuke"));
+//                p.setNazivPreporuke(rs.getString("nazivPreporuke"));
+//                p.setTekstPreporuke(rs.getString("tekstPreporuke"));
+//                p.setAutorPreporuke(rs.getString("autorPreporuke"));
+//                p.setNivoVidljivosti(rs.getString("nivoVidljivosti"));
+//                p.setMetaPreporuke(rs.getString("metaPreporuke"));
+//
+//                DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss.S");
+//                LocalDateTime datumPostavljanja = LocalDateTime.parse(rs.getTimestamp("datumKreiranjaPreporuke").toString(), datePattern);
+//                p.setDatumKreiranja(rs.getTimestamp("datumKreiranjaPreporuke").toString().substring(0, rs.getTimestamp("datumKreiranjaPreporuke").toString().length() - 5));
+//                p.setDatumKreiranjaPreporuke(datumPostavljanja);
+//
+//                listaPoslednjihPetPreporukaZaKorisnika.add(p);
+//            }
+//
+//            for (Preporuka preporuka : listaPoslednjihPetPreporukaZaKorisnika) {
+//                ResultSet pitanja = stm.executeQuery("select ocena_komentar from ocenaPreporuke where idPreporuke=" + preporuka.getIdPreporuke());
+//                float prosecnaOcena = 0, brojOcena = 0, suma = 0;
+//                while (pitanja.next()) {
+//                    brojOcena++;
+//                    suma += pitanja.getInt("ocena_komentar");
+//                }
+//                if (brojOcena == 0) {
+//                    prosecnaOcena = 1;
+//                } else {
+//                    prosecnaOcena = suma / brojOcena;
+//                }
+//                preporuka.setProsecnaOcena(prosecnaOcena);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UcitajVestiZaKorisnika.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//
+//    public void ucitajSvePreporukeZaGosta() {
+//        try {
+//            Connection conn = DriverManager.getConnection(db.db.connectionString, db.db.user, db.db.password);
+//            Statement stm = conn.createStatement();
+//
+//            ResultSet rs = stm.executeQuery("select p.idPreporuke, nazivPreporuke, tekstPreporuke, autorPreporuke, datumKreiranjaPreporuke, nivoVidljivosti, metaPreporuke from preporuke p, vidljivost vv where vv.nivoVidljivosti='Svi i gosti' && p.idVidljivost=vv.idVidljivost order by p.datumKreiranjaPreporuke desc");
+//
+//            listaSvihPreporukaZaKorisnika = new ArrayList<>();
+//
+//            while (rs.next()) {
+//                Preporuka p = new Preporuka();
+//                p.setIdPreporuke(rs.getInt("idPreporuke"));
+//                p.setNazivPreporuke(rs.getString("nazivPreporuke"));
+//                p.setTekstPreporuke(rs.getString("tekstPreporuke"));
+//                p.setAutorPreporuke(rs.getString("autorPreporuke"));
+//                p.setNivoVidljivosti(rs.getString("nivoVidljivosti"));
+//                p.setMetaPreporuke(rs.getString("metaPreporuke"));
+//
+//                DateTimeFormatter datePattern = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss.S");
+//                LocalDateTime datumPostavljanja = LocalDateTime.parse(rs.getTimestamp("datumKreiranjaPreporuke").toString(), datePattern);
+//                p.setDatumKreiranja(rs.getTimestamp("datumKreiranjaPreporuke").toString().substring(0, rs.getTimestamp("datumKreiranjaPreporuke").toString().length() - 5));
+//                p.setDatumKreiranjaPreporuke(datumPostavljanja);
+//
+//                listaSvihPreporukaZaKorisnika.add(p);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UcitajVestiZaKorisnika.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }

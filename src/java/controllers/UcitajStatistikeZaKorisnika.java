@@ -118,7 +118,7 @@ public class UcitajStatistikeZaKorisnika implements Serializable {
             Korisnik korisnik = (Korisnik) sesija.getAttribute("korisnik");
 
             if (korisnik != null) {
-                ResultSet statistikeZaKorisnika = stm.executeQuery("select idStatistike, nazivStatistike, metaStatistike, datumStatistike, naziviStavke, vrednostiStavke, nazivStatistike, stavkaStatistike from statistike s, ucestvuje_kreira uk, korisnik k where k.korisnickoIme='" + korisnik.getKorisnickoIme() + "' && k.idKorisnik=uk.idKorisnik && uk.tipObavestenja='statistika' && uk.idTipObavestenja=s.idStatistike && s.arhiviranaStatistika='false' order by s.datumStatistike desc limit 1");
+                ResultSet statistikeZaKorisnika = stm.executeQuery("select idStatistike, nazivStatistike, metaStatistike, datumStatistike, naziviStavke, vrednostiStavke, nazivStatistike, stavkaStatistike from statistike s, ucestvuje_kreira uk, korisnik k where k.korisnickoIme='" + korisnik.getKorisnickoIme() + "' && k.idKorisnik=uk.idKorisnik && uk.idObjave=s.idObjave && s.arhiviranaStatistika='false' order by s.datumStatistike desc limit 1");
 
                 while (statistikeZaKorisnika.next()) {
                     Statistika s = new Statistika();
@@ -152,13 +152,13 @@ public class UcitajStatistikeZaKorisnika implements Serializable {
 
             Map<String, Integer> kolicinaKorisnikaPoStavkamaMapa = new HashMap();
 
-            StringTokenizer vrednostiZaSvakuStavku = new StringTokenizer(poslednjaStatistikaZaKorisnika.getListaVrednostiStavke(), ", ");
-            StringTokenizer naziviSvakeStavke = new StringTokenizer(poslednjaStatistikaZaKorisnika.getListaNazivaStavke(), ", ");
+            StringTokenizer vrednostiZaSvakuStavku = new StringTokenizer(poslednjaStatistikaZaKorisnika.getListaVrednostiStavke(), ",");
+            StringTokenizer naziviSvakeStavke = new StringTokenizer(poslednjaStatistikaZaKorisnika.getListaNazivaStavke(), ",");
 
             int brojElemenata = vrednostiZaSvakuStavku.countTokens();
 
             for (int i = 1; i <= brojElemenata; i++) {
-                kolicinaKorisnikaPoStavkamaMapa.put(naziviSvakeStavke.nextToken(), Integer.parseInt(vrednostiZaSvakuStavku.nextToken()));
+                kolicinaKorisnikaPoStavkamaMapa.put(naziviSvakeStavke.nextToken().trim(), Integer.parseInt(vrednostiZaSvakuStavku.nextToken().trim()));
             }
 
             for (Map.Entry<String, Integer> stavkeStatistike : kolicinaKorisnikaPoStavkamaMapa.entrySet()) {
@@ -178,7 +178,7 @@ public class UcitajStatistikeZaKorisnika implements Serializable {
 
             if (korisnik != null) {
 
-                ResultSet idAnkete = stm.executeQuery("select idAnkete from ankete a, ucestvuje_kreira uk, korisnik k where k.korisnickoIme='" + korisnik.getKorisnickoIme() + "' && k.idKorisnik=uk.idKorisnik && uk.idTipObavestenja=a.idAnkete && uk.tipObavestenja='anketa' && a.vidljivostRezultata='true' order by a.datumTrajanjaAnkete desc limit 1");
+                ResultSet idAnkete = stm.executeQuery("select idAnkete from ankete a, ucestvuje_kreira uk, korisnik k where k.korisnickoIme='" + korisnik.getKorisnickoIme() + "' && k.idKorisnik=uk.idKorisnik && a.idObjave=uk.idObjave && a.vidljivostRezultata='true' order by a.datumTrajanjaAnkete desc limit 1");
                 
                 while(idAnkete.next())
                 idAnketa = idAnkete.getInt("idAnkete");
@@ -216,7 +216,7 @@ public class UcitajStatistikeZaKorisnika implements Serializable {
                 String tipPitanja = statistikaPrvogPitanjaPoslednjeAnketeZaKorisnika.getString("tipPitanja");
                 int idPitanja = statistikaPrvogPitanjaPoslednjeAnketeZaKorisnika.getInt("idPitanjaAnkete");
 
-                StringTokenizer ponudjeniOdgovoriZaPitanje = new StringTokenizer(statistikaPrvogPitanjaPoslednjeAnketeZaKorisnika.getString("ponudjeniOdgovori"), ", ");
+                StringTokenizer ponudjeniOdgovoriZaPitanje = new StringTokenizer(statistikaPrvogPitanjaPoslednjeAnketeZaKorisnika.getString("ponudjeniOdgovori"), ",");
 
                 ResultSet odgovoriNaPitanje = stm.executeQuery("select odgovoriAnkete from odgovoriAnkete oa where oa.idPitanjaAnkete=" + idPitanja);
 
@@ -230,7 +230,7 @@ public class UcitajStatistikeZaKorisnika implements Serializable {
                     Map<String, Integer> odgovoriMapa = new HashMap();
 
                     while (ponudjeniOdgovoriZaPitanje.hasMoreTokens()) {
-                        odgovoriMapa.put(ponudjeniOdgovoriZaPitanje.nextToken(), 0);
+                        odgovoriMapa.put(ponudjeniOdgovoriZaPitanje.nextToken().trim(), 0);
                     }
 
                     while (odgovoriNaPitanje.next()) {
@@ -289,8 +289,9 @@ public class UcitajStatistikeZaKorisnika implements Serializable {
                 }
             } else {
                 if (korisnik != null) {
-                ResultSet statistikeZaKorisnika = stm.executeQuery("select idStatistike, nazivStatistike, metaStatistike, datumStatistike, naziviStavke, vrednostiStavke, nazivStatistike, stavkaStatistike from statistike s, ucestvuje_kreira uk, korisnik k where k.korisnickoIme='" + korisnik.getKorisnickoIme() + "' && k.idKorisnik=uk.idKorisnik && uk.tipObavestenja='statistika' && uk.idTipObavestenja=s.idStatistike && s.arhiviranaStatistika='false' order by s.datumStatistike desc limit 1");
-
+                ResultSet statistikeZaKorisnika = stm.executeQuery("select idStatistike, nazivStatistike, metaStatistike, datumStatistike, naziviStavke, vrednostiStavke, nazivStatistike, stavkaStatistike from statistike s, ucestvuje_kreira uk, korisnik k where k.korisnickoIme='" + korisnik.getKorisnickoIme() + "' && k.idKorisnik=uk.idKorisnik && uk.idObjave=s.idObjave && s.arhiviranaStatistika='false' order by s.datumStatistike desc limit 2");
+                statistikeZaKorisnika.next();
+                
                 while (statistikeZaKorisnika.next()) {
                     Statistika s = new Statistika();
                     s.setIdStatistike(statistikeZaKorisnika.getInt("idStatistike"));
@@ -324,13 +325,13 @@ public class UcitajStatistikeZaKorisnika implements Serializable {
 
             Map<String, Integer> kolicinaKorisnikaPoStavkamaDrugaMapa = new HashMap();
 
-            StringTokenizer drugeVrednostiZaSvakuStavku = new StringTokenizer(pretposlednjaStatistikaZaKorisnika.getListaVrednostiStavke(), ", ");
-            StringTokenizer drugiNaziviSvakeStavke = new StringTokenizer(pretposlednjaStatistikaZaKorisnika.getListaNazivaStavke(), ", ");
+            StringTokenizer drugeVrednostiZaSvakuStavku = new StringTokenizer(pretposlednjaStatistikaZaKorisnika.getListaVrednostiStavke(), ",");
+            StringTokenizer drugiNaziviSvakeStavke = new StringTokenizer(pretposlednjaStatistikaZaKorisnika.getListaNazivaStavke(), ",");
 
             int drugiBrojElemenata = drugeVrednostiZaSvakuStavku.countTokens();
 
             for (int i = 1; i <= drugiBrojElemenata; i++) {
-                kolicinaKorisnikaPoStavkamaDrugaMapa.put(drugiNaziviSvakeStavke.nextToken(), Integer.parseInt(drugeVrednostiZaSvakuStavku.nextToken()));
+                kolicinaKorisnikaPoStavkamaDrugaMapa.put(drugiNaziviSvakeStavke.nextToken().trim(), Integer.parseInt(drugeVrednostiZaSvakuStavku.nextToken().trim()));
             }
 
             for (Map.Entry<String, Integer> stavkeStatistike : kolicinaKorisnikaPoStavkamaDrugaMapa.entrySet()) {

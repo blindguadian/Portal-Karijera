@@ -4,6 +4,7 @@ import beans.Grupa;
 import beans.Korisnik;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,15 +63,21 @@ public class UcitajGrupeStudenata {
         }
     }
 
-    public void sveGrupeGdeJeKorisnikClan() {
+    public void ucitajGrupeUKojimaSeKorisnikNalazi() {
         try {
             Connection conn = DriverManager.getConnection(db.db.connectionString, db.db.user, db.db.password);
-            Statement stm = conn.createStatement();
 
             HttpSession sesija = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             Korisnik korisnik = (Korisnik) sesija.getAttribute("korisnik");
 
-            ResultSet rs = stm.executeQuery("select g.idGrupa, nazivGrupe, nivoVidljivosti from grupa g, uGrupi ug, vidljivost v, korisnik k where g.idGrupa=ug.idGrupa && k.idKorisnik=ug.idKorisnik && k.korisnickoIme='" + korisnik.getKorisnickoIme() + "' && g.idVidljivost=v.idVidljivost");
+            PreparedStatement ps;
+            
+            if (korisnik != null) {
+                ps = conn.prepareStatement("select nazivGrupe, g.idGrupa from grupa g, uGrupi ug, korisnik k where k.korisnickoIme=? && k.idKorisnik=ug.idKorisnik && ug.idGrupa=g.idGrupa");
+                ps.setString(1, korisnik.getKorisnickoIme());
+            } else return;
+
+            ResultSet rs = ps.executeQuery();
 
             listaGrupaGdeJeKorisnikClan = new ArrayList<>();
 
@@ -78,13 +85,11 @@ public class UcitajGrupeStudenata {
                 Grupa g = new Grupa();
                 g.setIdGrupa(rs.getInt("idGrupa"));
                 g.setNazivGrupe(rs.getString("nazivGrupe"));
-                g.setNivoVidljivosti(rs.getString("nivoVidljivosti"));
 
                 listaGrupaGdeJeKorisnikClan.add(g);
             }
-
         } catch (SQLException ex) {
-            Logger.getLogger(UcitajGrupeStudenata.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UcitajVestiZaKorisnika.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
