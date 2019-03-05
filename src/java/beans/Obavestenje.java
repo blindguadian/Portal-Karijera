@@ -4,9 +4,25 @@ package beans;
 import java.time.LocalDateTime;
 
 public class Obavestenje {
-    private String datumKreiranja, naslovObavestenja, tekstOvavestenja, autorObavestenja, nivoVidljivosti, arhiviranoObavestenje, metaObavestenja;
+    private String datumKreiranja, naslovObavestenja, tekstOvavestenja, autorObavestenja, nivoVidljivosti, arhiviranoObavestenje, metaObavestenja, saljeNa, procitano;
     private LocalDateTime datumKreiranjaObavestenja;
     private int idObavestenja, idUcestvujeKreira;
+    
+    public String getProcitano() {
+        return procitano;
+    }
+
+    public void setProcitano(String procitano) {
+        this.procitano = procitano;
+    }
+
+    public String getSaljeNa() {
+        return saljeNa;
+    }
+
+    public void setSaljeNa(String saljeNa) {
+        this.saljeNa = saljeNa;
+    }
 
     public int getIdUcestvujeKreira() {
         return idUcestvujeKreira;

@@ -5,9 +5,17 @@ import java.time.LocalDateTime;
 
 public class Vest {
     
-    private String datumPostavljanjaVestiNaslovna, datumPostavljanja, naslovVesti, tekstVesti, autorVesti, arhiviranaVest, nivoVidljivosti, nazivKategorije, metaVesti;
+    private String datumPostavljanjaVestiNaslovna, datumPostavljanja, naslovVesti, tekstVesti, autorVesti, arhiviranaVest, nivoVidljivosti, nazivKategorije, metaVesti, procitana;
     private LocalDateTime datumPostavljanjaVesti;
     private int idVesti, idUcestvujeKreira;
+    
+    public String getProcitana() {
+        return procitana;
+    }
+
+    public void setProcitana(String procitana) {
+        this.procitana = procitana;
+    }
 
     public String getDatumPostavljanjaVestiNaslovna() {
         return datumPostavljanjaVestiNaslovna;

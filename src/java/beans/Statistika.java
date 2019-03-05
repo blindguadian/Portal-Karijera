@@ -4,9 +4,17 @@ package beans;
 import java.time.LocalDateTime;
 
 public class Statistika {
-    private String statistikaZa, listaNazivaStavke, listaVrednostiStavke, datumKreiranja, nazivStatistike, tekstStatistike, autorStatistike, nivoVidljivosti, arhiviranaStatistika, metaStatistike, stavkaStatistike;
+    private String statistikaZa, listaNazivaStavke, listaVrednostiStavke, datumKreiranja, nazivStatistike, tekstStatistike, autorStatistike, nivoVidljivosti, arhiviranaStatistika, metaStatistike, stavkaStatistike, procitana;
     private LocalDateTime datumKreiranjaStatistike;
     private int idStatistike, idUcestvujeKreira, ukupanBrojKorisnika;
+    
+    public String getProcitana() {
+        return procitana;
+    }
+
+    public void setProcitana(String procitana) {
+        this.procitana = procitana;
+    }
 
     public String getListaNazivaStavke() {
         return listaNazivaStavke;

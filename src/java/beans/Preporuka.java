@@ -4,10 +4,18 @@ package beans;
 import java.time.LocalDateTime;
 
 public class Preporuka {
-    private String datumKreiranja, nazivPreporuke, tekstPreporuke, autorPreporuke, nivoVidljivosti, metaPreporuke;
+    private String datumKreiranja, nazivPreporuke, tekstPreporuke, autorPreporuke, nivoVidljivosti, metaPreporuke, procitana;
     private LocalDateTime datumKreiranjaPreporuke;
     private int idPreporuke, idUcestvujeKreira;
     private float prosecnaOcena;
+    
+    public String getProcitana() {
+        return procitana;
+    }
+
+    public void setProcitana(String procitana) {
+        this.procitana = procitana;
+    }
 
     public float getProsecnaOcena() {
         return prosecnaOcena;

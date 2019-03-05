@@ -5,10 +5,18 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class Anketa {
-    private String prvoPitanje, nazivAnkete, tekstAnkete, nivoVidljivosti, autor, arhiviranaAnketa, autorAnkete, datumTrajanja, tipUcesnika, vidljivostRezultata, metaAnkete;
+    private String prvoPitanje, nazivAnkete, tekstAnkete, nivoVidljivosti, autor, arhiviranaAnketa, autorAnkete, datumTrajanja, tipUcesnika, vidljivostRezultata, metaAnkete, procitana;
     private LocalDateTime datumTrajanjaAnkete;
     private int idAnketa, idObjave;
     private HashMap<Integer, String> listaPitanjaAnkete;
+
+    public String getProcitana() {
+        return procitana;
+    }
+
+    public void setProcitana(String procitana) {
+        this.procitana = procitana;
+    }
 
     public String getPrvoPitanje() {
         return prvoPitanje;

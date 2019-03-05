@@ -4,9 +4,17 @@ package beans;
 import java.time.LocalDateTime;
 
 public class Oglas {
-    private String datumPostavljanjaOglasa, datumIsticanjaOglasa, naslovOglasa, tekstOglasa, autorOglasa, nivoVidljivosti, arhiviraniOglasi, metaOglasi;
+    private String datumPostavljanjaOglasa, datumIsticanjaOglasa, naslovOglasa, tekstOglasa, autorOglasa, nivoVidljivosti, arhiviraniOglasi, metaOglasi, procitan;
     private LocalDateTime datumPostavljanja, datumIsticanja;
     private int idOglasi, idUcestvujeKreira;
+   
+    public String getProcitan() {
+        return procitan;
+    }
+
+    public void setProcitan(String procitan) {
+        this.procitan = procitan;
+    }
 
     public int getIdUcestvujeKreira() {
         return idUcestvujeKreira;
