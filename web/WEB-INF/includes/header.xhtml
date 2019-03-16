@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Header</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <style>
+        #modal-dialog-registracija{
+            max-width: 540px;
+            height: 355px;
+        }
+
+
+        #modal-header-registracija {
+            background-color:#fff;
+            text-align: center;
+            font-family:  Verdana, Geneva, sans-serif;
+            position: relative;
+            margin: 5px;
+        }
+
+        .close {
+            float: right;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            filter: alpha(opacity=25);
+            opacity: .2;
+
+        }
+
+        #modal-body-registracija {
+            background-color:#fff;
+            position: relative;
+            display: flex;
+            padding: 5px;
+            height:270px;
+
+        }
+
+        #modal-footer-registracija {
+            position: relative;
+            background-color:#fff;
+            height:50px;
+            padding:5px;
+            font-family:  Verdana, Geneva, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+
+        }
+
+        .dugmeZatvori{
+            background-color: #009999; 
+            font-family:  Verdana, Geneva, sans-serif;
+            border: none;
+            color: white;
+            padding: 5px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+        }
+
+        .dugmeZatvori:hover{
+            background-color: #b3d9ff; 
+            font-family:  Verdana, Geneva, sans-serif;
+            border: none;
+            color: white;
+            padding: 5px 30px;
+            text-align: center;
+            text-decoration:none;
+            display: inline-block;
+            font-size: 12px;  
+        }
+
+        /*MODAL REGISTRACIJA-SADRZAJ*/
+
+        .wrapperZaSlike {
+            height:270px;
+            width:530px;
+            position: absolute;
+            overflow: hidden;
+            border:10px solid white;
+        }
+
+        .wrapperZaSlike .dveSlike {
+            height: 255px;
+            width: 510px;
+            position: relative;
+        }
+
+        .wrapperZaSlike .studentiSlikaOkvir {
+            position: absolute;
+            margin-left: -12%;
+            height:250px;
+            overflow:hidden;
+            width: 100%;
+            -ms-transform: skew(-20deg, 0deg);
+            -webkit-transform: skew(-20deg, 0deg);
+            transform: skew(-20deg, 0deg);
+        }
+
+        .wrapperZaSlike .studentiSlika,
+        .wrapperZaSlike .kompanijaSlika {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .wrapperZaSlike .studentiSlika:hover,
+        .wrapperZaSlike .kompanijaSlika:hover {
+            cursor: pointer;
+            opacity: 0.7;  
+        }
+
+        .wrapperZaSlike .studentiSlika {
+            left: 60px;
+            position: absolute;
+            top: 0;
+            height:250px;
+            width: 70%;
+            background-position: -50px ;
+            -ms-transform: skew(20deg, 0deg);
+            -webkit-transform: skew(20deg, 0deg);
+            transform: skew(20deg, 0deg);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .studentiBoja {
+            width: 100%;
+            height: 100%;
+            background:  #80ffaa;
+            opacity: .5;
+            position: absolute;
+        }
+
+        .wrapperZaSlike .kompanijaSlikaOkvir {
+            height:250px;
+            overflow: hidden;
+            position: relative;
+            background: white;
+            right: -50%;
+            top: 0;
+            width: 70%;
+            border-left: 10px white solid;
+            -ms-transform: skew(-25deg, 0deg);
+            -webkit-transform: skew(-25deg, 0deg);
+            transform: skew(-25deg, 0deg);
+        }
+
+        .wrapperZaSlike .kompanijaSlikaOkvir .kompanijaSlika {
+            position: absolute;
+            height:250px;
+            right: 30%;
+            width: 100%;
+            background-position: 25px ;
+            -ms-transform: skew(25deg, 0deg);
+            -webkit-transform: skew(25deg, 0deg);
+            transform: skew(25deg, 0deg);
+            color: #fff;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .kompanijaBoja {
+            width: 100%;
+            height: 100%;
+            background: #b3d9ff;
+            opacity: .5;
+            position: absolute;
+        }
+    </style>
+    <body>
+        <div id="top" style="background-image: linear-gradient(to left top, #00b16a, #009564, #00795a, #005e4d, #04443c);">
+            <div id="header" class="row">
+                <div id="logo" class="col-md-2">
+                    <img class="image-fluid rounded logoImg" src="resources\images\logo4.png" />
+                </div>
+
+                <div class="col-md-7" id="menuItems">
+                    <div id="ikonicaDiv" class="col-sm-1">
+                        <b:icon name="menuIcon">
+                            <svg version="1.1" height="30" width="120" id="svgMenu" class="svgMenu" style="overflow-x: visible; overflow-y: visible;">
+                                <path class="upper-line" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" d="M5 5 60 5" />
+                                <path class="middle-line-first" stroke-linecap="round" fill="none" stroke="white" stroke-width="5" d="M5 15 40 15" /> <path class="middle-line-second" style="overflow-x: visible;" stroke-linecap="round" stroke="white" stroke-width="5" d="M53 15 103 15" /> <circle id="middle-dot-upper" class="middle-dot-upper" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" /> <circle id="middle-dot-lower" class="middle-dot-lower" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" />
+                                <path class="lower-line" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" d="M5 25 60 25" />
+                            </svg>
+                        </b:icon>
+                    </div>
+                    <div id="gornja-menu-linija" class="col-sm-11">
+                        <svg version="1.1" height="5" width="700" id="svgMenuBorderUpper">
+                            <path class="gornja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
+                        </svg>
+                    </div>
+                    <div id="mainmenuDiv" class="col-sm-11">
+                        <nav id="mainMenu" class="navbar navbar-expand-sm">
+                            <ul class="navbar-nav mainmenu-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="faces/prikazSvihVesti.xhtml">Vesti</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="prikazSvihDiskusija.xhtml">Diskusije</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="faces/prikazSvihObavestenja.xhtml">Obavestenja</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="faces/prikazSvihGrupa.xhtml">Grupe</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="faces/prikazSvihAnketa">Ankete</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="faces/prikazSvihOglasa.xhtml">Oglasi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="faces/prikazSvihPreporuka.xhtml">Preporuke</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="faces/kontakt.xhtml">Kontakt</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div id="logoHolder" class="col-sm-1"></div>
+                    <div id="donja-menu-linija" class="col-sm-11">
+                        <svg version="1.1" height="5" width="700" id="svgMenuBorderLower">
+                            <path class="donja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="col-md-2" id="headerPrijavaDugmici">
+                    <div class="row">
+                        <div id="logindugme" class="col-sm-6">
+                            <h:form id="forma" prependId="false" >
+                                <b:commandButton class="btn btn-info btn-lg prijava-dugme" id="dugmePrijava" ajax="true" oncomplete="PF('registracijaDijalog').hide(); PF('prijavaDijalog').show();" value="Prijava">
+
+                                </b:commandButton>
+
+                                <p:dialog id="prijavaDijalog" header="Prijava" widgetVar="prijavaDijalog" resizable="false" styleClass="loginforma" hideEffect="drop" showEffect="drop">
+                                    <p:panelGrid columns="2">
+                                        <h:outputLabel for="username" value="Korisnicko ime:" />
+                                        <p:inputText id="username" value="#{login.korisnickoIme}" required="true" label="username"/>
+                                        <h:outputLabel for="password" value="Lozinka:" />
+                                        <p:password id="password" value="#{login.lozinka}" required="true" label="password" />
+                                        <f:facet name="footer">
+                                            <p:commandButton value="Prijavite se" action="#{login.login()}" style="float: right" />
+                                            <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px" action="/resetLozinke.xhtml"></p:commandLink>
+                                        </f:facet>
+                                    </p:panelGrid>
+                                </p:dialog>
+                            </h:form>
+                        </div>
+                        <div id="registracijadugme" class="col-sm-6">
+                            <b:button class="btn btn-outline-light btn-md registracija-dugme" id="dugmeRegistracija" value="Registracija" onclick="$('#myModal').modal()"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+            <div id="modal-dialog-registracija" class="modal-dialog" role="document">
+                <div id="modal-content-registracija" class="modal-content">
+                    <!--<div id="modal-header-registracija" class="modal-header" style="height:30px;padding:0;">
+                            <button type="button" class="close" data-dismiss="modal" style="height:10px;">&times;</button>
+                        </div>-->
+                    <div id="modal-body-registracija" class="modal-body">
+                        <div class="wrapperZaSlike">
+                            <div class="dveSlike">
+                                <div class="studentiSlikaOkvir">
+                                    <a href="/">
+                                        <div class="studentiSlika" style="background-image: url(resources/images/studenti.jpg);">
+                                            <p1>Kao student</p1>
+                                            <div class="studentiBoja"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="kompanijaSlikaOkvir">
+                                    <a href="/">
+                                        <div class="kompanijaSlika" style="background-image:url(resources/images/kompanija.jpg)">
+                                            <p2>Kao kompanija</p2>
+                                            <div class="kompanijaBoja"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modal-footer-registracija" class="modal-footer">
+                        <button type="button" class="dugmeZatvori" data-dismiss="modal">Zatvori</button>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </body>
+</ui:composition>

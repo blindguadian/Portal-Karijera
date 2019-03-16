@@ -41,7 +41,7 @@
                 $('#L4').toggle();
 
                 podesiVelicinuDivaZaEkrane();
-
+                
                 animirajTab(aktivanTab);
                 animiraniTabovi.push(aktivanTab);
 
@@ -89,23 +89,11 @@
                     var donjiSplitterPathDesniKlasa;
 
 
-                    if ($(window).width() >= 1509) {
-                        if (indexLista.get(tab) % 3 === 0) {
-                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterLargeKlasa' + indexLista.get(tab) / 3;
-                        }
-                    } else if ($(window).width() >= 991) {
-                        if (indexLista.get(tab) % 2 === 0) {
-                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterMediumKlasa' + indexLista.get(tab) / 2;
-                        }
-                    } else {
-                        klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterSmallKlasa' + indexLista.get(tab);
-                    }
-
-
                     $('.' + klasaDiskusijeDiv).addClass('diskusijeDivKlasaAnimacija');
 
                     if ($(window).width() >= 1509) {
                         if (indexLista.get(tab) % 3 === 0) {
+                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterLargeKlasa' + indexLista.get(tab) / 3;
                             donjiSplitterPathLeviKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + indexLista.get(tab);
                             donjiSplitterPathDesniKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + (indexLista.get(tab) + 1);
                             $('.' + donjiSplitterPathLeviKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
@@ -113,12 +101,14 @@
                         }
                     } else if ($(window).width() >= 991) {
                         if (indexLista.get(tab) % 2 === 0) {
+                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterMediumKlasa' + indexLista.get(tab) / 2;
                             donjiSplitterPathLeviKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + indexLista.get(tab);
                             donjiSplitterPathDesniKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + (indexLista.get(tab) + 1);
                             $('.' + donjiSplitterPathLeviKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
                             $('.' + donjiSplitterPathDesniKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
                         }
                     } else {
+                        klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterSmallKlasa' + indexLista.get(tab);
                         donjiSplitterPathLeviKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + indexLista.get(tab);
                         donjiSplitterPathDesniKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(tab) + '' + (indexLista.get(tab) + 1);
                         $('.' + donjiSplitterPathLeviKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
@@ -127,7 +117,7 @@
 
                     setTimeout(function () {
                         $('.' + klasaDiskusijeDiv).removeClass('nevidljiviDiv');
-                        $('[class*=' + klasaDonjiSplitterDiv + ']').removeClass('nevidljiviDiv');
+                        $(tab + ' [class*=' + klasaDonjiSplitterDiv + ']').removeClass('nevidljiviDiv');
                     }, 50);
 
                     setTimeout(function () {
@@ -174,17 +164,36 @@
 
 
             win.scroll(function () {
-
+                
                 if (win.height() + win.scrollTop() + 40 >= $(document).height()) {
-
+                    
+                    switch (aktivanTab) {
+                        case '#kontejnerPrikazSvihDiskusija':
+                            if(noviIndexLista.get(aktivanTab) > #{ucitajDiskusijeZaKorisnika.listaSvihDiskusijaZaKorisnika.size()}){
+                                return;
+                            } else 
+                            break;
+                        case '#kontejnerPrikazMojihDiskusija':
+                               if(noviIndexLista.get(aktivanTab) > #{ucitajDiskusijeZaKorisnika.listaSvihDiskusijaKojeJeKorisnikNapisao.size()}){
+                                return;
+                            } else 
+                            break;
+                        case '#kontejnerPrikazDiskusijaIzGrupe':
+                                if(noviIndexLista.get(aktivanTab) > #{ucitajDiskusijeZaKorisnika.listaDiskusijaZaDatuGrupu.size()}){
+                                    return;
+                            } else 
+                            break;
+                    }
+                    
                     var divScope = $(aktivanTab).height();
                     $(aktivanTab).height(divScope + 800);
 
                     $(aktivanTab).find('.dugme').click();
                     
                     if(aktivanTab == '#kontejnerPrikazDiskusijaIzGrupe'){
-                        indexListaGrupe.set(aktivanTab, indexListaGrupe.get(aktivanTab) + 12);
-                    } else noviIndexLista.set(aktivanTab, noviIndexLista.get(aktivanTab) + 12);
+                        noviIndexListaGrupe.set($(".dropdownDiskusijeIzGrupe").val(), noviIndexListaGrupe.get($(".dropdownDiskusijeIzGrupe").val() + 12));
+                    } 
+                    noviIndexLista.set(aktivanTab, noviIndexLista.get(aktivanTab) + 12);
 
                     function animirajDivoveScroll() {
                         
@@ -201,27 +210,53 @@
                                 klasaDiskusijeDiv = 'diskusijeIzGrupeDivKlasa' + indexLista.get(aktivanTab);
                                 break;
                         }
-                    
+                        
+                        var donjiSplitterPathLeviKlasa;
+                        var donjiSplitterPathDesniKlasa;
                         var klasaDonjiSplitterDiv;
 
                         if ($(window).width() >= 1509) {
-                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterLarge' + indexLista.get(aktivanTab) / 3;
+                            if (indexLista.get(aktivanTab) % 3 === 0) {
+                                klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterLargeKlasa' + indexLista.get(aktivanTab) / 3;
+                                donjiSplitterPathLeviKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(aktivanTab) + '' + indexLista.get(aktivanTab);
+                                donjiSplitterPathDesniKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(aktivanTab) + '' + (indexLista.get(aktivanTab) + 1);
+                                $('.' + donjiSplitterPathLeviKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                                $('.' + donjiSplitterPathDesniKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                            }
                         } else if ($(window).width() >= 991) {
-                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterMedium' + indexLista.get(aktivanTab) / 2;
+                            if (indexLista.get(aktivanTab) % 2 === 0) {
+                                klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterMediumKlasa' + indexLista.get(aktivanTab) / 2;
+                                donjiSplitterPathLeviKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(aktivanTab) + '' + indexLista.get(aktivanTab);
+                                donjiSplitterPathDesniKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(aktivanTab) + '' + (indexLista.get(aktivanTab) + 1);
+                                $('.' + donjiSplitterPathLeviKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                                $('.' + donjiSplitterPathDesniKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                            }
                         } else {
-                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterSmall' + indexLista.get(aktivanTab);
+                            klasaDonjiSplitterDiv = 'diskusijeDonjiSplitterSmallKlasa' + indexLista.get(aktivanTab);
+                            donjiSplitterPathLeviKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(aktivanTab) + '' + indexLista.get(aktivanTab);
+                            donjiSplitterPathDesniKlasa = 'diskusijeDonjiSplitterLinijaKlasa' + indexLista.get(aktivanTab) + '' + (indexLista.get(aktivanTab) + 1);
+                            $('.' + donjiSplitterPathLeviKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
+                            $('.' + donjiSplitterPathDesniKlasa).addClass('diskusijeDonjiSplitterLinijaAnimacija');
                         }
 
                         $('.' + klasaDiskusijeDiv).addClass('diskusijeDivKlasaAnimacija');
-                        $('.' + klasaDonjiSplitterDiv).addClass('diskusijeDonjiSplitterLinijaAnimacija');
 
                         setTimeout(function () {
                             $('.' + klasaDiskusijeDiv).removeClass('nevidljiviDiv');
-                            $('.' + klasaDonjiSplitterDiv).removeClass('nevidljiviDiv');
+                            $(aktivanTab + ' [class*=' + klasaDonjiSplitterDiv + ']').removeClass('nevidljiviDiv');
                         }, 50);
+                        
+                        setTimeout(function () {
+                            $('.' + klasaDiskusijeDiv).removeClass('diskusijeDivKlasaAnimacija');
+                            $('.' + donjiSplitterPathLeviKlasa).removeClass('diskusijeDonjiSplitterLinijaAnimacija');
+                            $('.' + donjiSplitterPathDesniKlasa).removeClass('diskusijeDonjiSplitterLinijaAnimacija');
+                        }, 1100);
 
                         if (indexLista.get(aktivanTab) === noviIndexLista.get(aktivanTab) - 1)
                             clearInterval(timeout);
+                        if(aktivanTab == '#kontejnerPrikazDiskusijaIzGrupe'){
+                            indexListaGrupe.set($(".dropdownDiskusijeIzGrupe").val(), indexListaGrupe.get($(".dropdownDiskusijeIzGrupe").val()) + 1);
+                        }
                         indexLista.set(aktivanTab, indexLista.get(aktivanTab) + 1);
                     }
 
@@ -250,121 +285,9 @@
             });
         </script>
         <div class="container">
-            <div id="top" style="background-image: linear-gradient(to left top, #00b16a, #009564, #00795a, #005e4d, #04443c);">
-                <div id="header" class="row">
-                    <div id="logo" class="col-md-2">
-                        <img class="image-fluid rounded logoImg" src="resources\images\logo4.png" />
-                    </div>
-
-                    <div class="col-md-7" id="menuItems">
-                        <div id="ikonicaDiv" class="col-sm-1">
-                            <b:icon name="menuIcon">
-                                <svg version="1.1" height="30" width="120" id="svgMenu" class="svgMenu" style="overflow-x: visible; overflow-y: visible;">
-                                    <path class="upper-line" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" d="M5 5 60 5" />
-                                    <path class="middle-line-first" stroke-linecap="round" fill="none" stroke="white" stroke-width="5" d="M5 15 40 15" /> <path class="middle-line-second" style="overflow-x: visible;" stroke-linecap="round" stroke="white" stroke-width="5" d="M53 15 103 15" /> <circle id="middle-dot-upper" class="middle-dot-upper" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" /> <circle id="middle-dot-lower" class="middle-dot-lower" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" />
-                                    <path class="lower-line" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" d="M5 25 60 25" />
-                                </svg>
-                            </b:icon>
-                        </div>
-                        <div id="gornja-menu-linija" class="col-sm-11">
-                            <svg version="1.1" height="5" width="700" id="svgMenuBorderUpper">
-                                <path class="gornja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
-                            </svg>
-                        </div>
-                        <div id="mainmenuDiv" class="col-sm-11">
-                            <nav id="mainMenu" class="navbar navbar-expand-sm">
-                                <ul class="navbar-nav mainmenu-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihVesti.xhtml">Vesti</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihDiskusija.xhtml">Diskusije</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihObavestenja.xhtml">Obavestenja</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihGrupa.xhtml">Grupe</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihAnketa">Ankete</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihOglasa.xhtml">Oglasi</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihPreporuka.xhtml">Preporuke</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="faces/kontakt.xhtml">Kontakt</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div id="logoHolder" class="col-sm-1"></div>
-                        <div id="donja-menu-linija" class="col-sm-11">
-                            <svg version="1.1" height="5" width="700" id="svgMenuBorderLower">
-                                <path class="donja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2" id="headerPrijavaDugmici">
-                        <div class="row">
-                            <div id="logindugme" class="col-sm-6">
-                                <h:form id="forma" prependId="false" >
-                                    <b:commandButton class="btn btn-info btn-lg prijava-dugme" id="dugmePrijava" ajax="true" oncomplete="PF('registracijaDijalog').hide(); PF('prijavaDijalog').show();" value="Prijava">
-
-                                    </b:commandButton>
-
-                                    <p:dialog id="prijavaDijalog" header="Prijava" widgetVar="prijavaDijalog" resizable="false" styleClass="loginforma" hideEffect="drop" showEffect="drop">
-                                        <p:panelGrid columns="2">
-                                            <h:outputLabel for="username" value="Korisnicko ime:" />
-                                            <p:inputText id="username" value="#{login.korisnickoIme}" required="true" label="username"/>
-                                            <h:outputLabel for="password" value="Lozinka:" />
-                                            <p:password id="password" value="#{login.lozinka}" required="true" label="password" />
-                                            <f:facet name="footer">
-                                                <p:commandButton value="Prijavite se" action="#{login.login()}" style="float: right" />
-                                                <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px" action="/resetLozinke.xhtml"></p:commandLink>
-                                            </f:facet>
-                                        </p:panelGrid>
-                                    </p:dialog>
-                                </h:form>
-                            </div>
-                            <div id="registracijadugme" class="col-sm-6">
-                                <h:form id="forma1" prependId="false">
-                                    <b:commandButton class="btn btn-outline-light btn-lg registracija-dugme" id="dugmeRegistracija" ajax="true" value="Registracija" oncomplete="PF('prijavaDijalog').hide(); PF('registracijaDijalog').show();" />
-
-                                    <p:dialog id="registracijaDijalog" header="Registrujte se kao" widgetVar="registracijaDijalog" resizable="false" hideEffect="drop" showEffect="drop">
-                                        <p:panelGrid style="width:300px;">
-                                            <p:row>
-                                                <p:column colspan="4" style="text-align: center">Student</p:column>
-                                                <p:column colspan="4" style="text-align: center">Kompanija</p:column>
-                                            </p:row>
-                                            <p:row>
-                                                <p:column colspan="4">
-                                                    <h:commandLink action="/faces/korisnickiProfilStudent.xhtml">
-                                                        <h:graphicImage value="resources/images/imgStudent.png"/>
-                                                    </h:commandLink>
-                                                </p:column>
-                                                <p:column colspan="4">
-                                                    <h:commandLink action="/faces/korisnickiProfilKompanija.xhtml">
-                                                        <h:graphicImage value="resources/images/imgKompanija.png"/>
-                                                    </h:commandLink>
-                                                </p:column>
-                                            </p:row>
-
-                                        </p:panelGrid>
-                                    </p:dialog>    
-                                </h:form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-1"></div>
-                </div>
-            </div>
+            <ui:include src="WEB-INF/includes/header.xhtml"/>
             <div id="middlePrikazDiskusija">
-                <div class="row" id="prikazDiskusija" style="padding-top: 50px;">
+                <div class="row" id="prikazDiskusijaTabovi" style="padding-top: 50px;">
                     <div id="tabovi" class="col-9 offset-1">
                         <ul class="nav nav-pills nav-justified objavePillsTab" id="objaveTab" role="tablist">
                             <li class="nav-item"><a class="nav-link active tabLink dugmeNavTab1" data-toggle="pill" href="#kontejnerPrikazSvihDiskusija">Sve diskusije<h:panelGroup rendered="#{ucitajDiskusijeZaKorisnika.brojNepregledanihSvihDiskusija > 0}"><svg class="tabSVG" width="20px" height="20px" viewBox="0 0 20 20"><g><circle cx="10" cy="14" r="10" fill="#df8cf2"/><text class="tabSVGText" x="50%" y="72%" text-anchor="middle" stroke="white" stroke-width="1px" dy=".3em">#{ucitajDiskusijeZaKorisnika.brojNepregledanihSvihDiskusija}</text></g></svg></h:panelGroup></a></li>
@@ -381,9 +304,9 @@
                         </script>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="tab-content col-12">
-                        <div id="kontejnerPrikazSvihDiskusija" class="tab-pane fade show active col-9 offset-1 kontejnerPrikazDivElemenata" role="tabpanel">
+                <div class="row" id="diskusijeContent">
+                    <div class="tab-content col-9 offset-1">
+                        <div id="kontejnerPrikazSvihDiskusija" class="tab-pane fade show active col-12 kontejnerPrikazDivElemenata" role="tabpanel">
                             <div id="kontejnerDugmeSveDiskusije" class="col-12">
                                 <h:commandButton id="dugmeSveDiskusije" class="dugme" value="ajaxDugme" style="visibility: hidden; width: 0px; height: 0px; font-size:0; border: none">
                                     <f:ajax id="ajax1" event="click" render="sveDiskusije" listener="#{ucitajDiskusijeZaKorisnika.povecajBrojTrenutnoPrikazanihSvihDiskusija()}"></f:ajax>
@@ -556,7 +479,7 @@
                                 </ui:repeat>
                             </h:panelGroup>
                         </div>
-                        <div id="kontejnerPrikazMojihDiskusija" class="tab-pane fade col-9 offset-1 kontejnerPrikazDivElemenata" role="tabpanel">
+                        <div id="kontejnerPrikazMojihDiskusija" class="tab-pane fade col-12 kontejnerPrikazDivElemenata" role="tabpanel">
                             <div id="kontejnerDugmeMojeDiskusije" class="col-12">
                                 <h:commandButton id="dugmeMojeDiskusije" class="dugme" value="ajaxDugme" style="visibility: hidden; width: 0px; height: 0px; font-size:0; border: none">
                                     <f:ajax id="ajax2" event="click" render="mojeDiskusije" listener="#{ucitajDiskusijeZaKorisnika.povecajBrojTrenutnoPrikazanihMojihDiskusija()}"></f:ajax>
@@ -578,11 +501,11 @@
                                         </div>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{(status.index) % 2 == 0 &amp;&amp; status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihMojihDiskusija}">
-                                        <div id="mojeDiskusijeDonjiSplitterMedium" class="diskusijeDonjiSplitterMediumKlasa#{(status.index/2)} col-sm-8 offset-2">
+                                        <div id="mojeDiskusijeDonjiSplitterMedium" class="mojediskusijeDonjiSplitterMediumKlasa#{(status.index/2)} col-sm-8 offset-2">
                                             <script>
                                                 if (#{status.index} >= indexLista.get('#kontejnerPrikazMojihDiskusija')) {
                                                         var klasa = 'diskusijeDonjiSplitterMediumKlasa' + #{(status.index/2)};
-                                                        $('.' + klasa).addClass('nevidljiviDiv');
+                                                        $('[class*=' + klasa + ']').addClass('nevidljiviDiv');
                                                 }
                                             </script>
                                             <svg id="mojeDiskusijeDonjiSplitterSvgMedium" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
@@ -591,11 +514,11 @@
                                         </div>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{status.index != 0 &amp;&amp; status.index lt ucitajDiskusijeZaKorisnika.trenutanBrojPrikazanihMojihDiskusija}">
-                                        <div id="mojeDiskusijeDonjiSplitterSmall" class="diskusijeDonjiSplitterSmallKlasa#{status.index} col-sm-8 offset-2">
+                                        <div id="mojeDiskusijeDonjiSplitterSmall" class="mojediskusijeDonjiSplitterSmallKlasa#{status.index} col-sm-8 offset-2">
                                             <script>
                                                 if (#{status.index} >= indexLista.get('#kontejnerPrikazMojihDiskusija')) {
                                                         var klasa = 'diskusijeDonjiSplitterSmallKlasa' + #{status.index};
-                                                        $('.' + klasa).addClass('nevidljiviDiv');
+                                                        $('[class*=' + klasa + ']').addClass('nevidljiviDiv');
                                                 }
                                             </script>
                                             <svg id="mojeDiskusijeDonjiSplitterSvgSmall" class="diskusijeDonjiSplitterLinija" version="1.1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 905 20">
@@ -710,7 +633,7 @@
                                 </ui:repeat>
                             </h:panelGroup>
                         </div>
-                        <div id="kontejnerPrikazDiskusijaIzGrupe" class="tab-pane fade col-9 offset-1 kontejnerPrikazDivElemenata" role="tabpanel">
+                        <div id="kontejnerPrikazDiskusijaIzGrupe" class="tab-pane fade col-12 kontejnerPrikazDivElemenata" role="tabpanel">
                             <div id="kontejnerDugmeDiskusijeIzGrupe" class="col-12">
                                 <h:commandButton id="dugmeDiskusijeIzGrupe" class="dugme" value="ajaxDugme" style="visibility: hidden; width: 0px; height: 0px; font-size:0; border: none">
                                     <f:ajax id="ajax2" event="click" render="diskusijeIzGrupe" ></f:ajax>
@@ -970,6 +893,9 @@
                             </h:panelGroup>
                         </div>
                     </div>
+                    <div id="sideMenu" class="col-2 sideMenuDivKlasa">
+                        <b:button id="objavaDugmeDiskusije" class="btn btn-info btn-lg sideMenu-dugme" value="Objavi diskusiju" href="unosDiskusija.xhtml" target="_blank" rendered="#{session.getAttribute('ulogovan') == 'true'}"/>
+                    </div>
                 </div>
             </div>
             <div class="row" id="loadingSVG">
@@ -1006,7 +932,6 @@
 
             </div>
         </div>
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
