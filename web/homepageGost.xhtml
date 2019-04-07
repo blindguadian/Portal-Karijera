@@ -24,127 +24,10 @@
             <f:viewAction action="#{ucitajPreporukeZaKorisnika.ucitajPoslednjihPetZaKorisnika()}"></f:viewAction>
         </f:metadata>
 
-        <style>
-
-        </style>
     </h:head>
     <h:body>
         <div class="container">
-            <div id="top" style="background-image: linear-gradient(to left top, #00b16a, #009564, #00795a, #005e4d, #04443c);">
-                <div id="header" class="row">
-                    <div id="logo" class="col-md-2">
-                        <img class="image-fluid rounded logoImg" src="resources\images\logo4.png" />
-                    </div>
-
-                    <div class="col-md-7" id="menuItems">
-                        <div id="ikonicaDiv" class="col-sm-1">
-                            <b:icon name="menuIcon">
-                                <svg version="1.1" height="30" width="120" id="svgMenu" class="svgMenu" style="overflow-x: visible; overflow-y: visible;">
-                                    <path class="upper-line" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" d="M5 5 60 5" />
-                                    <path class="middle-line-first" stroke-linecap="round" fill="none" stroke="white" stroke-width="5" d="M5 15 40 15" /> <path class="middle-line-second" style="overflow-x: visible;" stroke-linecap="round" stroke="white" stroke-width="5" d="M53 15 103 15" /> <circle id="middle-dot-upper" class="middle-dot-upper" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" /> <circle id="middle-dot-lower" class="middle-dot-lower" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" />
-                                    <path class="lower-line" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" d="M5 25 60 25" />
-                                </svg>
-                            </b:icon>
-                        </div>
-                        <div id="gornja-menu-linija" class="col-sm-11">
-                            <svg version="1.1" height="5" width="700" id="svgMenuBorderUpper">
-                                <path class="gornja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
-                            </svg>
-                        </div>
-                        <div id="mainmenuDiv" class="col-sm-11">
-                            <nav id="mainMenu" class="navbar navbar-expand-sm">
-                                <ul class="navbar-nav mainmenu-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="prikazSvihVesti.xhtml">Vesti</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="prikazSvihDiskusija.xhtml">Diskusije</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="prikazSvihObavestenja.xhtml">Obavestenja</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="prikazSvihGrupa.xhtml">Grupe</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="prikazSvihAnketa">Ankete</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="prikazSvihOglasa.xhtml">Oglasi</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="faces/prikazSvihPreporuka.xhtml">Preporuke</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="kontakt.xhtml">Kontakt</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div id="logoHolder" class="col-sm-1"></div>
-                        <div id="donja-menu-linija" class="col-sm-11">
-                            <svg version="1.1" height="5" width="700" id="svgMenuBorderLower">
-                                <path class="donja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2" id="headerPrijavaDugmici">
-                        <div class="row">
-                            <div id="logindugme" class="col-sm-6">
-                                <h:form id="forma" prependId="false" >
-                                    <b:commandButton class="btn btn-info btn-lg prijava-dugme" id="dugmePrijava" ajax="true" oncomplete="PF('registracijaDijalog').hide(); PF('prijavaDijalog').show();" value="Prijava">
-
-                                    </b:commandButton>
-
-                                    <p:dialog id="prijavaDijalog" header="Prijava" widgetVar="prijavaDijalog" resizable="false" styleClass="loginforma" hideEffect="drop" showEffect="drop">
-                                        <p:panelGrid columns="2">
-                                            <h:outputLabel for="username" value="Korisnicko ime:" />
-                                            <p:inputText id="username" value="#{login.korisnickoIme}" required="true" label="username"/>
-                                            <h:outputLabel for="password" value="Lozinka:" />
-                                            <p:password id="password" value="#{login.lozinka}" required="true" label="password" />
-                                            <f:facet name="footer">
-                                                <p:commandButton value="Prijavite se" action="#{login.login()}" style="float: right" />
-                                                <p:commandLink value="Zaboravili ste lozinku?" style="font-size:15px;margin-left:20px; margin-top:20px" action="/resetLozinke.xhtml"></p:commandLink>
-                                            </f:facet>
-
-                                        </p:panelGrid>
-                                    </p:dialog>
-                                </h:form>
-
-                            </div>
-                            <div id="registracijadugme" class="col-sm-6">
-                                <h:form id="forma1" prependId="false">
-                                    <b:commandButton class="btn btn-outline-light btn-lg registracija-dugme" id="dugmeRegistracija" ajax="true" value="Registracija" oncomplete="PF('prijavaDijalog').hide(); PF('registracijaDijalog').show();" />
-
-                                    <p:dialog id="registracijaDijalog" header="Registrujte se kao" widgetVar="registracijaDijalog" resizable="false" hideEffect="drop" showEffect="drop">
-                                        <p:panelGrid style="width:300px;">
-                                            <p:row>
-                                                <p:column colspan="4" style="text-align: center">Student</p:column>
-                                                <p:column colspan="4" style="text-align: center">Kompanija</p:column>
-                                            </p:row>
-                                            <p:row>
-                                                <p:column colspan="4">
-                                                    <h:commandLink action="/korisnickiProfilStudent.xhtml">
-                                                        <h:graphicImage value="resources/images/imgStudent.png"/>
-                                                    </h:commandLink>
-                                                </p:column>
-                                                <p:column colspan="4">
-                                                    <h:commandLink action="/korisnickiProfilKompanija.xhtml">
-                                                        <h:graphicImage value="resources/images/imgKompanija.png"/>
-                                                    </h:commandLink>
-                                                </p:column>
-                                            </p:row>
-
-                                        </p:panelGrid>
-                                    </p:dialog>    
-                                </h:form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-1"></div>
-                </div>
-            </div>
+            <ui:include src="WEB-INF/includes/header.xhtml"/>
             <div id="middleVesti">
                 <div class="row" id="vesti">
                     <div id="kontejnerVesti" class="col-10">
@@ -1686,6 +1569,8 @@
                     $(".linijaPetaObavestenjaDesno").removeClass('obavestenjaDesnoAnimacija');
                 }, 3500);
             });
+            
+            
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
