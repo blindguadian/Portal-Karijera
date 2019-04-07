@@ -13,506 +13,568 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
 */
 
 /* sa glavne strane, treba raspodeliti*/
-
-
-            .dugmeObavestenjaClick{
-                background: linear-gradient(to right, #17a2b8, rgba(23, 162, 184, 0.1));
-                background-size: 1000% 1000%;
-                -webkit-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
-                -moz-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
-                animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
-                animation-fill-mode: forwards;
-                color: white!important;
-            }
-
-            .dugmeObavestenjaClick:hover{
-                box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-                color: white;
-                background: linear-gradient(to right, #17a2b8, rgba(23, 162, 184, 0.1));
-                background-size: 1000% 1000%;
-                -webkit-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
-                -moz-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
-                animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
-                animation-fill-mode: forwards;
-            }
-
-            .stopStart1Animacija{
-                animation: 1.6s stopStart1Animacija linear 1;
-            }
-            .stopStart2Animacija{
-                animation: 1.6s stopStart2Animacija linear 1;
-                animation-delay: 0.1s;
-            }
-            .stopStart3Animacija{
-                animation: 1.6s stopStart3Animacija linear 1;
-                animation-delay: 0.2s;
-            }
-            .stopStart4Animacija{
-                animation: 1.6s stopStart4Animacija linear 1;
-                animation-delay: 0.3s;
-            }
-            .stopStart5Animacija{
-                animation: 1.6s stopStart5Animacija linear 1;
-                animation-delay: 0.4s;
-            }
-            .stopStartZavrsnaAnimacija{
-                animation: 1s stopStartZadnjaAnimacija linear 1;
-                animation-delay: 0.6s;
-            }
-            #strelicaDrugaVesti{
-                webkit-animation: 10s arrowAnimation infinite forwards;
-                animation: arrowAnimation 10s linear infinite;
-                animation-delay: 0.2s;
-            }
-
-            #strelicaTrecaVesti{
-                webkit-animation: 10s arrowAnimation infinite forwards;
-                animation: arrowAnimation 10s linear infinite;
-                animation-delay: 0.4s;
-            }
-
-            #strelicaCetvrtaVesti{
-                webkit-animation: 10s arrowAnimation infinite forwards;
-                animation: arrowAnimation 10s linear infinite;
-                animation-delay: 0.6s;
-            }
-
-            #strelicaDrugaStatistike{
-                webkit-animation: 10s arrowAnimationStatistika infinite forwards;
-                animation: arrowAnimationStatistika 10s linear infinite;
-                animation-delay: 0.2s;
-            }
-
-            #strelicaTrecaStatistike{
-                webkit-animation: 10s arrowAnimationStatistika infinite forwards;
-                animation: arrowAnimationStatistika 10s linear infinite;
-                animation-delay: 0.4s;
-            }
-
-            #strelicaCetvrtaStatistike{
-                webkit-animation: 10s arrowAnimationStatistika infinite forwards;
-                animation: arrowAnimationStatistika 10s linear infinite;
-                animation-delay: 0.6s;
-            }
-
-            .middle-line-second {
-                stroke-dasharray: 2 70;
-                stroke-dashoffset: 0;
-                -webkit-animation: 1.4s dashAppear linear forwards;
-                animation: dashAppear 1.4s linear;
-            }
-
-            #strelicasvgVesti, #strelicasvgStatistike{
-                transition: 0.2s;
-                float: right;
-            }
-
-            #strelicasvgVesti:hover, #strelicasvgStatistike:hover{
-                filter: drop-shadow( 3px 3px 3px #000 );
-            }
-
-            #ikonicaDiv:hover .middle-line-second {
-                -webkit-animation: 1s dash linear forwards;
-                animation: dash 1s linear;
-                animation-fill-mode: forwards;
-            }
-
-            #ikonicaDiv:hover .middle-dot-upper {
-                -webkit-animation: 1s dot linear forwards;
-                animation: dotUpper 1s linear;
-                animation-delay: 0.4s;
-            }
-
-            #ikonicaDiv:hover .middle-dot-lower {
-                -webkit-animation: 1s dot linear forwards;
-                animation: dotLower 1s linear;
-                animation-delay: 0.4s;
-            }
-
-
-            #menuItems:hover .gornja-meni-linija {
-                -webkit-animation: 1s dashMenuLine linear forwards;
-                animation: dashMenuLine 1s linear;
-                animation-delay: 1.4s;
-                animation-fill-mode: forwards;
-            }
-
-
-            #menuItems:hover .donja-meni-linija {
-                -webkit-animation: 1s dashMenuLine linear forwards;
-                animation: dashMenuLine 1s linear;
-                animation-delay: 1.4s;
-                animation-fill-mode: forwards;
-            }
-
-            #menuItems:hover #gornja-menu-linija, #menuItems:hover #donja-menu-linija {
-                visibility:visible;
-                opacity:1;
-                transition-delay: 1.4s;
-            }
-
-            #gornja-menu-linija, #donja-menu-linija{
-                visibility: hidden;
-                opacity: 0; 
-                transition:visibility linear 1s,opacity 1s linear;
-            }
-
-            .gornja-meni-linija, .donja-meni-linija{
-                -webkit-animation: 1s dashMenuLineRetreat linear forwards;
-                animation: dashMenuLineRetreat 1s linear;
-            }
-
-            .gornja-meni-linija, .donja-meni-linija{
-                visibility: hidden;
-            }
-
-            #svgMenu{
-                transition: 0.4s;
-            }
-
-            #ikonicaDiv:hover #svgMenu{
-                filter: drop-shadow( 5px 5px 5px #000 );
-            }
-
-            .elementDesnoObavestenja{
-                filter: drop-shadow( 5px 5px 5px #000 );
-            }
-
-            .linijaPrvaObavestenjaDesno, .linijaDrugaObavestenjaDesno, .linijaTrecaObavestenjaDesno, .linijaCetvrtaObavestenjaDesno, .linijaPetaObavestenjaDesno{
-                visibility: hidden;
-            }
-
-            .obavestenjaDesnoAnimacija{
-                visibility: hidden;
-                transition: 0.2s;
-                stroke-dasharray: 0 300;
-                stroke-dashoffset: 0;
-                -webkit-animation: 2s obavestenjaDesnoGradientAppear cubic-bezier(.01,.45,.78,.56) forwards;
-                animation: obavestenjaDesnoGradientAppear 2s cubic-bezier(.01,.45,.78,.56);
-                animation-delay: 1.5s;
-            }
-
-            .obavestenja{
-                transition: 0.4s;
-            }
-
-            .boxShadow{
-                transition: linear 0.4s;
-                -webkit-animation: 1.5s boxShadow cubic-bezier(.01,.45,.78,.56) forwards;
-                animation: 1.5s boxShadow linear forwards;
-                animation-delay: 3s;
-            }
-
-            @keyframes boxShadow{
-                0% {
-                    box-shadow: rgba(0, 73, 54, 0.1) 0px 0px 8px 2px;
-                }
-                20%{
-                    box-shadow: rgba(0, 73, 54, 0.2) 0px 0px 12px 4px;
-                }
-                40%{
-                    box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 16px 6px;
-                }
-                60%{
-                    box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 20px 8px;
-                }
-                80%{
-                    box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 24px 10px;
-                }
-                100% {
-                    box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 28px 13px;
-                }
-            }
-
-            @keyframes obavestenjaDesnoGradientAppear {
-                0% {
-                    visibility: visible;
-                    stroke-dasharray: 0 300;
-                }
-                80%{
-                    stroke-dasharray: 300;
-                }
-                100% {
-                    stroke-opacity: 0;
-                }
-            }
-
-            @keyframes obavestenjaClickPozadinaAnimacija{
-                0% {
-                    background-position: 100% 50%
-                }
-                100% {
-                    background-position: 0% 50%
-                }
-            }
-
-            @keyframes stopStart1Animacija{
-                0%{
-                    stop-color: white; 
-                    stop-opacity: 0.3;
-                }
-
-                50%{
-                    stop-color: #17a2b8; 
-                    stop-opacity: 0.3;
-                }
-
-                100%{
-                    stop-color: white;
-                    stop-opacity: 0.5;
-                }
-            }
-
-            @keyframes stopStart2Animacija{
-                0%{
-                    stop-color: white; 
-                    stop-opacity: 0.5;
-                }
-
-                50%{
-                    stop-color: #17a2b8; 
-                    stop-opacity: 0.6;
-                }
-
-                100%{
-                    stop-color: white;
-                    stop-opacity: 0.7;
-                }
-            }
-
-            @keyframes stopStart3Animacija{
-                0%{
-                    stop-color: white; 
-                    stop-opacity: 0.7;
-                }
-
-                50%{
-                    stop-color: #17a2b8; 
-                    stop-opacity: 0.9;
-                }
-
-                100%{
-                    stop-color: white;
-                    stop-opacity: 0.7;
-                }
-            }
-
-            @keyframes stopStart4Animacija{
-                0%{
-                    stop-color: white; 
-                    stop-opacity: 1;
-                }
-
-                50%{
-                    stop-color: #17a2b8; 
-                    stop-opacity: 1;
-                }
-
-                100%{
-                    stop-color: white;
-                    stop-opacity: 1;
-                }
-            }
-
-            @keyframes stopStart5Animacija{
-                0%{
-                    stop-color: white; 
-                    stop-opacity: 1;
-                }
-
-                50%{
-                    stop-color: #17a2b8; 
-                    stop-opacity: 1;
-                }
-
-                80%{
-                    stop-color: #17a2b8; 
-                    stop-opacity: 0.7;
-                }
-
-                100%{
-                    stop-color: white;
-                    stop-opacity: 0.5;
-                }
-            }
-
-            @keyframes stopStartPocetnaAnimacija{
-                0%{
-                    stop-color: white; 
-                    stop-opacity: 1;
-                }
-
-                50%{
-                    stop-color: #17a2b8; 
-                    stop-opacity: 1;
-                }
-
-                100%{
-                    stop-color: white;
-                    stop-opacity: 1;
-                }
-            }
-
-            @keyframes stopStartSrednjaAnimacija{
-                0%{
-                    stop-color: white; 
-                    stop-opacity: 1;
-                }
-
-                50%{
-                    stop-color: #17a2b8; 
-                    stop-opacity: 1;
-                }
-
-                100%{
-                    stop-color: white;
-                    stop-opacity: 1;
-                }
-            }
-
-            @keyframes stopStartZadnjaAnimacija{
-                0%{
-                    stop-color: #17a2b8; 
-                    stop-opacity: 1;
-                }
-
-                50%{
-                    stop-color: #17a2b8;
-                    stop-opacity: 1;
-                }
-
-                100%{
-                    stop-color: #17a2b8;
-                    stop-opacity: 1;
-                }
-            }
-
-            @keyframes dashMenuLineRetreat{
-                0% {
-                    stroke-opacity: 1;
-                    visibility: visible;
-                    opacity: 1;
-                }
-                100% {
-                    stroke-opacity: 0;
-                    visibility: hidden;
-                    opacity: 0;
-                }
-            }
-
-            @keyframes dashMenuLine {
-                0% {
-                    stroke-opacity: 1;
-                    stroke-width: 12;
-                    stroke-dasharray: 0 630;
-                    visibility: visible;
-                    opacity: 1;
-                }
-                100% {
-                    stroke-opacity: 1;
-                    stroke-width: 4;
-                    stroke-dasharray: 630 630;
-                    visibility: visible;
-                    opacity: 1;
-                }
-            }
-
-            @keyframes dotUpper{
-                50%{
-                    fill-opacity: 1;
-                }
-
-                100%{
-                    fill-opacity: 0;
-                    cx: 102;
-                    cy: -8;
-                }
-            }
-
-            @keyframes dotLower{
-                50%{
-                    fill-opacity: 1;
-                }
-
-                100%{
-                    fill-opacity: 0;
-                    cx: 102;
-                    cy: 38;
-                }
-            }
-
-            @keyframes dash {
-                0% {
-                    stroke-dasharray: 2 70;
-                }
-                80%{
-                    stroke: #17a2b8;
-                    stroke-dasharray: 70;
-                }
-                100% {
-                    stroke-opacity: 0;
-                }
-            }
-
-            @keyframes dashAppear {
-                0% {
-                    stroke-opacity: 0;
-                }
-                30% {
-                    stroke-opacity: 0;
-                }
-                100% {
-                    stroke-opacity: 1;
-                }
-            }
-
-            @keyframes arrowAnimation{
-                0% {
-                    fill: #17a2b8;
-                    fill-opacity:0;
-                }
-                80% {
-                    fill: #17a2b8;
-                    fill-opacity:0;
-                }
-                90% {
-                    fill: #17a2b8;
-                    fill-opacity: 1;
-                }
-                100% {
-                    fill: #17a2b8;
-                    fill-opacity:0;
-                }
-            }
-
-            @keyframes arrowAnimationStatistika{
-                0% {
-                    fill: #04443C;
-                    fill-opacity:0;
-                }
-                80% {
-                    fill: #04443C;
-                    fill-opacity:0;
-                }
-                90% {
-                    fill: #04443C;
-                    fill-opacity: 1;
-                }
-                100% {
-                    fill: #04443C;
-                    fill-opacity:0;
-                }
-            }
+a:visited{
+    color: #17a2b8;
+}
+
+.dugmeObavestenjaClick{
+    background: linear-gradient(to right, #17a2b8, rgba(23, 162, 184, 0.1));
+    background-size: 1000% 1000%;
+    -webkit-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+    -moz-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+    animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+    animation-fill-mode: forwards;
+    color: white!important;
+}
+
+.dugmeObavestenjaClick:hover{
+    box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    color: white;
+    background: linear-gradient(to right, #17a2b8, rgba(23, 162, 184, 0.1));
+    background-size: 1000% 1000%;
+    -webkit-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+    -moz-animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+    animation: obavestenjaClickPozadinaAnimacija 5s ease 1;
+    animation-fill-mode: forwards;
+}
+
+.stopStart1Animacija{
+    animation: 1.6s stopStart1Animacija linear 1;
+}
+.stopStart2Animacija{
+    animation: 1.6s stopStart2Animacija linear 1;
+    animation-delay: 0.1s;
+}
+.stopStart3Animacija{
+    animation: 1.6s stopStart3Animacija linear 1;
+    animation-delay: 0.2s;
+}
+.stopStart4Animacija{
+    animation: 1.6s stopStart4Animacija linear 1;
+    animation-delay: 0.3s;
+}
+.stopStart5Animacija{
+    animation: 1.6s stopStart5Animacija linear 1;
+    animation-delay: 0.4s;
+}
+.stopStartZavrsnaAnimacija{
+    animation: 1s stopStartZadnjaAnimacija linear 1;
+    animation-delay: 0.6s;
+}
+#strelicaDrugaVesti{
+    webkit-animation: 10s arrowAnimation infinite forwards;
+    animation: arrowAnimation 10s linear infinite;
+    animation-delay: 0.2s;
+}
+
+#strelicaTrecaVesti{
+    webkit-animation: 10s arrowAnimation infinite forwards;
+    animation: arrowAnimation 10s linear infinite;
+    animation-delay: 0.4s;
+}
+
+#strelicaCetvrtaVesti{
+    webkit-animation: 10s arrowAnimation infinite forwards;
+    animation: arrowAnimation 10s linear infinite;
+    animation-delay: 0.6s;
+}
+
+#strelicaDrugaStatistike{
+    webkit-animation: 10s arrowAnimationStatistika infinite forwards;
+    animation: arrowAnimationStatistika 10s linear infinite;
+    animation-delay: 0.2s;
+}
+
+#strelicaTrecaStatistike{
+    webkit-animation: 10s arrowAnimationStatistika infinite forwards;
+    animation: arrowAnimationStatistika 10s linear infinite;
+    animation-delay: 0.4s;
+}
+
+#strelicaCetvrtaStatistike{
+    webkit-animation: 10s arrowAnimationStatistika infinite forwards;
+    animation: arrowAnimationStatistika 10s linear infinite;
+    animation-delay: 0.6s;
+}
+
+.middle-line-second {
+    stroke-dasharray: 2 70;
+    stroke-dashoffset: 0;
+    -webkit-animation: 1.4s dashAppear linear forwards;
+    animation: dashAppear 1.4s linear;
+}
+
+#strelicasvgVesti, #strelicasvgStatistike{
+    transition: 0.2s;
+    float: right;
+}
+
+#strelicasvgVesti:hover, #strelicasvgStatistike:hover{
+    filter: drop-shadow( 3px 3px 3px #000 );
+}
+
+#ikonicaDiv:hover .middle-line-second {
+    -webkit-animation: 1s dash linear forwards;
+    animation: dash 1s linear;
+    animation-fill-mode: forwards;
+}
+
+#ikonicaDiv:hover .middle-dot-upper {
+    -webkit-animation: 1s dot linear forwards;
+    animation: dotUpper 1s linear;
+    animation-delay: 0.4s;
+}
+
+#ikonicaDiv:hover .middle-dot-lower {
+    -webkit-animation: 1s dot linear forwards;
+    animation: dotLower 1s linear;
+    animation-delay: 0.4s;
+}
+
+
+#menuItems:hover .gornja-meni-linija {
+    -webkit-animation: 1s dashMenuLine linear forwards;
+    animation: dashMenuLine 1s linear;
+    animation-delay: 1.4s;
+    animation-fill-mode: forwards;
+}
+
+
+#menuItems:hover .donja-meni-linija {
+    -webkit-animation: 1s dashMenuLine linear forwards;
+    animation: dashMenuLine 1s linear;
+    animation-delay: 1.4s;
+    animation-fill-mode: forwards;
+}
+
+#menuItems:hover #gornja-menu-linija, #menuItems:hover #donja-menu-linija {
+    visibility:visible;
+    opacity:1;
+    transition-delay: 1.4s;
+}
+
+#gornja-menu-linija, #donja-menu-linija{
+    visibility: hidden;
+    opacity: 0; 
+    transition:visibility linear 1s,opacity 1s linear;
+}
+
+.gornja-meni-linija, .donja-meni-linija{
+    -webkit-animation: 1s dashMenuLineRetreat linear forwards;
+    animation: dashMenuLineRetreat 1s linear;
+}
+
+.gornja-meni-linija, .donja-meni-linija{
+    visibility: hidden;
+}
+
+#svgMenu{
+    transition: 0.4s;
+}
+
+#ikonicaDiv:hover #svgMenu{
+    filter: drop-shadow( 5px 5px 5px #000 );
+}
+
+.elementDesnoObavestenja{
+    filter: drop-shadow( 5px 5px 5px #000 );
+}
+
+.linijaPrvaObavestenjaDesno, .linijaDrugaObavestenjaDesno, .linijaTrecaObavestenjaDesno, .linijaCetvrtaObavestenjaDesno, .linijaPetaObavestenjaDesno{
+    visibility: hidden;
+}
+
+.obavestenjaDesnoAnimacija{
+    visibility: hidden;
+    transition: 0.2s;
+    stroke-dasharray: 0 300;
+    stroke-dashoffset: 0;
+    -webkit-animation: 2s obavestenjaDesnoGradientAppear cubic-bezier(.01,.45,.78,.56) forwards;
+    animation: obavestenjaDesnoGradientAppear 2s cubic-bezier(.01,.45,.78,.56);
+    animation-delay: 1.5s;
+}
+
+.obavestenja{
+    transition: 0.4s;
+}
+
+.boxShadow{
+    transition: linear 0.4s;
+    -webkit-animation: 1.5s boxShadow cubic-bezier(.01,.45,.78,.56) forwards;
+    animation: 1.5s boxShadow linear forwards;
+    animation-delay: 3s;
+}
+
+@keyframes boxShadow{
+    0% {
+        box-shadow: rgba(0, 73, 54, 0.1) 0px 0px 8px 2px;
+    }
+    20%{
+        box-shadow: rgba(0, 73, 54, 0.2) 0px 0px 12px 4px;
+    }
+    40%{
+        box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 16px 6px;
+    }
+    60%{
+        box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 20px 8px;
+    }
+    80%{
+        box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 24px 10px;
+    }
+    100% {
+        box-shadow: rgba(0, 73, 54, 0.3) 0px 0px 28px 13px;
+    }
+}
+
+@keyframes obavestenjaDesnoGradientAppear {
+    0% {
+        visibility: visible;
+        stroke-dasharray: 0 300;
+    }
+    80%{
+        stroke-dasharray: 300;
+    }
+    100% {
+        stroke-opacity: 0;
+    }
+}
+
+@keyframes obavestenjaClickPozadinaAnimacija{
+    0% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes stopStart1Animacija{
+    0%{
+        stop-color: white; 
+        stop-opacity: 0.3;
+    }
+
+    50%{
+        stop-color: #17a2b8; 
+        stop-opacity: 0.3;
+    }
+
+    100%{
+        stop-color: white;
+        stop-opacity: 0.5;
+    }
+}
+
+@keyframes stopStart2Animacija{
+    0%{
+        stop-color: white; 
+        stop-opacity: 0.5;
+    }
+
+    50%{
+        stop-color: #17a2b8; 
+        stop-opacity: 0.6;
+    }
+
+    100%{
+        stop-color: white;
+        stop-opacity: 0.7;
+    }
+}
+
+@keyframes stopStart3Animacija{
+    0%{
+        stop-color: white; 
+        stop-opacity: 0.7;
+    }
+
+    50%{
+        stop-color: #17a2b8; 
+        stop-opacity: 0.9;
+    }
+
+    100%{
+        stop-color: white;
+        stop-opacity: 0.7;
+    }
+}
+
+@keyframes stopStart4Animacija{
+    0%{
+        stop-color: white; 
+        stop-opacity: 1;
+    }
+
+    50%{
+        stop-color: #17a2b8; 
+        stop-opacity: 1;
+    }
+
+    100%{
+        stop-color: white;
+        stop-opacity: 1;
+    }
+}
+
+@keyframes stopStart5Animacija{
+    0%{
+        stop-color: white; 
+        stop-opacity: 1;
+    }
+
+    50%{
+        stop-color: #17a2b8; 
+        stop-opacity: 1;
+    }
+
+    80%{
+        stop-color: #17a2b8; 
+        stop-opacity: 0.7;
+    }
+
+    100%{
+        stop-color: white;
+        stop-opacity: 0.5;
+    }
+}
+
+@keyframes stopStartPocetnaAnimacija{
+    0%{
+        stop-color: white; 
+        stop-opacity: 1;
+    }
+
+    50%{
+        stop-color: #17a2b8; 
+        stop-opacity: 1;
+    }
+
+    100%{
+        stop-color: white;
+        stop-opacity: 1;
+    }
+}
+
+@keyframes stopStartSrednjaAnimacija{
+    0%{
+        stop-color: white; 
+        stop-opacity: 1;
+    }
+
+    50%{
+        stop-color: #17a2b8; 
+        stop-opacity: 1;
+    }
+
+    100%{
+        stop-color: white;
+        stop-opacity: 1;
+    }
+}
+
+@keyframes stopStartZadnjaAnimacija{
+    0%{
+        stop-color: #17a2b8; 
+        stop-opacity: 1;
+    }
+
+    50%{
+        stop-color: #17a2b8;
+        stop-opacity: 1;
+    }
+
+    100%{
+        stop-color: #17a2b8;
+        stop-opacity: 1;
+    }
+}
+
+@keyframes dashMenuLineRetreat{
+    0% {
+        stroke-opacity: 1;
+        visibility: visible;
+        opacity: 1;
+    }
+    100% {
+        stroke-opacity: 0;
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+@keyframes dashMenuLine {
+    0% {
+        stroke-opacity: 1;
+        stroke-width: 12;
+        stroke-dasharray: 0 630;
+        visibility: visible;
+        opacity: 1;
+    }
+    100% {
+        stroke-opacity: 1;
+        stroke-width: 4;
+        stroke-dasharray: 630 630;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@keyframes dotUpper{
+    50%{
+        fill-opacity: 1;
+    }
+
+    100%{
+        fill-opacity: 0;
+        cx: 102;
+        cy: -8;
+    }
+}
+
+@keyframes dotLower{
+    50%{
+        fill-opacity: 1;
+    }
+
+    100%{
+        fill-opacity: 0;
+        cx: 102;
+        cy: 38;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 2 70;
+    }
+    80%{
+        stroke: #17a2b8;
+        stroke-dasharray: 70;
+    }
+    100% {
+        stroke-opacity: 0;
+    }
+}
+
+@keyframes dashAppear {
+    0% {
+        stroke-opacity: 0;
+    }
+    30% {
+        stroke-opacity: 0;
+    }
+    100% {
+        stroke-opacity: 1;
+    }
+}
+
+@keyframes arrowAnimation{
+    0% {
+        fill: #17a2b8;
+        fill-opacity:0;
+    }
+    80% {
+        fill: #17a2b8;
+        fill-opacity:0;
+    }
+    90% {
+        fill: #17a2b8;
+        fill-opacity: 1;
+    }
+    100% {
+        fill: #17a2b8;
+        fill-opacity:0;
+    }
+}
+
+@keyframes arrowAnimationStatistika{
+    0% {
+        fill: #04443C;
+        fill-opacity:0;
+    }
+    80% {
+        fill: #04443C;
+        fill-opacity:0;
+    }
+    90% {
+        fill: #04443C;
+        fill-opacity: 1;
+    }
+    100% {
+        fill: #04443C;
+        fill-opacity:0;
+    }
+}
 
 
 /*opste*/
+
+
+.userInfoInput{
+    border: none;
+    border-bottom: 2px solid #17a2b8;
+    border-radius: 0px;
+    webkit-transition: border-color ease-in-out .20s, box-shadow ease-in-out .20s;
+    -o-transition: border-color ease-in-out .20s, box-shadow ease-in-out .20s;
+    transition: border-color ease-in-out .20s, box-shadow ease-in-out .20s;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.userInfoInput:focus{
+    box-shadow: 0px 5px 7px -3px rgba(62, 74, 76, 0.41) !important;
+}
+
+.sideMenuDivKlasa{
+    text-align: center;
+}
+
+.sideMenu-dugme{
+    font-size: 1vw;
+    color: white;
+}
+
+.sideMenu-dugme:visited{
+    color: white;
+}
+
+.sideMenu-dugme:hover{
+    box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.objavePillsTab{
+    padding-bottom: 50px;
+    padding-top: 30px;
+    font-size: 1.4rem;
+}
+
+.objavePillsTab > li {
+    padding-right: 20px;
+}
+
+.objavePillsTab a{
+    color: black;
+    transition: 1s ease;
+}
+
+.objavePillsTab a:hover{
+    box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: rgba(23, 162, 184, 0.4)!important;
+    color: black;
+}
 
 .nav-pills .nav-link.active{
     color: #fff;
     background-color: #17a2b8;
 }
 
-/*stil svih pf dugmica*/
+.kontejnerPrikazDivElemenata{
+    font-size: 1.5rem;
+    text-align: center;
+    align-items: center;
+}
+
+/*stil svih dugmica*/
 
 @media (min-width: 1200px){
     [id^=dugme] {
@@ -545,7 +607,7 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
 }
 
 #top{
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
     background-color: #7E587E;
@@ -602,6 +664,228 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
     padding-right: 0px;
     padding-left: 0px;
 }
+
+
+
+/* MODALI PRIJAVA/REGISTRACIJA*/
+
+
+.modal.show .modal-dialog {
+    -webkit-transform: translate(0, 100px);
+    transform: translate(0, 100px);
+}
+
+/* Prijava modal */
+
+#modal-body-prijava{
+    padding-top: 20px;
+}
+
+.linijaUModaluZaPrijavu{
+    margin-bottom: 2rem;
+}
+
+#formaPrijava label:after{
+    content: "";
+}
+
+#formaPrijava label{
+    font-weight: 500;
+    font-size: 12px;
+    position: absolute;
+    top: .75rem;
+    -webkit-transition: .2s ease-out;
+    -o-transition: .2s ease-out;
+    transition: .2s ease-out;
+    cursor: text;
+    color: #757575;
+    text-indent: 5px;
+}
+
+.labelActive{
+    -webkit-transform: translateY(-140%);
+    -ms-transform: translateY(-140%);
+    transform: translateY(-140%);
+    font-weight: 300 !important;
+    text-indent: 0px !important;
+}
+
+.formaGreskaPoruka{
+    color: red;
+    font-size: 12px;
+}
+
+#modal-dialog-prijava{
+    max-width: 540px;
+}
+
+.prijava-tekst{
+    font-size: 20px;
+    font-family:  Verdana, Geneva, sans-serif;
+}
+
+.lozinkaDiv{
+}
+
+.zaboravljenaLozinkaDiv{
+    font-size: 12px;
+}
+
+.modalFooterPrijava{
+    height: 50px;
+    font-family:  Verdana, Geneva, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+/* Registracija modal*/
+
+#modal-dialog-registracija{
+    max-width: 540px;
+}
+
+/*.close {
+    float: right;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=25);
+    opacity: .2;
+}*/
+
+#modal-body-registracija {
+    padding: 5px;
+}
+
+#modal-footer-registracija {
+    height:50px;
+    font-family:  Verdana, Geneva, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: none;
+    padding-top: 0px;
+}
+
+.dugmeZatvori{
+    background-color: #17a2b8; 
+    font-family:  Verdana, Geneva, sans-serif;
+    border: none;
+    color: white;
+    padding: 5px 30px;
+    font-size: 12px;
+    transition: .6s;
+    border-radius: .3rem;
+}
+
+.dugmeZatvori:hover{
+    background-color: rgba(23, 162, 184, 0.4); 
+    font-family:  Verdana, Geneva, sans-serif;
+    border: none;
+    padding: 5px 30px;
+    color: white;
+    font-size: 12px;  
+}
+
+/*MODAL REGISTRACIJA-SADRZAJ*/
+
+.wrapperZaSlike {
+    overflow: hidden;
+    border:10px solid white;
+}
+
+.dveSlike {
+    position: relative;
+}
+
+.studentiSlikaOkvir {
+    position: absolute;
+    margin-left: -12%;
+    height: 100%;
+    overflow:hidden;
+    -ms-transform: skew(-20deg, 0deg);
+    -webkit-transform: skew(-20deg, 0deg);
+    transform: skew(-20deg, 0deg);
+}
+
+.studentiSlika, .kompanijaSlika {
+    background-size: 100%;
+    background-position: center;
+    transition: 1s ease;
+}
+
+.studentiSlika:hover, .kompanijaSlika:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    background-size: 105%;
+}
+
+.studentiSlika {
+    position: absolute;
+    height: 100%;
+    background-position: -50px;
+    -ms-transform: skew(20deg, 0deg);
+    -webkit-transform: skew(20deg, 0deg);
+    transform: skew(20deg, 0deg);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.studentiBoja {
+    background: #1e5a32;
+    opacity: .4;
+    height: 100%;
+    position: absolute;
+}
+
+.kompanijaSlikaOkvir {
+    height:250px;
+    overflow: hidden;
+    position: relative;
+    background: white;
+    right: -50%;
+    top: 0;
+    width: 70%;
+    border-left: 10px white solid;
+    -ms-transform: skew(-25deg, 0deg);
+    -webkit-transform: skew(-25deg, 0deg);
+    transform: skew(-25deg, 0deg);
+}
+
+.kompanijaSlika {
+    position: absolute;
+    height: 100%;
+    right: 30%;
+    width: 100%;
+    background-position: 25px ;
+    -ms-transform: skew(25deg, 0deg);
+    -webkit-transform: skew(25deg, 0deg);
+    transform: skew(25deg, 0deg);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kompanijaBoja {
+    background: #0f2d4c;
+    opacity: .4;
+    height: 100%;
+    position: absolute;
+}
+
+.modalTekst{
+    z-index: 99;
+    font-size: 20px;
+}
+
 
 /*drugi red*/
 
@@ -698,22 +982,24 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
     overflow: visible;
 }
 
-.vestiAutorDatum{
+.vestiAutor{
     font-size: 1.2rem;
     font-style: italic;
-    line-height: 7;
-}
-
-.vestiAutor{
     float: left;
+    text-indent: 5px;
 }
 
 .vestiDatum{
+    font-size: 1.2rem;
+    font-style: italic;
     float: right;
+    margin-right: 5px;
 }
 
 .vestiMeta{
-
+    padding-top: 20px;
+    font-size: 1.2rem;
+    min-height: 75px;
 }
 
 #vest-prva, #vest-druga, #vest-treca{
@@ -741,11 +1027,18 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
 /*obavestenja front page*/
 
 #middleObavestenja{
-    background-color: white;
-    box-shadow: inset 0px 10px 30px black;
+
 }
 
-@media (min-width: 1100px) {
+.middleObavestenjaDonjiSplitterLinija{
+    padding-top: 100px;
+}
+
+.middleObavestenjaGornjiSplitterLinija{
+    padding-bottom: 100px;
+}
+
+/*@media (min-width: 1100px) {
     #middleObavestenja {
         padding-top: 80px;
         padding-bottom: 80px;
@@ -758,7 +1051,7 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
         padding-top: 40px;
         padding-bottom: 40px;
     }
-}
+}*/
 
 #obavestenjaRow{
     align-items: center;
@@ -910,11 +1203,7 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
     text-align: left;
 }
 
-.obavestenjaDatumOverlineKlasa{
-    padding-top: 10px;
-}
-
-.obavestenjaAutorOverlineKlasa{
+.obavestenjaAutorOverlineKlasa, .obavestenjaDatumOverlineKlasa{
     padding-top: 10px;
 }
 
@@ -938,6 +1227,7 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
     text-align: left;
     line-height: 1;
 }
+
 
 
 /*ankete*/
@@ -982,8 +1272,8 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
 
 @media (min-width: 1100px) {
     #middleStatistike {
-        padding-top: 140px;
-        padding-bottom: 140px;
+        padding-top: 100px;
+        padding-bottom: 100px;
     }
 
 }
@@ -1010,7 +1300,7 @@ background-image: linear-gradient(to left top, #fff8f8, #f9c1bf, #ea8b84, #d3544
 }
 
 .statistikeMeta{
-    text-align: left;
+    text-align: center;
     padding-top: 50px;
 }
 
@@ -1249,4 +1539,229 @@ button.ui-button.ui-state-default,
         padding-right: 0px;*/
     width:100%;
     max-width: 100%;
+}
+
+
+
+
+/* Stranice sa svim obavestenjima! */
+
+/* Diskusije */
+
+@keyframes slide {
+    100% { 
+        bottom: 0; 
+        opacity: 1;
+    }
+}
+
+@keyframes donjiSplitterLinijaAnimacija {
+    100% {
+        stroke-dashoffset: 0%;
+    }
+}
+
+.tabLink{
+    min-height: 46px;
+}
+
+.tabSVG{
+    overflow: visible !important;
+    margin-left: 5px;
+}
+
+.tabSVGText{
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.diskusijeNaslov a:link{
+    font-weight: bold;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: #04443c;
+}
+
+.diskusijeNaslov a:hover{
+    color: #df8cf2;
+}
+
+.naslovSVGKlasa{
+    margin-right: 5px;
+}
+
+.diskusijeDivKlasa{
+    padding-bottom: 70px;
+    transition: 1s ease;
+}
+
+.diskusijeDivKlasaBlur{
+    filter: blur(8px);
+}
+
+div[class*="diskusijeDonjiSplitter"], .kontejnerRedDropdownGrupeZaKorisnika{
+    padding-bottom: 70px;
+}
+
+.nevidljiviDiv{
+    opacity: 0;
+}
+
+div[class*="diskusijeDonjiSplitterLinijaKlasa"]{
+    stroke-dasharray: 100%;
+    stroke-dashoffset: 100%;
+}
+
+.diskusijeDonjiSplitterLinijaAnimacija{
+    stroke-dasharray: 100%;
+    stroke-dashoffset: 100%;
+    -webkit-animation: donjiSplitterLinijaAnimacija ease-out forwards 2s;
+    animation: donjiSplitterLinijaAnimacija ease-out forwards 2s;
+}
+
+.diskusijeDivKlasaAnimacija{
+    padding-bottom: 70px;
+    opacity: 0;
+    bottom: -150px;
+    -webkit-animation: slide 0.7s forwards;
+    animation: slide forwards 0.7s;
+}
+
+.diskusijeSplitterLinija, .diskusijeSplitterLinijaMedium{
+    overflow: visible !important;
+}
+
+.diskusijeMeta{
+    font-size: 1.2rem;
+    padding-top: 20px;
+    min-height: 75px;
+}
+
+.diskusijeMetaNeprocitana{
+    font-weight: bold;
+}
+
+.diskusijeAutorKlasa{
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.diskusijeDatumKlasa{
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: right;
+    margin-right: 5px;
+}
+
+@media (min-width: 1510px){
+    .diskusijeSplitterMedium{
+        display: none;
+    }
+    div[class*="diskusijeDonjiSplitterMedium"], div[class*="diskusijeDonjiSplitterSmall"]{
+        display: none;
+    }
+}
+
+@media (min-width: 991px) and (max-width: 1509px){
+    .diskusijeSplitterLarge{
+        display: none;
+    }
+    div[class*="diskusijeDonjiSplitterLarge"], div[class*="diskusijeDonjiSplitterSmall"]{
+        display: none;
+    }
+}
+
+@media (max-width: 992px){
+    div[class*="diskusijeDonjiSplitterLarge"], div[class*="diskusijeDonjiSplitterMedium"], .diskusijeSplitterLarge, .diskusijeSplitterMedium{
+        display: none;
+    }
+}
+
+/* The container must be positioned relative: */
+.dropdownDiskusijeIzGrupeDiv {
+    position: relative;
+    width: 100%;
+    padding: 0;
+}
+
+.dropdownDiskusijeIzGrupeDiv select {
+    display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+    color: white;
+    transition: 1s ease;
+    background-color: #17a2b8;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+
+.select-selected:hover{
+    box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: rgba(23, 162, 184, 0.4)!important;
+    color: black;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+    color: #fff;
+    position: absolute;
+    content: "";
+    top: 18px;
+    right: 10px;
+    width: 0px;
+    height: 0px;
+    border: 7px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 10px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div, .select-selected {
+    transition: 1s ease;
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.select-items:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: -15px;
+    /*    background-color: white;*/
+    filter: blur(20px);
+    z-index: -1;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+    box-shadow: 0 12px 26px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: rgba(23, 162, 184, 0.4)!important;
+    color: black;
 }
