@@ -11,7 +11,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <style>
-
+        
+       
     </style>
 
     <h:body>
@@ -20,60 +21,72 @@
                 <div id="logo" class="col-2">
                     <img class="image-fluid rounded logoImg" src="resources\images\logo4.png" />
                 </div>
-
                 <div class="col-7" id="menuItems">
-                    <div id="ikonicaDiv" class="col-1">
-                        <b:icon name="menuIcon">
-                            <svg version="1.1" height="30" width="120" id="svgMenu" class="svgMenu" style="overflow-x: visible; overflow-y: visible;">
-                                <path class="upper-line" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" d="M5 5 60 5" />
-                                <path class="middle-line-first" stroke-linecap="round" fill="none" stroke="white" stroke-width="5" d="M5 15 40 15" /> <path class="middle-line-second" style="overflow-x: visible;" stroke-linecap="round" stroke="white" stroke-width="5" d="M53 15 103 15" /> <circle id="middle-dot-upper" class="middle-dot-upper" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" /> <circle id="middle-dot-lower" class="middle-dot-lower" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" />
-                                <path class="lower-line" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" d="M5 25 60 25" />
-                            </svg>
-                        </b:icon>
-                    </div>
-                    <div id="gornja-menu-linija" class="col-11">
-                        <svg version="1.1" height="5" width="700" id="svgMenuBorderUpper">
-                            <path class="gornja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
-                        </svg>
-                    </div>
-                    <div id="mainmenuDiv" class="col-11">
-                        <nav id="mainMenu" class="navbar navbar-expand-sm">
-                            <ul class="navbar-nav mainmenu-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="prikazSvihVesti.xhtml">Vesti</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="prikazSvihDiskusija.xhtml">Diskusije</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="prikazSvihObavestenja.xhtml">Obavestenja</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="prikazSvihGrupa.xhtml">Grupe</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="prikazSvihAnketa">Ankete</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="prikazSvihOglasa.xhtml">Oglasi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="prikazSvihPreporuka.xhtml">Preporuke</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="kontakt.xhtml">Kontakt</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div id="logoHolder" class="col-1"></div>
-                    <div id="donja-menu-linija" class="col-11">
-                        <svg version="1.1" height="5" width="700" id="svgMenuBorderLower">
-                            <path class="donja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" />
-                        </svg>
+                    <div class="row">
+                        <div id="ikonicaDiv" class="col-1">
+                            <b:icon name="menuIcon">
+                                <svg version="1.1" height="30" width="120" id="svgMenu" class="svgMenu" style="overflow-x: visible; overflow-y: visible;">
+                                    <path class="upper-line" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" d="M5 5 60 5" />
+                                    <path class="middle-line-first" stroke-linecap="round" fill="none" stroke="white" stroke-width="5" d="M5 15 40 15" /> <path id="middle-line-second-id" class="middle-line-second" style="overflow-x: visible;" stroke-linecap="round" stroke="white" stroke-width="5" d="M53 15 103 15" /> <circle id="middle-dot-upper-id" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" /> <circle id="middle-dot-lower-id" fill="#17a2b8" cx="102" cy="15" r="3" fill-opacity="0" />
+                                    <path class="lower-line" fill="none" stroke="white" stroke-width="5" stroke-linecap="round" d="M5 25 60 25" />
+                                </svg>
+                            </b:icon>
+                        </div>
+                        <div id="menuDiv" class="col-11">
+                            <div class="row">
+                                <div id="gornja-menu-linija" class="col-11">
+                                    <svg version="1.1" height="5" width="700" id="svgMenuBorderUpper">
+                                        <path id="gornja-meni-linija-id" class="gornja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" stroke-opacity="0"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="mainmenuDiv" class="col-11">
+                                    <nav id="mainMenu" class="navbar navbar-expand-sm">
+                                        <ul class="navbar-nav mainmenu-nav">
+                                            <li class="nav-item mainMenuListItems">
+                                                <a class="nav-link" href="prikazSvihVesti.xhtml">Vesti</a>
+                                            </li>
+                                            <li class="nav-item mainMenuListItems">
+                                                <a class="nav-link" href="prikazSvihDiskusija.xhtml">Diskusije</a>
+                                            </li>
+                                            <li class="nav-item mainMenuListItems">
+                                                <a class="nav-link" href="prikazSvihObavestenja.xhtml">Obavestenja</a>
+                                            </li>
+                                            <li class="nav-item mainMenuListItems">
+                                                <a class="nav-link" href="prikazSvihGrupa.xhtml">Grupe</a>
+                                            </li>
+                                            <li class="nav-item mainMenuListItems">
+                                                <a class="nav-link" href="prikazSvihAnketa">Ankete</a>
+                                            </li>
+                                            <li class="nav-item mainMenuListItems">
+                                                <a class="nav-link" href="prikazSvihOglasa.xhtml">Oglasi</a>
+                                            </li>
+                                            <li class="nav-item mainMenuListItems">
+                                                <a class="nav-link" href="prikazSvihPreporuka.xhtml">Preporuke</a>
+                                            </li>
+                                            <li class="nav-item mainMenuListItems">
+                                                <a class="nav-link" href="kontakt.xhtml">Kontakt</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <h:panelGroup rendered="#{session.getAttribute('ulogovan') == 'true'}">
+                                        <div id="dobrodosliDiv" class="dobrodosliSakriven">
+                                            <h:outputText value="Dobrodosli, #{session.getAttribute('javnoIme')}" />
+                                        </div>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="donja-menu-linija" class="col-11">
+                                    <svg version="1.1" height="5" width="700" id="svgMenuBorderLower">
+                                        <path id="donja-meni-linija-id" class="donja-meni-linija" stroke="#17a2b8" stroke-width="4" stroke-linecap="square" d="M0 0 630 0" stroke-opacity="0"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
                 <div class="col-2" id="headerPrijavaDugmici">
                     <div class="row">
                         <div id="logindugme" class="col-6">
@@ -209,6 +222,70 @@
         </div>   
         <script>
             $(document).ready(function () {
+                var i = 1;
+
+                if (window.location.pathname === ("/Projekat_4/")) {
+                    if($("#dobrodosliDiv").length){
+                        $("#mainMenu").attr("style", "position: absolute;");
+                    }
+                    var animacija = setInterval(function () {
+                        $("#mainMenu li:nth-child(" + i + ")").toggleClass("mainMenuListItemsAnimacija");
+                        $("#mainMenu li:nth-child(" + i + ")").toggleClass("mainMenuListItems");
+                        if ($(".navbar-nav li").length === i) {
+                            clearInterval(animacija);
+                        }
+                        i++;
+                    }, 150);
+
+                    var delay = setTimeout(function () {
+                        $("#gornja-meni-linija-id").toggleClass("gornja-meni-linija");
+                        $("#donja-meni-linija-id").toggleClass("donja-meni-linija");
+
+                        $("#gornja-meni-linija-id").toggleClass("gornja-meni-linija-animacija");
+                        $("#donja-meni-linija-id").toggleClass("donja-meni-linija-animacija");
+                    }, 800);
+
+
+                    $("#middle-line-second-id").toggleClass("middle-line-second-animacija");
+                    $("#middle-dot-upper-id").toggleClass("middle-dot-upper-animacija");
+                    $("#middle-dot-lower-id").toggleClass("middle-dot-lower-animacija");
+
+                } else if (window.location.pathname.startsWith("/Projekat_4/homepage")) {
+                    $("#mainMenu").attr("style", "display: none; position: absolute;");
+                    $("#dobrodosliDiv").toggleClass("dobrodosli");
+                    $("#dobrodosliDiv").toggleClass("dobrodosliSakriven");
+
+                    var sakrijDobrodoslicu = setTimeout(function () {
+                        $("#dobrodosliDiv").toggleClass("dobrodosli");
+                        $("#dobrodosliDiv").toggleClass("dobrodosliSakriven");
+                    }, 2000);
+
+                    $("#mainMenu").attr("style", "display: flex;  position: absolute;");
+
+                    var animacija = setInterval(function () {
+                        $("#mainMenu li:nth-child(" + i + ")").toggleClass("mainMenuListItemsAnimacija");
+                        $("#mainMenu li:nth-child(" + i + ")").toggleClass("mainMenuListItems");
+                        if ($(".navbar-nav li").length === i) {
+                            clearInterval(animacija);
+                        }
+                        i++;
+                    }, 150);
+
+                    $("#gornja-meni-linija-id").toggleClass("gornja-meni-linija");
+                    $("#donja-meni-linija-id").toggleClass("donja-meni-linija");
+
+                    $("#gornja-meni-linija-id").toggleClass("gornja-meni-linija-animacija");
+                    $("#donja-meni-linija-id").toggleClass("donja-meni-linija-animacija");
+
+                    $("#middle-line-second-id").toggleClass("middle-line-second-animacija");
+                    $("#middle-dot-upper-id").toggleClass("middle-dot-upper-animacija");
+                    $("#middle-dot-lower-id").toggleClass("middle-dot-lower-animacija");
+                }
+
+
+
+
+
                 $("#prijavaModal").on("focus", "input", function () {
                     $(this).parent().find("label").addClass('labelActive');
                 });
@@ -218,7 +295,7 @@
                     }
                 });
 
-                if (!$(".inputPolje input").val() == '') {
+                if (!$(".inputPolje input").val() === '') {
                     $(this).find("label").addClass('labelActive');
                 }
             });
